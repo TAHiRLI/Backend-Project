@@ -1,14 +1,18 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var counter = 0;
 }
-
+@model HomeViewModel
 
 <!-- SLIDER AREA START (slider-3) -->
 <div class="ltn__slider-area ltn__slider-3  section-bg-1">
     <div class="ltn__slide-one-active slick-slide-arrow-1 slick-slide-dots-1">
         <!-- ltn__slide-item -->
+        @foreach (var slide in Model.Sliders)
+        {
+            counter ++; 
         <div class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3-normal ltn__slide-item-3">
-            <div class="ltn__slide-item-inner">
+            <div class="ltn__slide-item-inner @(counter % 2 == 0? " text-right text-end":"")">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 align-self-center">
@@ -20,54 +24,27 @@
                                         </a>
                                     </div>
                                     <h6 class="slide-sub-title white-color--- animated"><span><i class="fas fa-home"></i></span> Real Estate Agency</h6>
-                                    <h1 class="slide-title animated ">Find Your Dream <br> House By Us</h1>
+                                    <h1 class="slide-title animated ">@(Html.Raw(slide.Title))</h1>
                                     <div class="slide-brief animated">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                                        <p>@slide.Desc</p>
                                     </div>
                                     <div class="btn-wrapper animated">
-                                        <a href="about.html" class="theme-btn-1 btn btn-effect-1">Make An Enquiry</a>
-                                        <a class="ltn__video-play-btn bg-white" href="https://www.youtube.com/embed/HnbMYzdjuBs?autoplay=1&amp;showinfo=0" data-rel="lightcase">
-                                            <i class="icon-play  ltn__secondary-color"></i>
-                                        </a>
-                                    </div>
+                                       <a href="@slide.Btn1Url" class="theme-btn-1 btn btn-effect-1">@slide.Btn1Text</a>
+                                        <a href="@slide.Btn2Url" class="btn btn-transparent btn-effect-3">@slide.Btn2Text</a> </div>
                                 </div>
                             </div>
-                            <div class="slide-item-img">
-                                <img src="~/assets/img/slider/21.png" alt="#">
+                                <div class="slide-item-img @(counter % 2 ==0? "slide-img-left":"") ">
+                                <img src="~/Uploads/Sliders/@slide.ImageUrl" alt="#">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- ltn__slide-item -->
-        <div class="ltn__slide-item ltn__slide-item-2  ltn__slide-item-3-normal ltn__slide-item-3">
-            <div class="ltn__slide-item-inner  text-right text-end">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 align-self-center">
-                            <div class="slide-item-info">
-                                <div class="slide-item-info-inner ltn__slide-animation">
-                                    <h6 class="slide-sub-title white-color--- animated"><span><i class="fas fa-home"></i></span> Real Estate Agency</h6>
-                                    <h1 class="slide-title animated ">The Right Place <br>of House Finding</h1>
-                                    <div class="slide-brief animated">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                    </div>
-                                    <div class="btn-wrapper animated">
-                                        <a href="service.html" class="theme-btn-1 btn btn-effect-1">OUR SERVICES</a>
-                                        <a href="about.html" class="btn btn-transparent btn-effect-3">LEARN MORE</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="slide-item-img slide-img-left">
-                                <img src="~/assets/img/slider/21.png" alt="#">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--  -->
+        <!-- ltn__slide-item-end -->
+            
+        }
+       
     </div>
 </div>
 <!-- SLIDER AREA END -->
@@ -412,6 +389,10 @@
             </div>
         </div>
         <div class="row ltn__product-slider-item-four-active-full-width slick-arrow-1">
+            @foreach(var item in Model.Sliders){
+
+            }
+
             <!-- ltn__product-item -->
             <div class="col-lg-12">
                 <div class="ltn__product-item ltn__product-item-4 text-center---">
@@ -974,79 +955,21 @@
                 </div>
             </div>
         </div>
-        <div class="row ltn__category-slider-active--- slick-arrow-1 justify-content-center">
+
+        <div class="row ltn__category-slider-active--- slick-arrow-1 justify-content-center">    
+        @foreach (var amenity in Model.Amenities)
+        {
             <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                 <div class="ltn__category-item ltn__category-item-5 text-center">
                     <a href="shop.html">
-                        <span class="category-icon"><i class="flaticon-car"></i></span>
-                        <span class="category-title">Parking Space</span>
+                        <span class="category-icon"><i class="@amenity.Icon"></i></span>
+                        <span class="category-title">@amenity.Name</span>
                         <span class="category-btn"><i class="flaticon-right-arrow"></i></span>
                     </a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                <div class="ltn__category-item ltn__category-item-5 text-center">
-                    <a href="shop.html">
-                        <span class="category-icon"><i class="flaticon-swimming"></i></span>
-                        <span class="category-title">Swimming Pool</span>
-                        <span class="category-btn"><i class="flaticon-right-arrow"></i></span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                <div class="ltn__category-item ltn__category-item-5 text-center">
-                    <a href="shop.html">
-                        <span class="category-icon"><i class="flaticon-secure-shield"></i></span>
-                        <span class="category-title">Private Security</span>
-                        <span class="category-btn"><i class="flaticon-right-arrow"></i></span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                <div class="ltn__category-item ltn__category-item-5 text-center">
-                    <a href="shop.html">
-                        <span class="category-icon"><i class="flaticon-stethoscope"></i></span>
-                        <span class="category-title">Medical Center</span>
-                        <span class="category-btn"><i class="flaticon-right-arrow"></i></span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                <div class="ltn__category-item ltn__category-item-5 text-center">
-                    <a href="shop.html">
-                        <span class="category-icon"><i class="flaticon-book"></i></span>
-                        <span class="category-title">Library Area</span>
-                        <span class="category-btn"><i class="flaticon-right-arrow"></i></span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                <div class="ltn__category-item ltn__category-item-5 text-center">
-                    <a href="shop.html">
-                        <span class="category-icon"><i class="flaticon-bed-1"></i></span>
-                        <span class="category-title">King Size Beds</span>
-                        <span class="category-btn"><i class="flaticon-right-arrow"></i></span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                <div class="ltn__category-item ltn__category-item-5 text-center">
-                    <a href="shop.html">
-                        <span class="category-icon"><i class="flaticon-home-2"></i></span>
-                        <span class="category-title">Smart Homes</span>
-                        <span class="category-btn"><i class="flaticon-right-arrow"></i></span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                <div class="ltn__category-item ltn__category-item-5 text-center">
-                    <a href="shop.html">
-                        <span class="category-icon"><i class="flaticon-slider"></i></span>
-                        <span class="category-title">Kid’s Playland</span>
-                        <span class="category-btn"><i class="flaticon-right-arrow"></i></span>
-                    </a>
-                </div>
-            </div>
+        }
+
         </div>
     </div>
 </div>

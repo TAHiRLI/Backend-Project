@@ -7,10 +7,12 @@ namespace Quarter.Models
     {
         [MaxLength(100)]
         public string Title { get; set; }
-        [MaxLength(200)]
-        public string Location { get; set; }
         [MaxLength(500)]
+        public string Location { get; set; }
+        [MaxLength(1000)]
         public string Desc { get; set; }
+        [MaxLength(100)]
+        public string? PosterDesc { get; set; }
         [Column(TypeName ="decimal(18,2)")]
         public decimal Area { get; set; }
         [Column(TypeName = "decimal(18,2)")]
