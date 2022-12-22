@@ -26,6 +26,9 @@ namespace Quarter.Controllers
             Model.Categories = _context.Categories.ToList();
 
 
+            ViewBag.Cities = Model.Cities;
+            ViewBag.Categories = Model.Categories;
+
             return View(Model);
         }
 
@@ -33,5 +36,6 @@ namespace Quarter.Controllers
         {
             return View();
         }
+      
     }
 }

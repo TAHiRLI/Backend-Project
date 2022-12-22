@@ -1,0 +1,24 @@
+﻿
+@model HomeFindViewModel
+
+<form asp-action="check" asp-controller="home" method="post" class="ltn__car-dealer-form-box row">
+    <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-car---- col-lg-3 col-md-6">
+        <select asp-for="CityId" class="nice-select" asp-items="@(new SelectList(ViewBag.Cities, nameof(City.Id), nameof(City.Name)))">
+            <option>Choose Area</option>
+
+        </select>
+    </div>
+
+    <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-calendar---- col-lg-3 col-md-6">
+        <select asp-for="CategoryId" class="nice-select" asp-items="@(new SelectList(ViewBag.Categories, nameof(Category.Id), nameof(Category.Name)))">
+            <option>Property Type</option>
+
+        </select>
+    </div>
+    <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
+        <div class="btn-wrapper text-center mt-0">
+            <!-- <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search Inventory</button> -->
+            <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Find Now</button>
+        </div>
+    </div>
+</form>

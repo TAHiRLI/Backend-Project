@@ -63,42 +63,7 @@
                     <div class="tab-content bg-white box-shadow-1 position-relative pb-10">
                         <div class="tab-pane fade active show" id="ltn__form_tab_1_1">
                             <div class="car-dealer-form-inner">
-                                <form action="#" class="ltn__car-dealer-form-box row">
-                                    <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-car---- col-lg-3 col-md-6">
-                                        <select class="nice-select">
-                                            <option>Choose Area</option>
-                                            <option>chicago</option>
-                                            <option>London</option>
-                                            <option>Los Angeles</option>
-                                            <option>New York</option>
-                                            <option>New Jersey</option>
-                                        </select>
-                                    </div>
-                                    <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-meter---- col-lg-3 col-md-6">
-                                        <select class="nice-select">
-                                            <option>Property Status</option>
-                                            <option>Open house</option>
-                                            <option>Rent</option>
-                                            <option>Sale</option>
-                                            <option>Sold</option>
-                                        </select>
-                                    </div>
-                                    <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-calendar---- col-lg-3 col-md-6">
-                                        <select class="nice-select">
-                                            <option>Property Type</option>
-                                            <option>Apartment</option>
-                                            <option>Co-op</option>
-                                            <option>Condo</option>
-                                            <option>Single Family Home</option>
-                                        </select>
-                                    </div>
-                                    <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
-                                        <div class="btn-wrapper text-center mt-0">
-                                            <!-- <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search Inventory</button> -->
-                                            <a href="shop-right-sidebar.html" class="btn theme-btn-1 btn-effect-1 text-uppercase">Find Now</a>
-                                        </div>
-                                    </div>
-                                </form>
+                              @await Html.PartialAsync("_HomeFindPartial",new HomeFindViewModel{})
                             </div>
                         </div>
                         <div class="tab-pane fade" id="ltn__form_tab_1_2">
