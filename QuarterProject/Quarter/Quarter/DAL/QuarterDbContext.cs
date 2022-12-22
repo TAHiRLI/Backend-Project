@@ -14,6 +14,8 @@ namespace Quarter.DAL
         public DbSet<Owner>Owners { get; set; }
         public DbSet<House> Houses { get; set; }
         public DbSet<HouseImage> HousesImages { get; set; }
+        public DbSet<HomeSlider> HomeSliders { get; set; }
+        public DbSet<Setting> Settings { get; set; }
 
 
     }

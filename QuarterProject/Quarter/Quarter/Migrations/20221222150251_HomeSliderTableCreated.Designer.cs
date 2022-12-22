@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quarter.DAL;
 
@@ -11,9 +12,10 @@ using Quarter.DAL;
 namespace Quarter.Migrations
 {
     [DbContext(typeof(QuarterDbContext))]
-    partial class QuarterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221222150251_HomeSliderTableCreated")]
+    partial class HomeSliderTableCreated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -242,29 +244,6 @@ namespace Quarter.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Owners");
-                });
-
-            modelBuilder.Entity("Quarter.Models.Setting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Key")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("Quarter.Models.House", b =>
