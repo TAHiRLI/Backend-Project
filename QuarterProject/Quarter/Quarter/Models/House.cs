@@ -38,7 +38,9 @@ namespace Quarter.Models
         public City? City { get; set; }
 
 
-        public List<HouseImage> HouseImages { get; set; } = new List<HouseImage>();
+        public List<HouseImage>? HouseImages { get; set; } 
+        public List<HouseAmenity>? HouseAmenities { get; set; }
+
 
 
 

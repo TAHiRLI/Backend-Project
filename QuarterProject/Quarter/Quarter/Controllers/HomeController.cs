@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Quarter.DAL;
 using Quarter.Models;
 using System.Diagnostics;
 
@@ -6,15 +7,16 @@ namespace Quarter.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly QuarterDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(QuarterDbContext context)
         {
-            _logger = logger;
+            this._context = context;
         }
 
         public IActionResult Index()
         {
+
             return View();
         }
 
