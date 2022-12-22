@@ -152,7 +152,7 @@
                             </li>
                         }
 
-                       
+
                     </ul>
                     <div class="ltn__callout bg-overlay-theme-05  mt-30">
                         <p>
@@ -293,22 +293,22 @@
 
             @foreach (var service in Model.Services.Take(3).ToList())
             {
-            <div class="col-lg-4 col-sm-6 col-12">
-                <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1">
-                    <div class="ltn__feature-icon">
-                       <span><i class="@service.Icon"></i></span>
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1">
+                        <div class="ltn__feature-icon">
+                            <span><i class="@service.Icon"></i></span>
                             <!--  <img src="~/assets/img/icons/icon-img/21.png" alt="#">-->
-                    </div>
-                    <div class="ltn__feature-info">
-                        <h3><a href="service-details.html">@service.Name</a></h3>
-                        <p>@service.Desc</p>
-                        <a class="ltn__service-btn" href="service-details.html">Find A Home <i class="flaticon-right-arrow"></i></a>
+                        </div>
+                        <div class="ltn__feature-info">
+                            <h3><a href="service-details.html">@service.Name</a></h3>
+                            <p>@service.Desc</p>
+                            <a class="ltn__service-btn" href="service-details.html">Find A Home <i class="flaticon-right-arrow"></i></a>
+                        </div>
                     </div>
                 </div>
-            </div>
-                
+
             }
-  
+
         </div>
     </div>
 </div>
@@ -334,7 +334,24 @@
                             <a href="product-details.html"><img src="~/Uploads//Houses/@house.HouseImages.FirstOrDefault(x=> x.PosterStatus==true)?.ImageUrl" alt="#"></a>
                             <div class="product-badge">
                                 <ul>
-                                    <li class="sale-badge bg-green">For Rent</li>
+                                    @{
+
+
+
+                                        if (house.IsSold)
+                                        {
+                                            <li class="sale-badge bg-dark">Sold</li>
+                                        }
+                                        else if (house.IsFeatured)
+                                        {
+                                            <li class="sale-badge bg-blue">Special</li>
+
+                                        }
+                                        else if (house.DiscountPercent > 0)
+                                        {
+                                            <li class="sale-badge bg-red">Discounted</li>
+                                        }
+                                    }
                                 </ul>
                             </div>
                             <div class="product-img-location-gallery">
