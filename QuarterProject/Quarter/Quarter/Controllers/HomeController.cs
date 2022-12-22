@@ -24,7 +24,8 @@ namespace Quarter.Controllers
             Model.Houses = _context.Houses.Include(x=> x.HouseImages).Include(x=> x.Owner).Include(x=> x.City).Where(x=> x.IsFeatured == true).ToList();
             Model.Cities = _context.Cities.ToList();
             Model.Categories = _context.Categories.ToList();
-
+            Model.Services = _context.Services.ToList();
+            Model.Settings = _context.Settings.ToDictionary(x=> x.Key, x=> x.Value);
 
             ViewBag.Cities = Model.Cities;
             ViewBag.Categories = Model.Categories;

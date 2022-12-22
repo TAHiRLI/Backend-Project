@@ -10,41 +10,41 @@
         <!-- ltn__slide-item -->
         @foreach (var slide in Model.Sliders)
         {
-            counter ++; 
-        <div class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3-normal ltn__slide-item-3">
-            <div class="ltn__slide-item-inner @(counter % 2 == 0? " text-right text-end":"")">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 align-self-center">
-                            <div class="slide-item-info">
-                                <div class="slide-item-info-inner ltn__slide-animation">
-                                    <div class="slide-video mb-50 d-none">
-                                        <a class="ltn__video-icon-2 ltn__video-icon-2-border" href="https://www.youtube.com/embed/tlThdr3O5Qo" data-rel="lightcase:myCollection">
-                                            <i class="fa fa-play"></i>
-                                        </a>
+            counter++;
+            <div class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3-normal ltn__slide-item-3">
+                <div class="ltn__slide-item-inner @(counter % 2 == 0? " text-right text-end":"")">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 align-self-center">
+                                <div class="slide-item-info">
+                                    <div class="slide-item-info-inner ltn__slide-animation">
+                                        <div class="slide-video mb-50 d-none">
+                                            <a class="ltn__video-icon-2 ltn__video-icon-2-border" href="https://www.youtube.com/embed/tlThdr3O5Qo" data-rel="lightcase:myCollection">
+                                                <i class="fa fa-play"></i>
+                                            </a>
+                                        </div>
+                                        <h6 class="slide-sub-title white-color--- animated"><span><i class="fas fa-home"></i></span> Real Estate Agency</h6>
+                                        <h1 class="slide-title animated ">@(Html.Raw(slide.Title))</h1>
+                                        <div class="slide-brief animated">
+                                            <p>@slide.Desc</p>
+                                        </div>
+                                        <div class="btn-wrapper animated">
+                                            <a href="@slide.Btn1Url" class="theme-btn-1 btn btn-effect-1">@slide.Btn1Text</a>
+                                            <a href="@slide.Btn2Url" class="btn btn-transparent btn-effect-3">@slide.Btn2Text</a>
+                                        </div>
                                     </div>
-                                    <h6 class="slide-sub-title white-color--- animated"><span><i class="fas fa-home"></i></span> Real Estate Agency</h6>
-                                    <h1 class="slide-title animated ">@(Html.Raw(slide.Title))</h1>
-                                    <div class="slide-brief animated">
-                                        <p>@slide.Desc</p>
-                                    </div>
-                                    <div class="btn-wrapper animated">
-                                       <a href="@slide.Btn1Url" class="theme-btn-1 btn btn-effect-1">@slide.Btn1Text</a>
-                                        <a href="@slide.Btn2Url" class="btn btn-transparent btn-effect-3">@slide.Btn2Text</a> </div>
                                 </div>
-                            </div>
                                 <div class="slide-item-img @(counter % 2 ==0? "slide-img-left":"") ">
-                                <img src="~/Uploads/Sliders/@slide.ImageUrl" alt="#">
+                                    <img src="~/Uploads/Sliders/@slide.ImageUrl" alt="#">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- ltn__slide-item-end -->
-            
+            <!-- ltn__slide-item-end -->
         }
-       
+
     </div>
 </div>
 <!-- SLIDER AREA END -->
@@ -63,49 +63,49 @@
                     <div class="tab-content bg-white box-shadow-1 position-relative pb-10">
                         <div class="tab-pane fade active show" id="ltn__form_tab_1_1">
                             <div class="car-dealer-form-inner">
-                              @await Html.PartialAsync("_HomeFindPartial",new HomeFindViewModel{})
+                                @await Html.PartialAsync("_HomeFindPartial",new HomeFindViewModel{})
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="ltn__form_tab_1_2">
-                            <div class="car-dealer-form-inner">
-                                <form action="#" class="ltn__car-dealer-form-box row">
-                                    <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-car---- col-lg-3 col-md-6">
-                                        <select class="nice-select">
-                                            <option>Choose Area</option>
-                                            <option>chicago</option>
-                                            <option>London</option>
-                                            <option>Los Angeles</option>
-                                            <option>New York</option>
-                                            <option>New Jersey</option>
-                                        </select>
-                                    </div>
-                                    <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-meter---- col-lg-3 col-md-6">
-                                        <select class="nice-select">
-                                            <option>Property Status</option>
-                                            <option>Open house</option>
-                                            <option>Rent</option>
-                                            <option>Sale</option>
-                                            <option>Sold</option>
-                                        </select>
-                                    </div>
-                                    <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-calendar---- col-lg-3 col-md-6">
-                                        <select class="nice-select">
-                                            <option>Property Type</option>
-                                            <option>Apartment</option>
-                                            <option>Co-op</option>
-                                            <option>Condo</option>
-                                            <option>Single Family Home</option>
-                                        </select>
-                                    </div>
-                                    <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
-                                        <div class="btn-wrapper text-center mt-0">
-                                            <!-- <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search Inventory</button> -->
-                                            <a href="shop-right-sidebar.html" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search Properties</a>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                        @* <div class="tab-pane fade" id="ltn__form_tab_1_2">
+                        <div class="car-dealer-form-inner">
+                        <form action="#" class="ltn__car-dealer-form-box row">
+                        <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-car---- col-lg-3 col-md-6">
+                        <select class="nice-select">
+                        <option>Choose Area</option>
+                        <option>chicago</option>
+                        <option>London</option>
+                        <option>Los Angeles</option>
+                        <option>New York</option>
+                        <option>New Jersey</option>
+                        </select>
                         </div>
+                        <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-meter---- col-lg-3 col-md-6">
+                        <select class="nice-select">
+                        <option>Property Status</option>
+                        <option>Open house</option>
+                        <option>Rent</option>
+                        <option>Sale</option>
+                        <option>Sold</option>
+                        </select>
+                        </div>
+                        <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-calendar---- col-lg-3 col-md-6">
+                        <select class="nice-select">
+                        <option>Property Type</option>
+                        <option>Apartment</option>
+                        <option>Co-op</option>
+                        <option>Condo</option>
+                        <option>Single Family Home</option>
+                        </select>
+                        </div>
+                        <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
+                        <div class="btn-wrapper text-center mt-0">
+                        <!-- <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search Inventory</button> -->
+                        <a href="shop-right-sidebar.html" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search Properties</a>
+                        </div>
+                        </div>
+                        </form>
+                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>
@@ -119,12 +119,12 @@
         <div class="row">
             <div class="col-lg-6 align-self-center">
                 <div class="about-us-img-wrap about-img-left">
-                    <img src="~/assets/img/others/7.png" alt="About Us Image">
+                    <img src="~/assets/img/@Model.Settings["aboutUs_img"]" alt="About Us Image">
                     <div class="about-us-img-info about-us-img-info-2 about-us-img-info-3">
 
                         <div class="ltn__video-img ltn__animation-pulse1">
-                            <img src="~/assets/img/others/8.png" alt="video popup bg image">
-                            <a class="ltn__video-icon-2 ltn__video-icon-2-border---" href="https://www.youtube.com/embed/X7R-q9rsrtU?autoplay=1&showinfo=0" data-rel="lightcase:myCollection">
+                            <img src="~/assets/img/@Model.Settings["aboutUs_videoImg"]" alt="video popup bg image">
+                            <a class="ltn__video-icon-2 ltn__video-icon-2-border---" href="@Model.Settings["aboutUs_VideoUrl"]" data-rel="lightcase:myCollection">
                                 <i class="fa fa-play"></i>
                             </a>
                         </div>
@@ -136,40 +136,31 @@
                     <div class="section-title-area ltn__section-title-2--- mb-20">
                         <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">About Us</h6>
                         <h1 class="section-title">
-                            The Leading Real Estate
-                            Rental Marketplace<span>.</span>
+                            @Model.Settings["aboutUs_title"]<span>.</span>
                         </h1>
                         <p>
-                            Over 39,000 people work for us in more than 70 countries all over the
-                            This breadth of global coverage, combined with specialist services
+                            @Model.Settings["aboutUs_desc"]
                         </p>
                     </div>
                     <ul class="ltn__list-item-half clearfix">
-                        <li>
-                            <i class="flaticon-home-2"></i>
-                            Smart Home Design
-                        </li>
-                        <li>
-                            <i class="flaticon-mountain"></i>
-                            Beautiful Scene Around
-                        </li>
-                        <li>
-                            <i class="flaticon-heart"></i>
-                            Exceptional Lifestyle
-                        </li>
-                        <li>
-                            <i class="flaticon-secure"></i>
-                            Complete 24/7 Security
-                        </li>
+
+                        @foreach (var service in Model.Services.Where(x => x.IsFeatured == true).ToList())
+                        {
+                            <li>
+                                <i class="@service.Icon"></i>
+                                @service.Name
+                            </li>
+                        }
+
+                       
                     </ul>
                     <div class="ltn__callout bg-overlay-theme-05  mt-30">
                         <p>
-                            "Enimad minim veniam quis nostrud exercitation <br>
-                            llamco laboris. Lorem ipsum dolor sit amet"
+                            @Model.Settings["aboutUs_quote"]
                         </p>
                     </div>
                     <div class="btn-wrapper animated">
-                        <a href="service.html" class="theme-btn-1 btn btn-effect-1">OUR SERVICES</a>
+                        <a href="@Model.Settings["aboutUs_btnUrl"]" class="theme-btn-1 btn btn-effect-1">@Model.Settings["aboutUs_btnText"]</a>
                     </div>
                 </div>
             </div>
@@ -299,45 +290,25 @@
             </div>
         </div>
         <div class="row ltn__custom-gutter--- justify-content-center">
+
+            @foreach (var service in Model.Services.Take(3).ToList())
+            {
             <div class="col-lg-4 col-sm-6 col-12">
                 <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1">
                     <div class="ltn__feature-icon">
-                        <!-- <span><i class="flaticon-house"></i></span> -->
-                        <img src="~/assets/img/icons/icon-img/21.png" alt="#">
+                       <span><i class="@service.Icon"></i></span>
+                            <!--  <img src="~/assets/img/icons/icon-img/21.png" alt="#">-->
                     </div>
                     <div class="ltn__feature-info">
-                        <h3><a href="service-details.html">Buy a home</a></h3>
-                        <p>over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
+                        <h3><a href="service-details.html">@service.Name</a></h3>
+                        <p>@service.Desc</p>
                         <a class="ltn__service-btn" href="service-details.html">Find A Home <i class="flaticon-right-arrow"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6 col-12">
-                <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1 active">
-                    <div class="ltn__feature-icon">
-                        <!-- <span><i class="flaticon-house-3"></i></span> -->
-                        <img src="~/assets/img/icons/icon-img/22.png" alt="#">
-                    </div>
-                    <div class="ltn__feature-info">
-                        <h3><a href="service-details.html">Rent a home</a></h3>
-                        <p>over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
-                        <a class="ltn__service-btn" href="service-details.html">Find A Home <i class="flaticon-right-arrow"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 col-12">
-                <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1">
-                    <div class="ltn__feature-icon">
-                        <!-- <span><i class="flaticon-deal-1"></i></span> -->
-                        <img src="~/assets/img/icons/icon-img/23.png" alt="#">
-                    </div>
-                    <div class="ltn__feature-info">
-                        <h3><a href="service-details.html">Sell a home</a></h3>
-                        <p>over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
-                        <a class="ltn__service-btn" href="service-details.html">Find A Home <i class="flaticon-right-arrow"></i></a>
-                    </div>
-                </div>
-            </div>
+                
+            }
+  
         </div>
     </div>
 </div>
@@ -354,103 +325,103 @@
             </div>
         </div>
         <div class="row ltn__product-slider-item-four-active-full-width slick-arrow-1">
-            @foreach(var house in Model.Houses){
+            @foreach (var house in Model.Houses)
+            {
                 <!-- ltn__product-item -->
-              <div class="col-lg-12">
-                <div class="ltn__product-item ltn__product-item-4 text-center---">
-                    <div class="product-img">
-                        <a href="product-details.html"><img src="~/Uploads//Houses/@house.HouseImages.FirstOrDefault(x=> x.PosterStatus==true)?.ImageUrl" alt="#"></a>
-                        <div class="product-badge">
-                            <ul>
-                                <li class="sale-badge bg-green">For Rent</li>
+                <div class="col-lg-12">
+                    <div class="ltn__product-item ltn__product-item-4 text-center---">
+                        <div class="product-img">
+                            <a href="product-details.html"><img src="~/Uploads//Houses/@house.HouseImages.FirstOrDefault(x=> x.PosterStatus==true)?.ImageUrl" alt="#"></a>
+                            <div class="product-badge">
+                                <ul>
+                                    <li class="sale-badge bg-green">For Rent</li>
+                                </ul>
+                            </div>
+                            <div class="product-img-location-gallery">
+                                <div class="product-img-location">
+                                    <ul>
+                                        <li>
+                                            <a href="locations.html"><i class="flaticon-pin"></i> @house.City.Name</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product-img-gallery">
+                                    <ul>
+                                        <li>
+                                            <a href="product-details.html"><i class="fas fa-camera"></i> @house.HouseImages.Count</a>
+                                        </li>
+                                        <li>
+                                            <a href="product-details.html"><i class="fas fa-film"></i> @house.ParkingCount</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-price">
+                                <span>$@((house.Price * (100 - house.DiscountPercent) / 100).ToString("0.00"))</span>
+                            </div>
+                            <h2 class="product-title"><a href="product-details.html">@house.Title</a></h2>
+                            <div class="product-description">
+                                <p>
+                                    @house.PosterDesc
+                                </p>
+                            </div>
+                            <ul class="ltn__list-item-2 ltn__list-item-2-before">
+                                <li>
+                                    <span>@house.BedroomCount <i class="flaticon-bed"></i></span>
+                                    Bedrooms
+                                </li>
+                                <li>
+                                    <span>@house.BathroomCount <i class="flaticon-clean"></i></span>
+                                    Bathrooms
+                                </li>
+                                <li>
+                                    <span>@house.Area <i class="flaticon-square-shape-design-interface-tool-symbol"></i></span>
+                                    square Ft
+                                </li>
                             </ul>
                         </div>
-                        <div class="product-img-location-gallery">
-                            <div class="product-img-location">
-                                <ul>
-                                    <li>
-                                        <a href="locations.html"><i class="flaticon-pin"></i> @house.City.Name</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="product-img-gallery">
-                                <ul>
-                                    <li>
-                                        <a href="product-details.html"><i class="fas fa-camera"></i> @house.HouseImages.Count</a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details.html"><i class="fas fa-film"></i> @house.ParkingCount</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-price">
-                                <span>$@((house.Price *(100-house.DiscountPercent)/100).ToString("0.00"))</span>
-                        </div>
-                        <h2 class="product-title"><a href="product-details.html">@house.Title</a></h2>
-                        <div class="product-description">
-                            <p>
-                                @house.PosterDesc
-                            </p>
-                        </div>
-                        <ul class="ltn__list-item-2 ltn__list-item-2-before">
-                            <li>
-                                <span>@house.BedroomCount <i class="flaticon-bed"></i></span>
-                                Bedrooms
-                            </li>
-                            <li>
-                                <span>@house.BathroomCount <i class="flaticon-clean"></i></span>
-                                Bathrooms
-                            </li>
-                            <li>
-                                <span>@house.Area <i class="flaticon-square-shape-design-interface-tool-symbol"></i></span>
-                                square Ft
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="product-info-bottom">
-                        <div class="real-estate-agent">
-                            <div class="agent-img">
-                                <a href="team-details.html"><img src="~/Uploads//Owners/@house.Owner.ImageUrl" alt="#"></a>
-                            </div>
-                            <div class="agent-brief">
+                        <div class="product-info-bottom">
+                            <div class="real-estate-agent">
+                                <div class="agent-img">
+                                    <a href="team-details.html"><img src="~/Uploads//Owners/@house.Owner.ImageUrl" alt="#"></a>
+                                </div>
+                                <div class="agent-brief">
                                     <h6><a href="team-details.html">@house.Owner.Fullname</a></h6>
-                                <small>Estate Agents</small>
+                                    <small>Estate Agents</small>
+                                </div>
                             </div>
-                        </div>
-                        <div class="product-hover-action">
-                            <ul>
-                                <li>
-                                    <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                        <i class="flaticon-expand"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
-                                        <i class="flaticon-heart-1"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="product-details.html" title="Product Details">
-                                        <i class="flaticon-add"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                            <div class="product-hover-action">
+                                <ul>
+                                    <li>
+                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                            <i class="flaticon-expand"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                            <i class="flaticon-heart-1"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="product-details.html" title="Product Details">
+                                            <i class="flaticon-add"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             }
 
-            
-          
+
+
         </div>
     </div>
 </div>
 <!-- PRODUCT SLIDER AREA END -->
-
 <!-- CATEGORY AREA START -->
 <div class="ltn__category-area section-bg-1-- ltn__primary-bg before-bg-1 bg-image bg-overlay-theme-black-5--0 pt-115 pb-90 d-none" data-bs-bg="img/bg/5.jpg">
     <div class="container">
@@ -568,19 +539,19 @@
             </div>
         </div>
 
-        <div class="row ltn__category-slider-active--- slick-arrow-1 justify-content-center">    
-        @foreach (var amenity in Model.Amenities)
-        {
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                <div class="ltn__category-item ltn__category-item-5 text-center">
-                    <a href="shop.html">
-                        <span class="category-icon"><i class="@amenity.Icon"></i></span>
-                        <span class="category-title">@amenity.Name</span>
-                        <span class="category-btn"><i class="flaticon-right-arrow"></i></span>
-                    </a>
+        <div class="row ltn__category-slider-active--- slick-arrow-1 justify-content-center">
+            @foreach (var amenity in Model.Amenities)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                    <div class="ltn__category-item ltn__category-item-5 text-center">
+                        <a href="shop.html">
+                            <span class="category-icon"><i class="@amenity.Icon"></i></span>
+                            <span class="category-title">@amenity.Name</span>
+                            <span class="category-btn"><i class="flaticon-right-arrow"></i></span>
+                        </a>
+                    </div>
                 </div>
-            </div>
-        }
+            }
 
         </div>
     </div>
