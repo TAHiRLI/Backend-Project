@@ -21,7 +21,9 @@ namespace Quarter.Controllers
             HomeViewModel Model = new HomeViewModel();
             Model.Amenities = _context.Amenities.ToList();
             Model.Sliders = _context.HomeSliders.ToList();
-            Model.Houses = _context.Houses.Include(x=> x.HouseImages).Include(x=> x.Owner).ToList();
+            Model.Houses = _context.Houses.Include(x=> x.HouseImages).Include(x=> x.Owner).Include(x=> x.City).Where(x=> x.IsFeatured == true).ToList();
+            Model.Cities = _context.Cities.ToList();
+            Model.Categories = _context.Categories.ToList();
 
 
             return View(Model);
