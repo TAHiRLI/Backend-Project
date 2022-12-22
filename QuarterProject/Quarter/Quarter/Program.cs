@@ -1,16 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using Quarter.DAL;
+using Quarter.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
 builder.Services.AddDbContext<QuarterDbContext>(opt =>
 {
     opt.UseSqlServer("Server=DESKTOP-6BCR9RQ; Database=Quarter; Trusted_Connection=TRUE ");
 });
 
+builder.Services.AddScoped<LayoutService>();
 
 
 var app = builder.Build();
