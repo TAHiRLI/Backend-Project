@@ -34,6 +34,8 @@ namespace Quarter.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(Owner owner)
         {
+            if (owner.File == null)
+                ModelState.AddModelError("File", "This field is required");
             if (!ModelState.IsValid)
             {
                 return View();
@@ -58,22 +60,37 @@ namespace Quarter.Areas.Admin.Controllers
 
         public IActionResult Edit(int id)
         {
-            var city = _context.Cities.FirstOrDefault(x => x.Id == id);
-            if (city == null)
+            var owner = _context.Owners.FirstOrDefault(x => x.Id == id);
+            if (owner == null)
                 return NotFound();
-            return View(city);
+            return View(owner);
         }
         [HttpPost]
-        public IActionResult Edit(City city)
+        public IActionResult Edit(Owner owner)
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
-            var existCity = _context.Cities.FirstOrDefault(x => x.Id == city.Id);
-            if (existCity == null)
+            var existOwner = _context.Owners.FirstOrDefault(x => x.Id == owner.Id);
+            if (existOwner == null)
                 return NotFound();
-            existCity.Name = city.Name;
+
+
+            if(owner.File != null)
+            {
+                FileManager.Delete(_env.WebRootPath, "Uploads/Owners", existOwner.ImageUrl);
+                existOwner.ImageUrl = FileManager.Save(owner.File, _env.WebRootPath, "Uploads/Owners", 100);
+            }
+
+
+
+
+            existOwner.Fullname = owner.Fullname;
+            existOwner.Desc = owner.Desc;
+            existOwner.SharePercent = owner.SharePercent;
+
+            
             _context.SaveChanges();
 
 

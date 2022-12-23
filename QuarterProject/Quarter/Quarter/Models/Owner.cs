@@ -20,7 +20,7 @@ namespace Quarter.Models
         [NotMapped]
         [MaxFileSize(2)]
         [AllowedFileTypes("image/jpeg" , "image/png")]
-        public IFormFile File { get; set; }
+        public IFormFile? File { get; set; }
 
         public List<House>? Houses { get; set; }
 

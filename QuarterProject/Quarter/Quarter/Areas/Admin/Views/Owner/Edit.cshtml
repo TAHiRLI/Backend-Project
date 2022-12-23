@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+@model Owner
+<div class="w-100 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Update  Owner</h4>
+
+            <form action="edit" method="post" class="forms-sample" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="Fullname">Name</label>
+                    <input asp-for="Fullname" type="text" class="form-control" placeholder="Name">
+                    <span class="text-danger" asp-validation-for="Fullname"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SharePercent">Share Percent</label>
+                    <input asp-for="SharePercent" type="number" step="0.001" class="form-control" placeholder="SharePercent">
+                    <span class="text-danger" asp-validation-for="SharePercent"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Desc">Description</label>
+                    <textarea asp-for="Desc" class="form-control" placeholder="Desc"><</textarea>
+                    <span class="text-danger" asp-validation-for="Desc"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="File">File upload</label>
+                    <input asp-for="File" type="file" class="form-controll">
+                    <span class="text-danger" asp-validation-for="File"></span>
+                </div>
+                <input type="hidden" asp-for="Id" value="@Model.Id"></input>
+
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <a class="btn btn-light" asp-action="index" asp-controller="owner">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
