@@ -1,0 +1,68 @@
+﻿@model List<House>
+
+@{
+    ViewData["Title"] = "Index";
+    var counter = 0;
+}
+
+<div class="w-100 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Basic Table</h4>
+            <div class="col-12  text-end"><a class="text-end d-block" asp-action="create" asp-controller="house">Create</a></div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Owner</th>
+                            <th>Category</th>
+                            <th>Area</th>
+                            <th>Rooms</th>
+                            <th>Status</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var house in Model)
+                        {
+                            counter++;
+                            <tr>
+                                <td>@counter</td>
+                                <td>
+                                    <img width="50"  src="~/Uploads/Houses/@house.HouseImages.FirstOrDefault(x=> x.PosterStatus== true)?.ImageUrl" />
+
+                                </td>
+                                <td>@house.Title</td>
+                                <td>@house.Owner.Fullname</td>
+                                <td>@house.Category.Name</td>
+                                <td>@house.Area</td>
+                                <td>@house.RoomCount</td>
+                                  <td><label class="badge badge-@(house.IsSold? "danger":"success")">@(house.IsSold? "Sold" : "For Sale")</label></td>
+
+                                <td>@house.Price</td>
+                                <td>
+                                    <a asp-action="edit" asp-action="house" asp-route-id="@house.Id"><i style="font-size:20px" class="mdi mdi-lead-pencil"></i></a>
+                                    <a class="delete-btn" asp-action="delete" asp-action="house" asp-route-id="@house.Id"><i style="font-size:20px" class="mdi mdi-close-circle text-danger "></i></a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/admin/js/Main.js"></script>
+
+
+}
+
