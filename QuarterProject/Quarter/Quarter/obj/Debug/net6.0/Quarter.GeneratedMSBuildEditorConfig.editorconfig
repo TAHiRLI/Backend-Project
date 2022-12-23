@@ -15,6 +15,18 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Hp/Desktop/BackEnd_Project/Backend-Project/QuarterProject/Quarter/Quarter/Areas/Admin/Views/Amenity/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQW1lbml0eVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Hp/Desktop/BackEnd_Project/Backend-Project/QuarterProject/Quarter/Quarter/Areas/Admin/Views/Amenity/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQW1lbml0eVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Hp/Desktop/BackEnd_Project/Backend-Project/QuarterProject/Quarter/Quarter/Areas/Admin/Views/Amenity/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQW1lbml0eVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Hp/Desktop/BackEnd_Project/Backend-Project/QuarterProject/Quarter/Quarter/Areas/Admin/Views/Category/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcnlcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

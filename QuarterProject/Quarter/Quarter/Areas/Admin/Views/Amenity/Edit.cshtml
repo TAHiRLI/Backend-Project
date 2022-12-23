@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+}
+@model Amenity
+<div class="w-100 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Create New Owner</h4>
+
+            <form action="create" method="post" class="forms-sample" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="Name">Name</label>
+                    <input asp-for="Name" type="text" class="form-control">
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Icon">Icon</label>
+                    <input asp-for="Icon" type="text" class="form-control">
+                    <span class="text-danger" asp-validation-for="Icon"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IsFeatured">IsFeatured</label>
+                    <br />
+                    <input asp-for="IsFeatured" type="checkbox">
+                    <span class="text-danger" asp-validation-for="IsFeatured"></span>
+                </div>
+
+                <input asp-for="Id" type="hidden" value="@Model.Id" />
+
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <a class="btn btn-light" asp-action="index" asp-controller="Amenity">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
