@@ -34,7 +34,7 @@ namespace Quarter.Models
         [Required]
         public int OwnerId { get; set; }
         public int CityId { get; set; }
-        public City City { get; set; }
+        public City? City { get; set; }
 
         public Category? Category { get; set; }
         public Owner? Owner { get; set; }
@@ -50,8 +50,8 @@ namespace Quarter.Models
         public List<IFormFile>? Files { get; set; }
 
 
-        public List<HouseImage>? HouseImages { get; set; } 
-        public List<HouseAmenity>? HouseAmenities { get; set; }
+        public List<HouseImage>? HouseImages { get; set; } = new List<HouseImage>();
+        public List<HouseAmenity>? HouseAmenities { get; set; } = new List<HouseAmenity>();
 
 
 
