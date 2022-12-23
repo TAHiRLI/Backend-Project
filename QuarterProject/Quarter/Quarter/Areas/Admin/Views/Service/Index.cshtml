@@ -36,9 +36,9 @@
                                 <td>@counter</td>
                                 <td>@service.Name</td>
                                 <td>@service.Desc</td>
-                                <td>
+                               
                                 <td><label class="badge badge-@(!service.IsFeatured? "danger":"success")">@(service.IsFeatured ? "Featured" : "Ordinary")</label></td>
-                                </td>
+                              
                                 <td>
                                     <a asp-action="edit" asp-action="Service" asp-route-id="@service.Id"><i style="font-size:20px" class="mdi mdi-lead-pencil"></i></a>
                                     <a class="delete-btn" asp-action="delete" asp-action="Service" asp-route-id="@service.Id"><i style="font-size:20px" class="mdi mdi-close-circle text-danger "></i></a>
