@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Quarter.Attributes.ValidationAttributes;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Quarter.Models
@@ -37,6 +38,16 @@ namespace Quarter.Models
 
         public Category? Category { get; set; }
         public Owner? Owner { get; set; }
+        [NotMapped]
+        public List<int>? AmenityIds { get; set; }
+        [NotMapped]
+        [AllowedFileTypes("image/jpeg", "image/png")]
+        [MaxFileSize(2)]
+        public IFormFile? File { get; set; }
+        [NotMapped]
+        [AllowedFileTypes("image/jpeg", "image/png")]
+        [MaxFileSize(2)]
+        public List<IFormFile>? Files { get; set; }
 
 
         public List<HouseImage>? HouseImages { get; set; } 
