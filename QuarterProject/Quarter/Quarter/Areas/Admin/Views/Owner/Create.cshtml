@@ -3,13 +3,13 @@
     ViewData["Title"] = "Create";
 }
 
-@model OwnerViewModel
+@model Owner
 <div class="w-100 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Create New Owner</h4>
          
-            <form action="create" method="post" class="forms-sample">
+            <form action="create" method="post" class="forms-sample" enctype="multipart/form-data">
                 <div class="form-group">
                     <label asp-for="Fullname" >Name</label>
                     <input asp-for="Fullname" type="text" class="form-control"  placeholder="Name">

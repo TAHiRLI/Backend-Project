@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Quarter.Areas.Admin.ViewModels;
 using Quarter.DAL;
+using Quarter.Helpers;
 using Quarter.Models;
 
 namespace Quarter.Areas.Admin.Controllers
@@ -11,9 +12,12 @@ namespace Quarter.Areas.Admin.Controllers
     {
         private readonly QuarterDbContext _context;
 
-        public OwnerController(QuarterDbContext context)
+        public readonly IWebHostEnvironment _env;
+
+        public OwnerController(QuarterDbContext context, IWebHostEnvironment env)
         {
             this._context = context;
+            _env = env;
         }
         public IActionResult Index()
         {
@@ -28,7 +32,7 @@ namespace Quarter.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(OwnerViewModel owner)
+        public IActionResult Create(Owner owner)
         {
             if (!ModelState.IsValid)
             {
@@ -39,12 +43,15 @@ namespace Quarter.Areas.Admin.Controllers
                 Fullname = owner.Fullname,
                 Desc = owner.Desc,
                 SharePercent = owner.SharePercent,
-                
+                ImageUrl = FileManager.Save(owner.File, _env.WebRootPath, "Uploads/Owners", 100),
             };
 
-            return Ok(newOwner);
+          
+
+            
 
             _context.Owners.Add(newOwner);
+            _context.SaveChanges();
 
             return RedirectToAction("index");
         }

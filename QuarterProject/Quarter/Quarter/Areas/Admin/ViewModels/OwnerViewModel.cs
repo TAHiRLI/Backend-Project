@@ -11,6 +11,6 @@ namespace Quarter.Areas.Admin.ViewModels
         public decimal SharePercent { get; set; }
         [MaxLength(500)]
         public string Desc { get; set; }
-        public IFormFile? File { get; set; }
+        
     }
 }

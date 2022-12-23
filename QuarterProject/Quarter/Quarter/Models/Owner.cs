@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using Quarter.Attributes.ValidationAttributes;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,9 +14,13 @@ namespace Quarter.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal SharePercent { get; set; }
         [MaxLength(100)]
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
         [MaxLength(500)]
         public string Desc { get; set; }
+        [NotMapped]
+        [MaxFileSize(2)]
+        [AllowedFileTypes("image/jpeg" , "image/png")]
+        public IFormFile File { get; set; }
 
         public List<House>? Houses { get; set; }
 
