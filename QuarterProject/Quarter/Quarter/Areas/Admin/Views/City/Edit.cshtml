@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+}
+@model City
+   <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Edit city</h4>
+                
+                  <form asp-action="edit" method="post" class="form-inline">
+                    <label asp-for="Name" class="sr-only" for="inlineFormInputName2">City Name</label>
+                    <div>
+                    <input asp-for="Name" class="form-control mb-2 mr-sm-2">
+                    </div>
+                  
+                  
+                   
+                    <button type="submit" class="btn btn-primary mb-2">Edit</button>
+                  </form>
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+              </div>
+            </div>
+

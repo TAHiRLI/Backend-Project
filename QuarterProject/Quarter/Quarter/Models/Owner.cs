@@ -17,7 +17,7 @@ namespace Quarter.Models
         [MaxLength(500)]
         public string Desc { get; set; }
 
-        public List<House>? House { get; set; }
+        public List<House>? Houses { get; set; }
 
     }
 }

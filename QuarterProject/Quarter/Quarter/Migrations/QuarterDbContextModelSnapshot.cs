@@ -45,7 +45,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Amenities");
+                    b.ToTable("Amenities", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.Category", b =>
@@ -63,7 +63,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.City", b =>
@@ -74,6 +74,9 @@ namespace Quarter.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(30)
@@ -81,7 +84,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cities");
+                    b.ToTable("Cities", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.HomeSlider", b =>
@@ -132,7 +135,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("HomeSliders");
+                    b.ToTable("HomeSliders", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.House", b =>
@@ -168,6 +171,9 @@ namespace Quarter.Migrations
 
                     b.Property<decimal>("DiscountPercent")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsFeatured")
                         .HasColumnType("bit");
@@ -215,7 +221,7 @@ namespace Quarter.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Houses");
+                    b.ToTable("Houses", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.HouseAmenity", b =>
@@ -238,7 +244,7 @@ namespace Quarter.Migrations
 
                     b.HasIndex("HouseId");
 
-                    b.ToTable("HouseAmenities");
+                    b.ToTable("HouseAmenities", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.HouseImage", b =>
@@ -263,7 +269,7 @@ namespace Quarter.Migrations
 
                     b.HasIndex("HouseId");
 
-                    b.ToTable("HousesImages");
+                    b.ToTable("HousesImages", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.Owner", b =>
@@ -294,7 +300,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Owners");
+                    b.ToTable("Owners", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.Service", b =>
@@ -324,7 +330,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services");
+                    b.ToTable("Services", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.Setting", b =>
@@ -347,7 +353,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Settings");
+                    b.ToTable("Settings", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.House", b =>
@@ -359,7 +365,7 @@ namespace Quarter.Migrations
                         .IsRequired();
 
                     b.HasOne("Quarter.Models.City", "City")
-                        .WithMany("House")
+                        .WithMany("Houses")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -419,7 +425,7 @@ namespace Quarter.Migrations
 
             modelBuilder.Entity("Quarter.Models.City", b =>
                 {
-                    b.Navigation("House");
+                    b.Navigation("Houses");
                 });
 
             modelBuilder.Entity("Quarter.Models.House", b =>

@@ -32,12 +32,11 @@ namespace Quarter.Models
         public int CategoryId { get; set; }
         [Required]
         public int OwnerId { get; set; }
-        [Required]
         public int CityId { get; set; }
+        public City City { get; set; }
 
         public Category? Category { get; set; }
         public Owner? Owner { get; set; }
-        public City? City { get; set; }
 
 
         public List<HouseImage>? HouseImages { get; set; } 
