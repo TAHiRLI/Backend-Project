@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.Project;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using Quarter.DAL;
@@ -90,6 +91,15 @@ namespace Quarter.Areas.Admin.Controllers
 
             }
 
+            foreach (var Id in house.AmenityIds)
+            {
+                HouseAmenity houseAmenity = new HouseAmenity
+                {
+                    AmenityId = Id
+                };
+                house.HouseAmenities.Add(houseAmenity);
+            }
+
             house.CreatedAt = DateTime.UtcNow.AddHours(4);
             house.UpdatedAt = DateTime.UtcNow.AddHours(4);
 
@@ -97,6 +107,89 @@ namespace Quarter.Areas.Admin.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Edit (int id)
+        {
+            var model = _context.Houses
+                .Include(x=> x.HouseAmenities)
+                .Include(x=> x.City)
+                .Include(x=> x.Category)
+                .Include(x=> x.Owner)
+                .FirstOrDefault(h => h.Id == id);
+            if(model == null)
+                return NotFound();
+
+
+            ViewBag.Cities = _context.Cities.ToList();
+            ViewBag.Amenities = _context.Amenities.ToList();
+            ViewBag.Owners = _context.Owners.ToList();
+            ViewBag.Categories = _context.Categories.ToList();
+            model.AmenityIds = model.HouseAmenities.Select(x => x.AmenityId).ToList();
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Edit(House house)
+        {
+            var existHouse = _context.Houses.FirstOrDefault(x => x.Id == house.Id);
+            if (existHouse == null)
+                return NotFound();
+
+            if (!_context.Cities.Any(x => x.Id == house.CityId))
+                ModelState.AddModelError("CityId", "City not found");
+            if (!_context.Categories.Any(x => x.Id == house.CategoryId))
+                ModelState.AddModelError("CategoryId", "Category not found");
+            if (!_context.Owners.Any(x => x.Id == house.OwnerId))
+                ModelState.AddModelError("OwnerId", "Owner not found");
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Cities = _context.Cities.ToList();
+                ViewBag.Amenities = _context.Amenities.ToList();
+                ViewBag.Owners = _context.Owners.ToList();
+                ViewBag.Categories = _context.Categories.ToList();
+                return View();
+            }
+           
+
+            existHouse.HouseAmenities.RemoveAll(x => !house.AmenityIds.Contains(x.AmenityId));
+
+            foreach (var amenityId in house.AmenityIds.Where(x=> !existHouse.HouseAmenities.Any(a=> a.AmenityId == x)).ToList())
+            {
+                HouseAmenity newHouseAmenity = new HouseAmenity
+                {
+                    AmenityId = amenityId,
+                };
+                existHouse.HouseAmenities.Add(newHouseAmenity);
+            }
+
+
+            if(house.File != null)
+            {
+                var posterImg = existHouse.HouseImages.FirstOrDefault(x => x.PosterStatus == true).ImageUrl;
+                FileManager.Delete(_env.WebRootPath, "Uploads/Houses", posterImg);
+                posterImg = FileManager.Save(house.File, _env.WebRootPath, "Uploads/Houses", 100);
+            }
+            
+
+            existHouse.Title = house.Title;
+            existHouse.Desc = house.Desc;
+            existHouse.Location = house.Location;
+            existHouse.CategoryId = house.CategoryId;
+            existHouse.OwnerId = house.OwnerId;
+            existHouse.CityId = house.CityId;
+            existHouse.Area = house.Area;
+            existHouse.RoomCount = house.RoomCount;
+            existHouse.BathroomCount = house.BathroomCount;
+            existHouse.ParkingCount = house.ParkingCount; ;
+            existHouse.BedroomCount = house.BedroomCount;
+            existHouse.DiscountPercent = house.DiscountPercent;
+            existHouse.Price = house.Price;
+            existHouse.PosterDesc = house.PosterDesc;
+            existHouse.IsFeatured = house.IsFeatured;
+            existHouse.IsSold = house.IsSold;
+            
+
+            return Ok(existHouse);
         }
     }
 }

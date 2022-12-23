@@ -39,7 +39,7 @@ namespace Quarter.Models
         public Category? Category { get; set; }
         public Owner? Owner { get; set; }
         [NotMapped]
-        public List<int>? AmenityIds { get; set; }
+        public List<int>? AmenityIds { get; set; } = new List<int>();
         [NotMapped]
         [AllowedFileTypes("image/jpeg", "image/png")]
         [MaxFileSize(2)]
