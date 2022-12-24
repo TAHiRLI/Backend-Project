@@ -1,0 +1,53 @@
+﻿@model List<Setting>
+
+@{
+    ViewData["Title"] = "Index";
+    var counter = 0;
+}
+
+<div class="w-100 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Settings</h4>
+            <div class="col-12  text-end"><a class="text-end d-block" asp-action="create" asp-controller="setting">Create</a></div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Key</th>
+                            <th>Value</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var setting in Model)
+                        {
+                            counter++;
+                            <tr>
+                                <td>@counter</td>
+                                <td>@setting.Key</td>
+                                <td>@setting.Value</td>
+                                <td>
+                                    <a asp-action="edit" asp-action="setting" asp-route-id="@setting.Id"><i style="font-size:20px" class="mdi mdi-lead-pencil"></i></a>
+                                    <a class="delete-btn" asp-action="delete" asp-action="setting" asp-route-id="@setting.Id"><i style="font-size:20px" class="mdi mdi-close-circle text-danger "></i></a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/admin/js/Main.js"></script>
+
+
+}
+
+
