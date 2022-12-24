@@ -114,15 +114,33 @@
                         <label asp-for="File">Poster Image</label>
                         <input asp-for="File" type="file" class="form-controll">
                         <span class="text-danger" asp-validation-for="File"></span>
+                        <div>
+                            <img width="100" class="border-rounded" src="~/Uploads/Houses/@Model.HouseImages.FirstOrDefault(x=> x.PosterStatus== true)?.ImageUrl">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label asp-for="Files">Other Images</label>
                         <input asp-for="Files" class="form-controll">
                         <span class="text-danger" asp-validation-for="Files"></span>
+                        <div class="row mt-3 ">
+
+                        @foreach (var image in Model.HouseImages.Where(x=> x.PosterStatus == false).ToList())
+                        {
+                                <div class="position-relative mx-3 ">
+                                    <button type="button" class="close position-absolute img-close" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            <input type="hidden" value="@image.Id" asp-for="HouseImgIds"/>
+                            <img width="100" class="border-rounded" src="~/Uploads/Houses/@image.ImageUrl" />
+                        </div>
+
+                            }
+                        </div>
+                        
                     </div>
 
                 </div>
-                <input type="hidden" value="@Model.Id" asp-for="Id"></input>
+                <input type="hidden" value="@Model.Id" asp-for="Id"/>
                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
                 <a class="btn btn-light" asp-action="index" asp-controller="House">Cancel</a>
             </form>
@@ -130,7 +148,14 @@
     </div>
 </div>
 
+@section Scripts{
+    <script>
 
+        $(document).on("click", ".img-close", function(){
+            $(this).parent().remove();
+        })
+    </script>
+}
 
 
 

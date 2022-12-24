@@ -69,7 +69,6 @@ namespace Quarter.Areas.Admin.Controllers
                 return View();
             }
 
-
             HouseImage posterImage = new HouseImage
             {
                 ImageUrl = FileManager.Save(house.File, _env.WebRootPath, "Uploads/Houses", 100),
@@ -116,6 +115,7 @@ namespace Quarter.Areas.Admin.Controllers
                 .Include(x=> x.City)
                 .Include(x=> x.Category)
                 .Include(x=> x.Owner)
+                .Include(x=> x.HouseImages)
                 .FirstOrDefault(h => h.Id == id);
             if(model == null)
                 return NotFound();
@@ -131,7 +131,7 @@ namespace Quarter.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(House house)
         {
-            var existHouse = _context.Houses.FirstOrDefault(x => x.Id == house.Id);
+            var existHouse = _context.Houses.Include(x=> x.HouseImages).Include(x=> x.HouseAmenities).FirstOrDefault(x => x.Id == house.Id);
             if (existHouse == null)
                 return NotFound();
 
@@ -151,9 +151,10 @@ namespace Quarter.Areas.Admin.Controllers
             }
            
 
+
             existHouse.HouseAmenities.RemoveAll(x => !house.AmenityIds.Contains(x.AmenityId));
 
-            foreach (var amenityId in house.AmenityIds.Where(x=> !existHouse.HouseAmenities.Any(a=> a.AmenityId == x)).ToList())
+            foreach (var amenityId in house.AmenityIds.Where(x=> !existHouse.HouseAmenities.Any(a=> a.AmenityId == x) ).ToList())
             {
                 HouseAmenity newHouseAmenity = new HouseAmenity
                 {
@@ -165,11 +166,38 @@ namespace Quarter.Areas.Admin.Controllers
 
             if(house.File != null)
             {
-                var posterImg = existHouse.HouseImages.FirstOrDefault(x => x.PosterStatus == true).ImageUrl;
+                var posterImg = existHouse.HouseImages.FirstOrDefault(x => x.PosterStatus == true)?.ImageUrl;
+                if (posterImg == null)
+                    return NotFound();
                 FileManager.Delete(_env.WebRootPath, "Uploads/Houses", posterImg);
-                posterImg = FileManager.Save(house.File, _env.WebRootPath, "Uploads/Houses", 100);
+                existHouse.HouseImages.FirstOrDefault(x=> x.PosterStatus).ImageUrl = FileManager.Save(house.File, _env.WebRootPath, "Uploads/Houses", 100);
             }
-            
+
+
+            var removedImages = existHouse.HouseImages.Where(x => !house.HouseImgIds.Contains(x.Id) && x.PosterStatus == false).ToList();
+
+            foreach (var image in removedImages)
+            {
+                FileManager.Delete(_env.WebRootPath, "Uploads/Books", image.ImageUrl);
+                existHouse.HouseImages.Remove(image);
+            }
+
+            if (house.Files != null)
+            {
+                foreach (var file in house.Files)
+                {
+                    HouseImage OtherImage = new HouseImage
+                    {
+                        ImageUrl = FileManager.Save(file, _env.WebRootPath, "Uploads/Houses", 100),
+                        PosterStatus = false,
+                    };
+                    existHouse.HouseImages.Add(OtherImage);
+                }
+
+            }
+
+
+
 
             existHouse.Title = house.Title;
             existHouse.Desc = house.Desc;
@@ -187,9 +215,10 @@ namespace Quarter.Areas.Admin.Controllers
             existHouse.PosterDesc = house.PosterDesc;
             existHouse.IsFeatured = house.IsFeatured;
             existHouse.IsSold = house.IsSold;
-            
+            existHouse.UpdatedAt = DateTime.UtcNow.AddHours(4);
 
-            return Ok(existHouse);
+            _context.SaveChanges();
+            return RedirectToAction("index");
         }
     }
 }

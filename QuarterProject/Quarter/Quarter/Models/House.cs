@@ -41,6 +41,8 @@ namespace Quarter.Models
         [NotMapped]
         public List<int>? AmenityIds { get; set; } = new List<int>();
         [NotMapped]
+        public List<int>? HouseImgIds { get; set; } = new List<int>();
+        [NotMapped]
         [AllowedFileTypes("image/jpeg", "image/png")]
         [MaxFileSize(2)]
         public IFormFile? File { get; set; }
