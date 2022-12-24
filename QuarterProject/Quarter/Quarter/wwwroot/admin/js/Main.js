@@ -31,7 +31,7 @@ $(document).on("click", ".delete-btn", function (e) {
                             'Deleted!',
                             'Your file has been deleted.',
                             'success'
-                        )
+                        ).then(()=> location.reload())
                     }).catch(err => console.error(err));
 
             }

@@ -40,19 +40,8 @@ namespace Quarter.Areas.Admin.Controllers
             {
                 return View();
             }
-            Owner newOwner = new Owner
-            {
-                Fullname = owner.Fullname,
-                Desc = owner.Desc,
-                SharePercent = owner.SharePercent,
-                ImageUrl = FileManager.Save(owner.File, _env.WebRootPath, "Uploads/Owners", 100),
-            };
-
-          
-
-            
-
-            _context.Owners.Add(newOwner);
+            owner.ImageUrl = FileManager.Save(owner.File, _env.WebRootPath, "Uploads/Owners", 100);
+            _context.Owners.Add(owner);
             _context.SaveChanges();
 
             return RedirectToAction("index");

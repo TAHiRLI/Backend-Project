@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+@model HomeSlider
+<div class="w-100 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Create New Slider</h4>
+
+            <form action="create" method="post" class="forms-sample" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="Title">Title</label>
+                    <input asp-for="Title" type="text" class="form-control" placeholder="Name">
+                    <span class="text-danger" asp-validation-for="Title"></span>
+                </div>
+            
+                
+                <div class="form-group">
+                    <label asp-for="Desc">Description</label>
+                    <textarea asp-for="Desc" class="form-control" placeholder="Desc"><</textarea>
+                    <span class="text-danger" asp-validation-for="Desc"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Btn1Text">Btn1Text</label>
+                    <input asp-for="Btn1Text" type="text" class="form-control" placeholder="Btn1Text">
+                    <span class="text-danger" asp-validation-for="Btn1Text"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Btn1Url">Btn1Url</label>
+                    <input asp-for="Btn1Url" type="text" class="form-control" placeholder="Btn1Url">
+                    <span class="text-danger" asp-validation-for="Btn1Url"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Btn2Text">Btn2Text</label>
+                    <input asp-for="Btn2Text" type="text" class="form-control" placeholder="Btn2Text">
+                    <span class="text-danger" asp-validation-for="Btn2Text"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Btn2Url">Btn2Url</label>
+                    <input asp-for="Btn2Url" type="text" class="form-control" placeholder="Btn2Url">
+                    <span class="text-danger" asp-validation-for="Btn2Url"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Order">Order</label>
+                    <input asp-for="Order" type="number" class="form-control" placeholder="Order" value="@ViewBag.LastOrder">
+                    <span class="text-danger" asp-validation-for="Order"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="File">File upload</label>
+                    <input asp-for="File" type="file" class="form-controll">
+                    <span class="text-danger" asp-validation-for="File"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <a class="btn btn-light" asp-action="index" asp-controller="Slider">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

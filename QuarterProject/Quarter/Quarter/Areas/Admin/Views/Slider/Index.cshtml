@@ -1,0 +1,64 @@
+﻿
+
+@model List<HomeSlider>
+
+@{
+    ViewData["Title"] = "Index";
+    var counter = 0;
+}
+
+<div class="w-100 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Basic Table</h4>
+            <div class="col-12  text-end"><a class="text-end d-block" asp-action="create" asp-controller="Slider">Create</a></div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Order</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var slider in Model)
+                        {
+                            counter++;
+                            <tr>
+                                <td>@counter</td>
+                                <td>
+                                    <img width="50" class="border-circle" src="~/Uploads/Sliders/@slider.ImageUrl" />
+
+                                </td>
+                                <td>@Html.Raw(slider.Title)</td>
+                                <td>@slider.Desc</td>
+                                <td>@slider.Order</td>
+                                <td>
+                                    <a asp-action="edit" asp-action="Slider" asp-route-id="@slider.Id"><i style="font-size:20px" class="mdi mdi-lead-pencil"></i></a>
+                                    <a class="delete-btn" asp-action="delete" asp-action="Slider" asp-route-id="@slider.Id"><i style="font-size:20px" class="mdi mdi-close-circle text-danger "></i></a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/admin/js/Main.js"></script>
+
+
+}
+
+
+
+
