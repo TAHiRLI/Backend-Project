@@ -331,7 +331,7 @@
                 <div class="col-lg-12">
                     <div class="ltn__product-item ltn__product-item-4 text-center---">
                         <div class="product-img">
-                            <a href="product-details.html"><img src="~/Uploads//Houses/@house.HouseImages.FirstOrDefault(x=> x.PosterStatus==true)?.ImageUrl" alt="#"></a>
+                            <a asp-action="details" asp-controller="house"><img src="~/Uploads//Houses/@house.HouseImages.FirstOrDefault(x=> x.PosterStatus==true)?.ImageUrl" alt="#"></a>
                             <div class="product-badge">
                                 <ul>
                                     @{
@@ -340,16 +340,16 @@
 
                                         if (house.IsSold)
                                         {
-                                            <li class="sale-badge bg-dark">Sold</li>
+                                                <li class="sale-badge bg-dark">Sold</li>
                                         }
                                         else if (house.IsFeatured)
                                         {
-                                            <li class="sale-badge bg-blue">Special</li>
+                                                <li class="sale-badge bg-blue">Special</li>
 
                                         }
                                         else if (house.DiscountPercent > 0)
                                         {
-                                            <li class="sale-badge bg-red">Discounted</li>
+                                                <li class="sale-badge bg-red">Discounted</li>
                                         }
                                     }
                                 </ul>
@@ -365,10 +365,10 @@
                                 <div class="product-img-gallery">
                                     <ul>
                                         <li>
-                                            <a href="product-details.html"><i class="fas fa-camera"></i> @house.HouseImages.Count</a>
+                                            <a asp-action="details" asp-controller="house"><i class="fas fa-camera"></i> @house.HouseImages.Count</a>
                                         </li>
                                         <li>
-                                            <a href="product-details.html"><i class="fas fa-film"></i> @house.ParkingCount</a>
+                                            <a asp-action="details" asp-controller="house"><i class="fas fa-film"></i> @house.ParkingCount</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -378,7 +378,7 @@
                             <div class="product-price">
                                 <span>$@((house.Price * (100 - house.DiscountPercent) / 100).ToString("0.00"))</span>
                             </div>
-                            <h2 class="product-title"><a href="product-details.html">@house.Title</a></h2>
+                            <h2 class="product-title"><a asp-action="details" asp-controller="house">@house.Title</a></h2>
                             <div class="product-description">
                                 <p>
                                     @house.PosterDesc
@@ -411,8 +411,8 @@
                             </div>
                             <div class="product-hover-action">
                                 <ul>
-                                    <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                   <li>
+                                        <a  asp-action="gethousedata" asp-controller="house" asp-route-id="@house.Id" class="modalBtn" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
                                             <i class="flaticon-expand"></i>
                                         </a>
                                     </li>
@@ -422,7 +422,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="product-details.html" title="Product Details">
+                                        <a asp-action="details" asp-controller="house" title="Product Details">
                                             <i class="flaticon-add"></i>
                                         </a>
                                     </li>
@@ -725,3 +725,6 @@
     </div>
 </div>
 <!-- BRAND LOGO AREA END -->
+@section Scripts{
+    <script src="~/assets/js/modal.js"></script>
+}

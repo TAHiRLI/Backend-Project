@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "mdF6Q+sBANA2do68pevnm9zyblla+hkh7KiT8uexCeg=",
+  "Hash": "PkvTbtBNybo98hYEv+ST2d+TQetFcuXqB05KJPqkyLY=",
   "Source": "Quarter",
   "BasePath": "_content/Quarter",
   "Mode": "Default",
@@ -35666,6 +35666,23 @@
       "OriginalItemSpec": "wwwroot\\assets\\js\\maplace-active.js"
     },
     {
+      "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\assets\\js\\modal.js",
+      "SourceId": "Quarter",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\",
+      "BasePath": "_content/Quarter",
+      "RelativePath": "assets/js/modal.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\js\\modal.js"
+    },
+    {
       "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\assets\\js\\plugins.js",
       "SourceId": "Quarter",
       "SourceType": "Discovered",
@@ -36482,6 +36499,23 @@
       "OriginalItemSpec": "wwwroot\\Uploads\\Houses\\7.png"
     },
     {
+      "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Houses\\81e9d9ab-e81d-45de-9de4-e66b2381d2b6h6-img-1.jpg",
+      "SourceId": "Quarter",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\",
+      "BasePath": "_content/Quarter",
+      "RelativePath": "Uploads/Houses/81e9d9ab-e81d-45de-9de4-e66b2381d2b6h6-img-1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Houses\\81e9d9ab-e81d-45de-9de4-e66b2381d2b6h6-img-1.jpg"
+    },
+    {
       "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Houses\\8e5cc7c4-6fe3-4fb2-a76b-d8c7c4bf7561h3-team-img-3.png",
       "SourceId": "Quarter",
       "SourceType": "Discovered",
@@ -36601,6 +36635,40 @@
       "OriginalItemSpec": "wwwroot\\Uploads\\Houses\\b974d066-79b8-496e-9569-d1f85ef011a7gridhome.jpg"
     },
     {
+      "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Houses\\c43717dd-fb88-41d1-b1f6-78e4f8a7337bh3-video-img.jpg",
+      "SourceId": "Quarter",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\",
+      "BasePath": "_content/Quarter",
+      "RelativePath": "Uploads/Houses/c43717dd-fb88-41d1-b1f6-78e4f8a7337bh3-video-img.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Houses\\c43717dd-fb88-41d1-b1f6-78e4f8a7337bh3-video-img.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Houses\\d8997227-7e7e-4da8-8352-b66dea7582f5blog-feature-img-3.jpg",
+      "SourceId": "Quarter",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\",
+      "BasePath": "_content/Quarter",
+      "RelativePath": "Uploads/Houses/d8997227-7e7e-4da8-8352-b66dea7582f5blog-feature-img-3.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Houses\\d8997227-7e7e-4da8-8352-b66dea7582f5blog-feature-img-3.jpg"
+    },
+    {
       "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Houses\\ef3a8656-34bc-40ec-b0c9-94baad471ed6blog-feature-img-3.jpg",
       "SourceId": "Quarter",
       "SourceType": "Discovered",
@@ -36618,6 +36686,23 @@
       "OriginalItemSpec": "wwwroot\\Uploads\\Houses\\ef3a8656-34bc-40ec-b0c9-94baad471ed6blog-feature-img-3.jpg"
     },
     {
+      "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Houses\\f34e22e2-c2fd-4e03-a922-54ae3296e96fh6-img-2.jpg",
+      "SourceId": "Quarter",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\",
+      "BasePath": "_content/Quarter",
+      "RelativePath": "Uploads/Houses/f34e22e2-c2fd-4e03-a922-54ae3296e96fh6-img-2.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Houses\\f34e22e2-c2fd-4e03-a922-54ae3296e96fh6-img-2.jpg"
+    },
+    {
       "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Owners\\14fc5716-ac4a-4663-8811-c95a074adc51h6-img-8.jpg",
       "SourceId": "Quarter",
       "SourceType": "Discovered",
@@ -36633,6 +36718,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\Owners\\14fc5716-ac4a-4663-8811-c95a074adc51h6-img-8.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Owners\\2c5a6fcc-4390-49e4-9f34-82cd817dc457blog-feature-img-3.jpg",
+      "SourceId": "Quarter",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\",
+      "BasePath": "_content/Quarter",
+      "RelativePath": "Uploads/Owners/2c5a6fcc-4390-49e4-9f34-82cd817dc457blog-feature-img-3.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Owners\\2c5a6fcc-4390-49e4-9f34-82cd817dc457blog-feature-img-3.jpg"
     },
     {
       "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Owners\\6a4cf94c-932a-4cdd-9be0-1e51cf66c473h3-team-img-1 - Copy.png",
@@ -36735,6 +36837,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\Sliders\\68a883ef-7b5f-4140-b840-ca1aa443863agridhome.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Sliders\\c8b511f1-56f9-430f-920d-2969336cd0e3blog-feature-img-3.jpg",
+      "SourceId": "Quarter",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\",
+      "BasePath": "_content/Quarter",
+      "RelativePath": "Uploads/Sliders/c8b511f1-56f9-430f-920d-2969336cd0e3blog-feature-img-3.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Sliders\\c8b511f1-56f9-430f-920d-2969336cd0e3blog-feature-img-3.jpg"
     },
     {
       "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Sliders\\d1449a17-7cb7-4238-830d-3f1273d1c675blog-feature-img-4.jpg",

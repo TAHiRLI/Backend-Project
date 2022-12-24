@@ -66,7 +66,11 @@ namespace Quarter.Areas.Admin.Controllers
 
         public IActionResult Delete(int id)
         {
-            
+            var serive = _context.Services.FirstOrDefault(x => x.Id == id);
+            if (serive == null)
+                return NotFound();
+            _context.Services.Remove(serive);
+            _context.SaveChanges();
             return Ok();
         }
     }
