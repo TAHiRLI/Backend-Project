@@ -1,14 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.DotNet.Scaffolding.Shared.Project;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using Quarter.DAL;
 using Quarter.Helpers;
 using Quarter.Models;
+using System.Data;
 
 namespace Quarter.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "SuperAdmin, Admin")]
     public class HouseController : Controller
     {
         private readonly QuarterDbContext _context;

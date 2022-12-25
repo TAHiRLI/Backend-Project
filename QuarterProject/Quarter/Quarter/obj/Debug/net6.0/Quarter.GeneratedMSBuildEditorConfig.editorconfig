@@ -15,6 +15,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Hp/Desktop/BackEnd_Project/Backend-Project/QuarterProject/Quarter/Quarter/Areas/Admin/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Hp/Desktop/BackEnd_Project/Backend-Project/QuarterProject/Quarter/Quarter/Areas/Admin/Views/Amenity/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQW1lbml0eVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

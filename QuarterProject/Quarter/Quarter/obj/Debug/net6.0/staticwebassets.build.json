@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FLUtdg67WoxTag7CHCCAF9Gbvjtgrp7aGDopbZp+HSs=",
+  "Hash": "YNscZO85mQLEC90p5bflW0EhyNkV7wTIQ+2X+3KYwVE=",
   "Source": "Quarter",
   "BasePath": "_content/Quarter",
   "Mode": "Default",
@@ -36293,6 +36293,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\webfonts\\fa-solid-900.woff2"
+    },
+    {
+      "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\lib\\signalr.js",
+      "SourceId": "Quarter",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\",
+      "BasePath": "_content/Quarter",
+      "RelativePath": "lib/signalr.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\signalr.js"
+    },
+    {
+      "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\lib\\signalr.min.js",
+      "SourceId": "Quarter",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\",
+      "BasePath": "_content/Quarter",
+      "RelativePath": "lib/signalr.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\signalr.min.js"
     },
     {
       "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Houses\\1.png",

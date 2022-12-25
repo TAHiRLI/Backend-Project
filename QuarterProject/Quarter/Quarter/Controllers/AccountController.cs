@@ -192,6 +192,7 @@ namespace Quarter.Controllers
 
 
 
+            return NotFound();
         }
         public async Task<IActionResult> Login()
         {
