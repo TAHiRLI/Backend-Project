@@ -1,0 +1,53 @@
+﻿
+@model ProfileEditViewModel
+<div class="ltn__form-box">
+    <form asp-action="profile" method="post" enctype="multipart/form-data">
+        <div class="row mb-50">
+            <div class="col-md-6">
+                <label asp-for="File">Profile Photo</label>
+                <input asp-for="File" type="file"  >
+                <span class="text-danger" asp-validation-for="File"></span>
+                <div>
+                    <img width="100" src="~/Uploads/Users/@Model.UserPhoto"/>
+                </div>
+            </div> <div class="col-md-6">
+                <label asp-for ="Fullname">Fullname:</label>
+                <input asp-for="Fullname" type="text" >
+                <span class="text-danger" asp-validation-for="Fullname"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Username">Username:</label>
+                <input asp-for="Username" type="text" >
+                <span class="text-danger" asp-validation-for="Username"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Email">Display Email:</label>
+                <input asp-for="Email" type="email"  placeholder="example@example.com">
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+
+        </div>
+        <fieldset>
+            <legend>Password change</legend>
+            <div class="row">
+                <div class="col-md-12">
+                    <label asp-for="CurrentPassword">Current password (leave blank to leave unchanged):</label>
+                    <input asp-for="CurrentPassword" type="password" >
+                    <span class="text-danger" asp-validation-for="CurrentPassword"></span>
+
+                    <label asp-for="NewPassword">New password (leave blank to leave unchanged):</label>
+                    <input asp-for="NewPassword" type="password" >
+                    <span class="text-danger" asp-validation-for="NewPassword"></span>
+
+                    <label asp-for="ConfirmPassword">Confirm new password:</label>
+                    <input asp-for="ConfirmPassword" type="password" >
+                    <span class="text-danger" asp-validation-for="ConfirmPassword" ></span>
+
+                </div>
+            </div>
+        </fieldset>
+        <div class="btn-wrapper">
+            <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Save Changes</button>
+        </div>
+    </form>
+</div>

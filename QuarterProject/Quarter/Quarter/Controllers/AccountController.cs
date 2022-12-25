@@ -40,21 +40,21 @@ namespace Quarter.Controllers
         }
 
         // create roles 
-       // public async Task<IActionResult> CreateRoles()
-       // {
-            //IdentityRole role1 = new IdentityRole("SuperAdmin");
-            //IdentityRole role2 = new IdentityRole("Admin");
-            //IdentityRole role3 = new IdentityRole("Member");
-           // IdentityRole role4 = new IdentityRole("Visitor");
+        // public async Task<IActionResult> CreateRoles()
+        // {
+        //IdentityRole role1 = new IdentityRole("SuperAdmin");
+        //IdentityRole role2 = new IdentityRole("Admin");
+        //IdentityRole role3 = new IdentityRole("Member");
+        // IdentityRole role4 = new IdentityRole("Visitor");
 
 
-            //await _roleManager.CreateAsync(role1);
-            //await _roleManager.CreateAsync(role2);
-            //await _roleManager.CreateAsync(role3);
-           // await _roleManager.CreateAsync(role4);
+        //await _roleManager.CreateAsync(role1);
+        //await _roleManager.CreateAsync(role2);
+        //await _roleManager.CreateAsync(role3);
+        // await _roleManager.CreateAsync(role4);
 
-         //   return Ok();
-      //  }
+        //   return Ok();
+        //  }
         public IActionResult Register()
         {
             return View();
@@ -134,7 +134,7 @@ namespace Quarter.Controllers
 
             return RedirectToAction("login");
         }
-        public async Task<IActionResult>  ConfirmEmail( string token , string email)
+        public async Task<IActionResult> ConfirmEmail(string token, string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
@@ -144,7 +144,7 @@ namespace Quarter.Controllers
             if (!result.Succeeded)
                 return NotFound();
 
-            await _userManager.RemoveFromRoleAsync(user,"Visitor");
+            await _userManager.RemoveFromRoleAsync(user, "Visitor");
             await _userManager.AddToRoleAsync(user, "Member");
 
 
@@ -213,14 +213,14 @@ namespace Quarter.Controllers
                 return View();
             }
             var result = await _signInManager.PasswordSignInAsync(user, LoginVm.Password, true, true);
-           
+
             if (result.IsLockedOut)
             {
                 ModelState.AddModelError("", "Too many attempts, please try again after 5 minutes");
                 return View();
             }
 
-            if(!await _userManager.IsEmailConfirmedAsync(user))
+            if (!await _userManager.IsEmailConfirmedAsync(user))
             {
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 var url = Url.Action(nameof(ConfirmEmail), "account", new { token = token, email = user.Email }, Request.Scheme); ;
@@ -242,7 +242,7 @@ namespace Quarter.Controllers
                 ModelState.AddModelError("", "Please verify your email");
                 return View();
             }
-         
+
             if (!result.Succeeded)
             {
                 ModelState.AddModelError("", "Username of password is incorredt");
@@ -266,7 +266,7 @@ namespace Quarter.Controllers
             if (user == null)
                 return NotFound();
 
-           var token =  await _userManager.GeneratePasswordResetTokenAsync(user);
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
             var url = Url.Action("VerifyPasswordReset", "account", new { email = user.Email, token = token }, Request.Scheme);
 
@@ -290,16 +290,16 @@ namespace Quarter.Controllers
 
             return View();
         }
-        public async Task<IActionResult>  VerifyPasswordReset(string email, string token)
+        public async Task<IActionResult> VerifyPasswordReset(string email, string token)
         {
-            var user =await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByEmailAsync(email);
 
-            if (user == null || !await _userManager.VerifyUserTokenAsync(user, _userManager.Options.Tokens.PasswordResetTokenProvider, "ResetPassword", token ))
+            if (user == null || !await _userManager.VerifyUserTokenAsync(user, _userManager.Options.Tokens.PasswordResetTokenProvider, "ResetPassword", token))
                 return NotFound();
 
             TempData["token"] = token;
-            TempData["email"] = email; 
-           return RedirectToAction("resetPassword");
+            TempData["email"] = email;
+            return RedirectToAction("resetPassword");
         }
         public IActionResult ResetPassword()
         {
@@ -310,7 +310,7 @@ namespace Quarter.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult > ResetPassword(ResetPasswordViewModel ResetVm)
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel ResetVm)
         {
             if (ResetVm.Email == null || ResetVm.Token == null)
                 return NotFound();
@@ -321,7 +321,7 @@ namespace Quarter.Controllers
                 TempData["token"] = ResetVm.Token;
                 return View();
             }
-            var user =await _userManager.FindByEmailAsync(ResetVm.Email);
+            var user = await _userManager.FindByEmailAsync(ResetVm.Email);
 
             if (user == null)
                 return NotFound();
@@ -340,6 +340,44 @@ namespace Quarter.Controllers
             }
 
             return RedirectToAction("login");
+        }
+        [Authorize(Roles = "Member")]
+        public async Task<IActionResult> Logout()
+        {
+            var user = _userManager.FindByNameAsync(User.Identity.Name);
+            if (user == null)
+                return NotFound();
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("index", "home");
+        }
+        [Authorize(Roles = "Member")]
+        public async Task<IActionResult> Profile()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user == null)
+                return NotFound();
+            ProfileViewModel ProfileVm = new ProfileViewModel();
+            ProfileVm.ProfileEditVm.Fullname = user.Fullname;
+            ProfileVm.ProfileEditVm.Email = user.Email;
+            ProfileVm.ProfileEditVm.Username = user.UserName;
+            ProfileVm.ProfileEditVm.UserPhoto = user.UserPhoto;
+
+
+            return View(ProfileVm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Profile(ProfileEditViewModel MemberProfileVm)
+        {
+            ProfileViewModel ProfileVm = new ProfileViewModel();
+            ProfileVm.ProfileEditVm = MemberProfileVm;
+
+            if (!ModelState.IsValid)
+            {
+                return View(ProfileVm);
+            }
+            var user = await _userManager.FindByNameAsync(MemberProfileVm.Username);
+            return RedirectToAction("index", "home");
         }
     }
 }
