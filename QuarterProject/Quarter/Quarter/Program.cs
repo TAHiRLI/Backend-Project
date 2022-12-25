@@ -29,6 +29,15 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(Options=>
 
 builder.Services.AddScoped<LayoutService>();
 
+builder.Services.AddAuthentication()
+               .AddGoogle(options =>
+               {
+                   options.ClientId = "575810266001-uej5f9or7hjuuab7c6lpa644ejlno7pr.apps.googleusercontent.com";
+                   options.ClientSecret = "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";
+                   options.SignInScheme = IdentityConstants.ExternalScheme;
+               });
+
+
 
 var app = builder.Build();
 
@@ -44,7 +53,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllerRoute(
     name: "areas",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "h5ES8m2TTcQSqnlK0vcjERwSEGur58CehpyjuPIbS+A6iQcRLr2uSaQQi1oajWAWCiP0rjvVH0zM8XBe7uHJcg==",
+  "dgSpecHash": "6LX3UVPe13OICnaVY3/bX0hoje0AXQ2OrT7aQ8hztbPC/tPiCFDjm7EuBR2EqleG9kSNMj+WY2vpE+R1yIxDbw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\Quarter.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\Hp\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\messagepackanalyzer\\2.1.152\\messagepackanalyzer.2.1.152.nupkg.sha512",
+    "C:\\Users\\Hp\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\6.0.12\\microsoft.aspnetcore.authentication.google.6.0.12.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.12\\microsoft.aspnetcore.cryptography.internal.6.0.12.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.12\\microsoft.aspnetcore.cryptography.keyderivation.6.0.12.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.12\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.12.nupkg.sha512",

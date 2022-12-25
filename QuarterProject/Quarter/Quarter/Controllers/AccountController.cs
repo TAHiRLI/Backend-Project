@@ -13,6 +13,11 @@ using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using NuGet.Protocol;
 using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using Org.BouncyCastle.Tls;
 
 namespace Quarter.Controllers
 {
@@ -107,7 +112,7 @@ namespace Quarter.Controllers
 
             // create email message
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("hoyt10@ethereal.email"));
+            email.From.Add(MailboxAddress.Parse("hermann.mohr73@ethereal.email"));
             email.To.Add(MailboxAddress.Parse(user.Email));
             email.Subject = "Please, verify your mail address";
             email.Body = new TextPart(TextFormat.Html) { Text = $"Click <a href=\"{url}\" >here</a> to verify your email" };
@@ -115,7 +120,7 @@ namespace Quarter.Controllers
             // send email
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("hoyt10@ethereal.email", "JZzXeaDGTJeckW52vc");
+            smtp.Authenticate("hermann.mohr73@ethereal.email", "VUdDcQUqPBzNms27N3");
             smtp.Send(email);
             smtp.Disconnect(true);
 
@@ -144,7 +149,50 @@ namespace Quarter.Controllers
 
             return RedirectToAction("Login");
         }
+        [AllowAnonymous]
+        public IActionResult GoogleLogin()
+        {
+            string redirectUrl = Url.Action("GoogleResponse", "Account");
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties("Google", redirectUrl);
+            return new ChallengeResult("Google", properties);
+        }
+        [AllowAnonymous]
+        public async Task<IActionResult> GoogleResponse()
+        {
+            ExternalLoginInfo info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+                return RedirectToAction(nameof(Login));
 
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false);
+
+            if (result.Succeeded)
+                return RedirectToAction(nameof(Index), "home");
+
+            else
+            {
+                AppUser user = new AppUser
+                {
+                    Email = info.Principal.FindFirst(ClaimTypes.Email).Value,
+                    UserName = info.Principal.FindFirst(ClaimTypes.Email).Value,
+                    EmailConfirmed = true,
+
+                };
+                IdentityResult identityResult = await _userManager.CreateAsync(user);
+                if (identityResult.Succeeded)
+                {
+                    identityResult = await _userManager.AddLoginAsync(user, info);
+                    if (identityResult.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(user, false);
+                        return RedirectToAction(nameof(Index), "home");
+                    }
+                }
+            }
+
+
+
+
+        }
         public async Task<IActionResult> Login()
         {
             return View();
@@ -176,7 +224,7 @@ namespace Quarter.Controllers
 
                 // create email message
                 var email = new MimeMessage();
-                email.From.Add(MailboxAddress.Parse("hoyt10@ethereal.email"));
+                email.From.Add(MailboxAddress.Parse("hermann.mohr73@ethereal.email"));
                 email.To.Add(MailboxAddress.Parse(user.Email));
                 email.Subject = "Please, verify your mail address";
                 email.Body = new TextPart(TextFormat.Html) { Text = $"Click <a href=\"{url}\" >here</a> to verify your email" };
@@ -184,7 +232,7 @@ namespace Quarter.Controllers
                 // send email
                 using var smtp = new SmtpClient();
                 smtp.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
-                smtp.Authenticate("hoyt10@ethereal.email", "JZzXeaDGTJeckW52vc");
+                smtp.Authenticate("hermann.mohr73@ethereal.email", "VUdDcQUqPBzNms27N3");
                 smtp.Send(email);
                 smtp.Disconnect(true);
 
@@ -222,7 +270,7 @@ namespace Quarter.Controllers
 
             // create email message
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("hoyt10@ethereal.email"));
+            email.From.Add(MailboxAddress.Parse("hermann.mohr73@ethereal.email"));
             email.To.Add(MailboxAddress.Parse(ForgotVm.Email));
             email.Subject = "Please, verify your mail address";
             email.Body = new TextPart(TextFormat.Html) { Text = $"Click <a href=\"{url}\" >here</a> to verify your email" };
@@ -230,7 +278,7 @@ namespace Quarter.Controllers
             // send email
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("hoyt10@ethereal.email", "JZzXeaDGTJeckW52vc");
+            smtp.Authenticate("hermann.mohr73@ethereal.email", "VUdDcQUqPBzNms27N3");
             smtp.Send(email);
             smtp.Disconnect(true);
 
