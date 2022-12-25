@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quarter.DAL;
 
@@ -11,9 +12,10 @@ using Quarter.DAL;
 namespace Quarter.Migrations
 {
     [DbContext(typeof(QuarterDbContext))]
-    partial class QuarterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221225133531_appUserAdded")]
+    partial class appUserAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -249,7 +251,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Amenities", (string)null);
+                    b.ToTable("Amenities");
                 });
 
             modelBuilder.Entity("Quarter.Models.Category", b =>
@@ -267,7 +269,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Quarter.Models.City", b =>
@@ -288,7 +290,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cities", (string)null);
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("Quarter.Models.HomeSlider", b =>
@@ -338,7 +340,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("HomeSliders", (string)null);
+                    b.ToTable("HomeSliders");
                 });
 
             modelBuilder.Entity("Quarter.Models.House", b =>
@@ -424,7 +426,7 @@ namespace Quarter.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Houses", (string)null);
+                    b.ToTable("Houses");
                 });
 
             modelBuilder.Entity("Quarter.Models.HouseAmenity", b =>
@@ -447,7 +449,7 @@ namespace Quarter.Migrations
 
                     b.HasIndex("HouseId");
 
-                    b.ToTable("HouseAmenities", (string)null);
+                    b.ToTable("HouseAmenities");
                 });
 
             modelBuilder.Entity("Quarter.Models.HouseImage", b =>
@@ -472,7 +474,7 @@ namespace Quarter.Migrations
 
                     b.HasIndex("HouseId");
 
-                    b.ToTable("HousesImages", (string)null);
+                    b.ToTable("HousesImages");
                 });
 
             modelBuilder.Entity("Quarter.Models.Owner", b =>
@@ -502,7 +504,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Owners", (string)null);
+                    b.ToTable("Owners");
                 });
 
             modelBuilder.Entity("Quarter.Models.Service", b =>
@@ -532,7 +534,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services", (string)null);
+                    b.ToTable("Services");
                 });
 
             modelBuilder.Entity("Quarter.Models.Setting", b =>
@@ -555,7 +557,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Settings", (string)null);
+                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("Quarter.Models.AppUser", b =>

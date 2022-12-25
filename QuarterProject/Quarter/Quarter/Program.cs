@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Quarter.DAL;
+using Quarter.Models;
 using Quarter.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,16 @@ builder.Services.AddDbContext<QuarterDbContext>(opt =>
 {
     opt.UseSqlServer("Server=DESKTOP-6BCR9RQ; Database=Quarter; Trusted_Connection=TRUE ");
 });
+
+
+builder.Services.AddIdentity<AppUser, IdentityRole>(Options=>
+{
+    Options.Password.RequireDigit = false;
+    Options.Password.RequireUppercase = false;
+    Options.Password.RequiredLength = 8;
+    Options.Password.RequireNonAlphanumeric = false;
+
+}).AddDefaultTokenProviders().AddEntityFrameworkStores<QuarterDbContext>();
 
 builder.Services.AddScoped<LayoutService>();
 
