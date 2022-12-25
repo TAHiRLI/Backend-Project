@@ -22,6 +22,8 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(Options=>
     Options.Password.RequireUppercase = false;
     Options.Password.RequiredLength = 8;
     Options.Password.RequireNonAlphanumeric = false;
+    Options.User.RequireUniqueEmail = true;
+    Options.SignIn.RequireConfirmedEmail = true;
 
 }).AddDefaultTokenProviders().AddEntityFrameworkStores<QuarterDbContext>();
 

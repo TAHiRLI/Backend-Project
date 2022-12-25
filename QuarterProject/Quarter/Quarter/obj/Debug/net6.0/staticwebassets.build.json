@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HydQPX+sN5K/OFSjdcH6eD3YBFjDoLSxkQ5hMGQNYrU=",
+  "Hash": "FLUtdg67WoxTag7CHCCAF9Gbvjtgrp7aGDopbZp+HSs=",
   "Source": "Quarter",
   "BasePath": "_content/Quarter",
   "Mode": "Default",
@@ -36973,6 +36973,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\Users\\524e8ebe-8c55-4c45-84b1-35a7346bb24fh3-team-img-1 - Copy.png"
+    },
+    {
+      "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Users\\7039c0a8-8c61-42aa-b0a5-c09e7ffc8689userProfile.png",
+      "SourceId": "Quarter",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\",
+      "BasePath": "_content/Quarter",
+      "RelativePath": "Uploads/Users/7039c0a8-8c61-42aa-b0a5-c09e7ffc8689userProfile.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Users\\7039c0a8-8c61-42aa-b0a5-c09e7ffc8689userProfile.png"
     },
     {
       "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Users\\71a29d82-cc16-4cb9-bcac-093ce30c953ah3-team-img-1 - Copy.png",

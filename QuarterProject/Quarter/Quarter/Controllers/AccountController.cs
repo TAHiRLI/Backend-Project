@@ -12,6 +12,7 @@ using Quarter.ViewModels;
 using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using NuGet.Protocol;
+using Microsoft.AspNetCore.Mvc.Abstractions;
 
 namespace Quarter.Controllers
 {
@@ -33,18 +34,21 @@ namespace Quarter.Controllers
         }
 
         // create roles 
-        //public async Task<IActionResult> CreateRoles()
-        //{
-        //    IdentityRole role1 = new IdentityRole("SuperAdmin");
-        //    IdentityRole role2 = new IdentityRole("Admin");
-        //    IdentityRole role3 = new IdentityRole("Member");
+       // public async Task<IActionResult> CreateRoles()
+       // {
+            //IdentityRole role1 = new IdentityRole("SuperAdmin");
+            //IdentityRole role2 = new IdentityRole("Admin");
+            //IdentityRole role3 = new IdentityRole("Member");
+           // IdentityRole role4 = new IdentityRole("Visitor");
 
 
-        //    await _roleManager.CreateAsync(role1);
-        //    await _roleManager.CreateAsync(role2);
-        //    await _roleManager.CreateAsync(role3);
-        //    return Ok();
-        //}
+            //await _roleManager.CreateAsync(role1);
+            //await _roleManager.CreateAsync(role2);
+            //await _roleManager.CreateAsync(role3);
+           // await _roleManager.CreateAsync(role4);
+
+         //   return Ok();
+      //  }
         public IActionResult Register()
         {
             return View();
@@ -72,7 +76,7 @@ namespace Quarter.Controllers
             }
 
 
-            AppUser appUser = new AppUser
+            AppUser user = new AppUser
             {
                 Fullname = RegisterVm.Fullname,
                 Email = RegisterVm.Email,
@@ -83,10 +87,10 @@ namespace Quarter.Controllers
 
             if (RegisterVm.File != null)
             {
-                appUser.UserPhoto = FileManager.Save(RegisterVm.File, _env.WebRootPath, "Uploads/Users", 100);
+                user.UserPhoto = FileManager.Save(RegisterVm.File, _env.WebRootPath, "Uploads/Users", 100);
             }
 
-            var result = await _userManager.CreateAsync(appUser, RegisterVm.Password);
+            var result = await _userManager.CreateAsync(user, RegisterVm.Password);
 
             if (!result.Succeeded)
             {
@@ -97,8 +101,48 @@ namespace Quarter.Controllers
                 }
                 return View();
             }
-            await _userManager.AddToRoleAsync(appUser, "Member");
+
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var url = Url.Action(nameof(ConfirmEmail), "account", new { token = token, email = user.Email }, Request.Scheme); ;
+
+            // create email message
+            var email = new MimeMessage();
+            email.From.Add(MailboxAddress.Parse("hoyt10@ethereal.email"));
+            email.To.Add(MailboxAddress.Parse(user.Email));
+            email.Subject = "Please, verify your mail address";
+            email.Body = new TextPart(TextFormat.Html) { Text = $"Click <a href=\"{url}\" >here</a> to verify your email" };
+
+            // send email
+            using var smtp = new SmtpClient();
+            smtp.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
+            smtp.Authenticate("hoyt10@ethereal.email", "JZzXeaDGTJeckW52vc");
+            smtp.Send(email);
+            smtp.Disconnect(true);
+
+
+            //^ signalr toastr
+
+
+
+            await _userManager.AddToRoleAsync(user, "Visitor");
+
             return RedirectToAction("login");
+        }
+        public async Task<IActionResult>  ConfirmEmail( string token , string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+                return NotFound();
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (!result.Succeeded)
+                return NotFound();
+
+            await _userManager.RemoveFromRoleAsync(user,"Visitor");
+            await _userManager.AddToRoleAsync(user, "Member");
+
+
+            return RedirectToAction("Login");
         }
 
         public async Task<IActionResult> Login()
@@ -118,12 +162,36 @@ namespace Quarter.Controllers
                 return View();
             }
             var result = await _signInManager.PasswordSignInAsync(user, LoginVm.Password, true, true);
+           
             if (result.IsLockedOut)
             {
                 ModelState.AddModelError("", "Too many attempts, please try again after 5 minutes");
                 return View();
             }
 
+            if(!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var url = Url.Action(nameof(ConfirmEmail), "account", new { token = token, email = user.Email }, Request.Scheme); ;
+
+                // create email message
+                var email = new MimeMessage();
+                email.From.Add(MailboxAddress.Parse("hoyt10@ethereal.email"));
+                email.To.Add(MailboxAddress.Parse(user.Email));
+                email.Subject = "Please, verify your mail address";
+                email.Body = new TextPart(TextFormat.Html) { Text = $"Click <a href=\"{url}\" >here</a> to verify your email" };
+
+                // send email
+                using var smtp = new SmtpClient();
+                smtp.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
+                smtp.Authenticate("hoyt10@ethereal.email", "JZzXeaDGTJeckW52vc");
+                smtp.Send(email);
+                smtp.Disconnect(true);
+
+                ModelState.AddModelError("", "Please verify your email");
+                return View();
+            }
+         
             if (!result.Succeeded)
             {
                 ModelState.AddModelError("", "Username of password is incorredt");
