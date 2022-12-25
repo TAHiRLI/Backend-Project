@@ -18,6 +18,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Org.BouncyCastle.Tls;
+using Org.BouncyCastle.Asn1.X509;
 
 namespace Quarter.Controllers
 {
@@ -183,6 +184,7 @@ namespace Quarter.Controllers
                     identityResult = await _userManager.AddLoginAsync(user, info);
                     if (identityResult.Succeeded)
                     {
+                        await _userManager.AddToRoleAsync(user, "Member");
                         await _signInManager.SignInAsync(user, false);
                         return RedirectToAction(nameof(Index), "home");
                     }
