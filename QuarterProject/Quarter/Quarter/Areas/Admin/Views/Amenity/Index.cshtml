@@ -1,21 +1,18 @@
 ﻿
 @{
     ViewData["Title"] = "Index";
-}
-
-
-
-
-@model PagedList.IPagedList<Amenity>
-@using PagedList;
-@using PagedList.Mvc;
-
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-
-@{
-    ViewData["Title"] = "Index";
     var counter = 0;
+    var pagedList = (IPagedList)ViewBag.Names;
 }
+
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+
+
+<!-- import the included stylesheet for some (very basic) default styling -->
+<link href="~/admin/css/PagedList.css" rel="stylesheet" type="text/css" />
 
 <div class="w-100 grid-margin stretch-card">
     <div class="card">
@@ -34,7 +31,7 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var service in Model)
+                        @foreach (var service in ViewBag.Names)
                         {
                             counter++;
                             <tr>
@@ -52,9 +49,9 @@
                     </tbody>
                 </table>
                 <div >
-                    Page @(Model.PageCount< Model.PageNumber? 1: Model.PageNumber) of @Model.PageCount
-                  @*  @Html.PagedListPager(Model, page => Url.Action("Index",
-                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
+                    <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+                    @Html.PagedListPager(pagedList, page => Url.Action("Index", new { page }))
+             
                 </div>
             </div>
         </div>

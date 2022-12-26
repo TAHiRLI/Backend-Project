@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "S9Up4EwrWD/RT7hS2j70JZSLVJK6APLujKKvUf8dQ+k=",
+  "Hash": "UGrLtPyeghrPPz2Q9x2qVa/avek43PGwM1GJYaI26bc=",
   "Source": "Quarter",
   "BasePath": "_content/Quarter",
   "Mode": "Default",
@@ -117,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\admin\\css\\maps\\vertical-layout-light\\style.css.map"
+    },
+    {
+      "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\admin\\css\\PagedList.css",
+      "SourceId": "Quarter",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\",
+      "BasePath": "_content/Quarter",
+      "RelativePath": "admin/css/PagedList.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\admin\\css\\PagedList.css"
     },
     {
       "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\admin\\css\\vertical-layout-light\\style.css",
