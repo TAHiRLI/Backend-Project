@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using PagedList;
 using Quarter.DAL;
 using Quarter.Models;
 using System.Data;
@@ -16,10 +18,16 @@ namespace Quarter.Areas.Admin.Controllers
         {
             this._context = context;
         }
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder, int? page )
         {
-            var model = _context.Amenities.ToList();
-            return View(model);
+            ViewBag.CurrentSort = sortOrder;
+            var amenities = _context.Amenities;
+
+            int pageSize = 2;
+            int pageNumber = (page ?? 1);
+
+
+            return View( amenities.ToPagedList(pageNumber,pageSize));
         }
         public IActionResult Create()
         {
