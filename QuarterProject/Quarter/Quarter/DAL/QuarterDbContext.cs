@@ -22,6 +22,7 @@ namespace Quarter.DAL
         public DbSet<HouseAmenity> HouseAmenities { get; set; }
         public DbSet<Service> Services { get; set; } 
         public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<UserComment> UserComments { get; set; }
 
 
     }

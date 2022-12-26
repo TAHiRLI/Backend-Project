@@ -304,3 +304,6 @@ C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quart
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\BouncyCastle.Crypto.dll
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Google.dll
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\libman.json
+C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

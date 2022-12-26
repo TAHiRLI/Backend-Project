@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quarter.DAL;
 
@@ -11,9 +12,10 @@ using Quarter.DAL;
 namespace Quarter.Migrations
 {
     [DbContext(typeof(QuarterDbContext))]
-    partial class QuarterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221226073618_userCommentTableCreated")]
+    partial class userCommentTableCreated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -567,14 +569,11 @@ namespace Quarter.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("CreatedAd")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("HouseId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsApproved")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -727,7 +726,7 @@ namespace Quarter.Migrations
                         .IsRequired();
 
                     b.HasOne("Quarter.Models.House", "House")
-                        .WithMany("UserComments")
+                        .WithMany()
                         .HasForeignKey("HouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -757,8 +756,6 @@ namespace Quarter.Migrations
                     b.Navigation("HouseAmenities");
 
                     b.Navigation("HouseImages");
-
-                    b.Navigation("UserComments");
                 });
 
             modelBuilder.Entity("Quarter.Models.Owner", b =>

@@ -1,0 +1,16 @@
+﻿@model CommentViewModel
+<div class="ltn__comment-reply-area ltn__form-box mb-30">
+    <form asp-action="comment" method="post">
+        <h4>Add a Review</h4>
+        <div class="mb-30">
+        </div>
+        <div class="input-item input-item-textarea ltn__custom-icon">
+            <textarea asp-for="Text" placeholder="Type your comments...."></textarea>
+            <span class="text-danger" asp-validation-for="Text"></span>
+        </div>
+        <input  type="hidden" asp-for="HouseId" value="@Model.HouseId"/>
+        <div class="btn-wrapper">
+            <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Submit</button>
+        </div>
+    </form>
+</div>

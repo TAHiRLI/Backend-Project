@@ -146,6 +146,8 @@ namespace Quarter.Controllers
             if (user == null)
                 return NotFound();
 
+            
+
             var result = await _userManager.ConfirmEmailAsync(user, token);
             if (!result.Succeeded)
                 return NotFound();
@@ -180,9 +182,9 @@ namespace Quarter.Controllers
                 AppUser user = new AppUser
                 {
                     Email = info.Principal.FindFirst(ClaimTypes.Email).Value,
-                    UserName = info.Principal.FindFirst(ClaimTypes.Email).Value,
+                    UserName = info.Principal.FindFirst(ClaimTypes.Email).Value.Split("@")[0],
                     EmailConfirmed = true,
-
+                    
                 };
                 IdentityResult identityResult = await _userManager.CreateAsync(user);
                 if (identityResult.Succeeded)
@@ -198,7 +200,7 @@ namespace Quarter.Controllers
             }
 
 
-
+           
 
             return NotFound();
         }
@@ -424,6 +426,7 @@ namespace Quarter.Controllers
             }
 
             user.UserName = MemberVm.Username;
+            user.Fullname = MemberVm.Fullname;
 
             if (MemberVm.Email.ToUpper() != user.NormalizedEmail)
             {

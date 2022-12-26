@@ -7,7 +7,7 @@ namespace Quarter.ViewModels
     {
         [MaxLength(30)]
         public string Fullname { get; set; }
-        [MaxLength(20)]
+        [MaxLength(30)]
         public string Username { get; set; }
         [MaxLength(100)]
         [DataType(DataType.EmailAddress)]
