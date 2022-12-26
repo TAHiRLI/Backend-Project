@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Org.BouncyCastle.Tls;
 using Org.BouncyCastle.Asn1.X509;
+using Microsoft.EntityFrameworkCore;
 
 namespace Quarter.Controllers
 {
@@ -26,14 +27,19 @@ namespace Quarter.Controllers
     {
 
         private readonly UserManager<AppUser> _userManager;
+        private readonly QuarterDbContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IWebHostEnvironment _env;
 
-        public AccountController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager, IWebHostEnvironment env)
+        public string MyEmail = "macie.kuhic14@ethereal.email";
+        public string MyPassword = "HUmyGCuSUMUhhD23Kw";
+
+        public AccountController(UserManager<AppUser> userManager, QuarterDbContext context, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager, IWebHostEnvironment env)
         {
 
             this._userManager = userManager;
+            this._context = context;
             this._roleManager = roleManager;
             this._signInManager = signInManager;
             this._env = env;
@@ -113,7 +119,7 @@ namespace Quarter.Controllers
 
             // create email message
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("hermann.mohr73@ethereal.email"));
+            email.From.Add(MailboxAddress.Parse(MyEmail));
             email.To.Add(MailboxAddress.Parse(user.Email));
             email.Subject = "Please, verify your mail address";
             email.Body = new TextPart(TextFormat.Html) { Text = $"Click <a href=\"{url}\" >here</a> to verify your email" };
@@ -121,7 +127,7 @@ namespace Quarter.Controllers
             // send email
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("hermann.mohr73@ethereal.email", "VUdDcQUqPBzNms27N3");
+            smtp.Authenticate(MyEmail, MyPassword);
             smtp.Send(email);
             smtp.Disconnect(true);
 
@@ -227,7 +233,7 @@ namespace Quarter.Controllers
 
                 // create email message
                 var email = new MimeMessage();
-                email.From.Add(MailboxAddress.Parse("hermann.mohr73@ethereal.email"));
+                email.From.Add(MailboxAddress.Parse(MyEmail));
                 email.To.Add(MailboxAddress.Parse(user.Email));
                 email.Subject = "Please, verify your mail address";
                 email.Body = new TextPart(TextFormat.Html) { Text = $"Click <a href=\"{url}\" >here</a> to verify your email" };
@@ -235,7 +241,7 @@ namespace Quarter.Controllers
                 // send email
                 using var smtp = new SmtpClient();
                 smtp.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
-                smtp.Authenticate("hermann.mohr73@ethereal.email", "VUdDcQUqPBzNms27N3");
+                smtp.Authenticate(MyEmail, MyPassword);
                 smtp.Send(email);
                 smtp.Disconnect(true);
 
@@ -273,7 +279,7 @@ namespace Quarter.Controllers
 
             // create email message
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("hermann.mohr73@ethereal.email"));
+            email.From.Add(MailboxAddress.Parse(MyEmail));
             email.To.Add(MailboxAddress.Parse(ForgotVm.Email));
             email.Subject = "Please, verify your mail address";
             email.Body = new TextPart(TextFormat.Html) { Text = $"Click <a href=\"{url}\" >here</a> to verify your email" };
@@ -281,7 +287,7 @@ namespace Quarter.Controllers
             // send email
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("hermann.mohr73@ethereal.email", "VUdDcQUqPBzNms27N3");
+            smtp.Authenticate(MyEmail, MyPassword);
             smtp.Send(email);
             smtp.Disconnect(true);
 
@@ -367,17 +373,105 @@ namespace Quarter.Controllers
             return View(ProfileVm);
         }
         [HttpPost]
-        public async Task<IActionResult> Profile(ProfileEditViewModel MemberProfileVm)
+        [Authorize(Roles ="Member")]
+        public async Task<IActionResult> Profile(ProfileEditViewModel MemberVm)
         {
             ProfileViewModel ProfileVm = new ProfileViewModel();
-            ProfileVm.ProfileEditVm = MemberProfileVm;
+            ProfileVm.ProfileEditVm = MemberVm;
 
             if (!ModelState.IsValid)
-            {
                 return View(ProfileVm);
+
+
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user == null)
+                return NotFound();
+
+            if (MemberVm.Email.ToUpper() != user.NormalizedEmail && _context.AppUsers.Any(x => x.NormalizedEmail == MemberVm.Email.ToUpper()))
+                ModelState.AddModelError("Email", "This email allready taken");
+            if (MemberVm.Username.ToUpper() != user.NormalizedUserName && _context.AppUsers.Any(x => x.NormalizedUserName == MemberVm.Username.ToUpper()))
+                ModelState.AddModelError("Email", "This email allready taken");
+
+            if (!ModelState.IsValid)
+                return View(ProfileVm);
+
+            IdentityResult isPasswordUpdated = IdentityResult.Success;
+            IdentityResult isUserUpdated = IdentityResult.Success;
+
+            if (MemberVm.CurrentPassword != null || MemberVm.NewPassword != null)
+            {
+                if(MemberVm.CurrentPassword == null || !await _userManager.CheckPasswordAsync(user, MemberVm.CurrentPassword))
+                {
+                    ModelState.AddModelError("CurrentPassword", "Password is incorrect");
+                    return View(ProfileVm);
+                }
+                 isPasswordUpdated = await _userManager.ChangePasswordAsync(user, MemberVm.CurrentPassword, MemberVm.NewPassword);
+                if (!isPasswordUpdated.Succeeded)
+                {
+                    foreach (var error in isPasswordUpdated.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                        return View(ProfileVm);
+                }
             }
-            var user = await _userManager.FindByNameAsync(MemberProfileVm.Username);
-            return RedirectToAction("index", "home");
+            if(MemberVm.File != null)
+            {
+                if(user.UserPhoto != "defaultUser.jpeg")
+                FileManager.Delete(_env.WebRootPath, "Uploads/Users", user.UserPhoto);
+
+                user.UserPhoto = FileManager.Save(MemberVm.File, _env.WebRootPath, "Uploads/Users", 100);
+            }
+
+            user.UserName = MemberVm.Username;
+
+            if (MemberVm.Email.ToUpper() != user.NormalizedEmail)
+            {
+                user.Email = MemberVm.Email;
+                user.EmailConfirmed = false;
+
+            }
+
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var url = Url.Action(nameof(ConfirmEmail), "account", new { token = token, email = MemberVm.Email }, Request.Scheme); ;
+
+            // create email message
+            var email = new MimeMessage();
+            email.From.Add(MailboxAddress.Parse(MyEmail));
+            email.To.Add(MailboxAddress.Parse(user.Email));
+            email.Subject = "Please, verify your mail address";
+            email.Body = new TextPart(TextFormat.Html) { Text = $"Click <a href=\"{url}\" >here</a> to verify your email" };
+
+            // send email
+            using var smtp = new SmtpClient();
+            smtp.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
+            smtp.Authenticate(MyEmail, MyPassword);
+            smtp.Send(email);
+            smtp.Disconnect(true);
+            //^signalr toastr
+
+
+
+            isUserUpdated = await _userManager.UpdateAsync(user);
+
+
+            using( var transaction = _context.Database.BeginTransaction())
+            {
+                if(isUserUpdated.Succeeded && isPasswordUpdated.Succeeded)
+                {
+                    _context.SaveChanges();
+                    transaction.Commit();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "something went wrong");
+                    return View(ProfileVm);
+                }
+
+            }
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("login", "account");
         }
     }
 }

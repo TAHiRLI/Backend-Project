@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YNscZO85mQLEC90p5bflW0EhyNkV7wTIQ+2X+3KYwVE=",
+  "Hash": "H4H1+VdpFNjhBH+74OgNHqIl6ZLIG6mxihXHWspa9RE=",
   "Source": "Quarter",
   "BasePath": "_content/Quarter",
   "Mode": "Default",
@@ -36958,6 +36958,23 @@
       "OriginalItemSpec": "wwwroot\\Uploads\\Users\\27bf7946-e324-4566-bf55-b9c6187b02bcgridhome.jpg"
     },
     {
+      "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Users\\2958ff34-4211-4773-b386-48b024e6fce2h3-team-img-1 - Copy.png",
+      "SourceId": "Quarter",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\",
+      "BasePath": "_content/Quarter",
+      "RelativePath": "Uploads/Users/2958ff34-4211-4773-b386-48b024e6fce2h3-team-img-1 - Copy.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Users\\2958ff34-4211-4773-b386-48b024e6fce2h3-team-img-1 - Copy.png"
+    },
+    {
       "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Users\\344bb4b3-3af9-4305-bc4f-6df80956c6fah3-team-img-2.png",
       "SourceId": "Quarter",
       "SourceType": "Discovered",
@@ -37058,6 +37075,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\Users\\8c42693b-c728-4f35-992d-d0ba9cef1abbh3-team-img-3.png"
+    },
+    {
+      "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Users\\defaultUser.jpeg",
+      "SourceId": "Quarter",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\",
+      "BasePath": "_content/Quarter",
+      "RelativePath": "Uploads/Users/defaultUser.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Users\\defaultUser.jpeg"
     },
     {
       "Identity": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\wwwroot\\Uploads\\Users\\f52d2571-60ec-447d-81c7-640fe5aea5c1gridhome.jpg",
