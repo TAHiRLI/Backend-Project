@@ -29,7 +29,7 @@ namespace Quarter.Areas.Admin.Controllers
             
             
             int pageSize = 5;
-            var Comments = house.UserComments;
+            var Comments = house.UserComments.OrderByDescending(x=> x.CreatedAt).ToList();
             Pagination<UserComment> paginatedList = new Pagination<UserComment>();
 
             ViewBag.Comments = paginatedList.GetPagedNames(Comments, page, pageSize);

@@ -571,7 +571,7 @@ namespace Quarter.Migrations
                     b.Property<int>("HouseId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsApproved")
+                    b.Property<bool?>("IsApproved")
                         .HasColumnType("bit");
 
                     b.Property<string>("Text")

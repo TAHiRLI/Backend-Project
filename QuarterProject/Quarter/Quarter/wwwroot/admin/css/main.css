@@ -5,3 +5,17 @@
     top: -15px;
     color: red;
 }
+
+.comment-count {
+    position: absolute;
+    right: -6px;
+    width: 18px;
+    height: 18px;
+    border-radius: 100%;
+    top: -22px;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.8;
+}

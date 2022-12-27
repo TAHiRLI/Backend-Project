@@ -41,11 +41,14 @@
                                     <td>@comment.AppUser.UserName</td>
                                     <td>@comment.Text</td>
 
-                                    <td><label class="badge badge-@(!comment.IsApproved? "danger":"success")">@(comment.IsApproved ? "Approved" : "Denied")</label></td>
+                                <td>
+                                    <label class="badge text-light badge-@(comment.IsApproved==true? "success":comment.IsApproved == false?"danger":"warning")">
+                                        @(comment.IsApproved==true ? "Approved" : comment.IsApproved == false?"Denied":"Pending")
+                                        </label></td>
 
                                     <td>
-                                    <a class="text-success @(comment.IsApproved?"d-none":"")" asp-action="approve" asp-controller="Comment" asp-route-id="@comment.Id"><i style="font-size:20px" class="mdi mdi-checkbox-marked-circle"></i></a>
-                                    <a class="text-danger @(!comment.IsApproved?"d-none":"")" asp-action="deny" asp-controller="Comment" asp-route-id="@comment.Id"><i style="font-size:20px" class="mdi mdi-close-circle "></i></a>
+                                    <a class="text-success @(comment.IsApproved==true?"d-none":"")" asp-action="approve" asp-controller="Comment" asp-route-id="@comment.Id"><i style="font-size:26px" class="mdi mdi-checkbox-marked-circle"></i></a>
+                                    <a class="text-danger @(!comment.IsApproved==true?"d-none":"")" asp-action="deny" asp-controller="Comment" asp-route-id="@comment.Id"><i style="font-size:26px" class="mdi mdi-close-circle "></i></a>
                                     </td>
                                 </tr>
                         }

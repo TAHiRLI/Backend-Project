@@ -29,6 +29,7 @@ namespace Quarter.Areas.Admin.Controllers
                 .Include(x => x.Owner)
                 .Include(x => x.City)
                 .Include(x => x.HouseImages)
+                .Include(x=> x.UserComments)
                 .ToList();
 
 

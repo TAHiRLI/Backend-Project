@@ -134,7 +134,7 @@
                         <div class="ltn__comment-area mb-30" id="comment-container">
                             <div class="ltn__comment-inner">
                                 <ul id="load-more-btn">
-                            @await Html.PartialAsync("_CommentsPartial", Model.House.UserComments.Where(x=> x.IsApproved).Take(3).ToList())
+                            @await Html.PartialAsync("_CommentsPartial", Model.House.UserComments.Where(x=> x.IsApproved==true).Take(3).ToList())
 
                                 </ul>
                                 
@@ -143,7 +143,7 @@
 
                         </div>
                         <div class="text-center mt-3 ">
-                            @if (Model.House.UserComments.Count(x => x.IsApproved) > 3)
+                            @if (Model.House.UserComments.Count(x => x.IsApproved==true) > 3)
                             {
                                 <a asp-action="getcomment" asp-controller="house" asp-route-Count="3" asp-route-houseId="@Model.House.Id" class="btn theme-btn-1 load-more-btn" skipCount="3" takeCount="3">Load More</a>
 

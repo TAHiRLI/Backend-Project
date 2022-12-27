@@ -12,6 +12,6 @@ namespace Quarter.Models
         public DateTime CreatedAt { get; set; }
         public House? House { get; set; }
         public  AppUser? AppUser { get; set; }
-        public bool IsApproved { get; set; }
+        public bool? IsApproved { get; set; }
     }
 }

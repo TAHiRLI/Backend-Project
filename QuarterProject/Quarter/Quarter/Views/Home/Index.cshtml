@@ -339,16 +339,16 @@
                                     @{
                                         if (house.IsSold)
                                         {
-                                                <li class="sale-badge bg-dark">Sold</li>
+                                                    <li class="sale-badge bg-dark">Sold</li>
                                         }
                                         else if (house.IsFeatured)
                                         {
-                                                <li class="sale-badge bg-blue">Special</li>
+                                                    <li class="sale-badge bg-blue">Special</li>
 
                                         }
                                         else if (house.DiscountPercent > 0)
                                         {
-                                                <li class="sale-badge bg-red">Discounted</li>
+                                                    <li class="sale-badge bg-red">Discounted</li>
                                         }
                                     }
                                 </ul>
@@ -378,13 +378,13 @@
                                 @{
                                     if (house.DiscountPercent > 0)
                                     {
-                                        <span>$@((house.Price * (100 - house.DiscountPercent) / 100).ToString("0.00"))</span>
-                                        <del>$@house.Price.ToString("0.00")</del>
+                                            <span>$@((house.Price * (100 - house.DiscountPercent) / 100).ToString("0.00"))</span>
+                                            <del>$@house.Price.ToString("0.00")</del>
 
                                     }
                                     else
                                     {
-                                        <span>$@house.Price.ToString("0.00")</span>
+                                            <span>$@house.Price.ToString("0.00")</span>
                                     }
 
                                 }
@@ -493,102 +493,30 @@
             </div>
         </div>
         <div class="row ltn__testimonial-slider-5-active slick-arrow-1">
+            @foreach (var comment in Model.Comments)
+            {
             <div class="col-lg-4">
                 <div class="ltn__testimonial-item ltn__testimonial-item-7">
-                    <div class="ltn__testimoni-info">
-                        <p>
+                    <div class="ltn__testimoni-info" >
+                            <p style="min-height:130px; overflow:hidden">
                             <i class="flaticon-left-quote-1"></i>
-                            Precious ipsum dolor sit amet
-                            consectetur adipisicing elit, sed dos
-                            mod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad min
-                            veniam, quis nostrud Precious ips
-                            um dolor sit amet, consecte
+                          @comment.Text
                         </p>
                         <div class="ltn__testimoni-info-inner">
                             <div class="ltn__testimoni-img">
-                                <img src="~/assets/img/testimonial/1.jpg" alt="#">
+                                <img src="~/Uploads/Users/@comment.AppUser.UserPhoto" alt="#">
                             </div>
                             <div class="ltn__testimoni-name-designation">
-                                <h5>Jacob William</h5>
+                                <h5>@comment.AppUser.UserName</h5>
                                 <label>Selling Agents</label>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="ltn__testimonial-item ltn__testimonial-item-7">
-                    <div class="ltn__testimoni-info">
-                        <p>
-                            <i class="flaticon-left-quote-1"></i>
-                            Precious ipsum dolor sit amet
-                            consectetur adipisicing elit, sed dos
-                            mod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad min
-                            veniam, quis nostrud Precious ips
-                            um dolor sit amet, consecte
-                        </p>
-                        <div class="ltn__testimoni-info-inner">
-                            <div class="ltn__testimoni-img">
-                                <img src="~/assets/img/testimonial/2.jpg" alt="#">
-                            </div>
-                            <div class="ltn__testimoni-name-designation">
-                                <h5>Kelian Anderson</h5>
-                                <label>Selling Agents</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="ltn__testimonial-item ltn__testimonial-item-7">
-                    <div class="ltn__testimoni-info">
-                        <p>
-                            <i class="flaticon-left-quote-1"></i>
-                            Precious ipsum dolor sit amet
-                            consectetur adipisicing elit, sed dos
-                            mod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad min
-                            veniam, quis nostrud Precious ips
-                            um dolor sit amet, consecte
-                        </p>
-                        <div class="ltn__testimoni-info-inner">
-                            <div class="ltn__testimoni-img">
-                                <img src="~/assets/img/testimonial/3.jpg" alt="#">
-                            </div>
-                            <div class="ltn__testimoni-name-designation">
-                                <h5>Adam Joseph</h5>
-                                <label>Selling Agents</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="ltn__testimonial-item ltn__testimonial-item-7">
-                    <div class="ltn__testimoni-info">
-                        <p>
-                            <i class="flaticon-left-quote-1"></i>
-                            Precious ipsum dolor sit amet
-                            consectetur adipisicing elit, sed dos
-                            mod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad min
-                            veniam, quis nostrud Precious ips
-                            um dolor sit amet, consecte
-                        </p>
-                        <div class="ltn__testimoni-info-inner">
-                            <div class="ltn__testimoni-img">
-                                <img src="~/assets/img/testimonial/4.jpg" alt="#">
-                            </div>
-                            <div class="ltn__testimoni-name-designation">
-                                <h5>James Carter</h5>
-                                <label>Selling Agents</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                
+            }
+     
             <!--  -->
         </div>
     </div>

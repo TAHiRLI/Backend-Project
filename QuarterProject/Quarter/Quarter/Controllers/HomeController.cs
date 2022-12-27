@@ -25,8 +25,8 @@ namespace Quarter.Controllers
             Model.Cities = _context.Cities.ToList();
             Model.Categories = _context.Categories.ToList();
             Model.Services = _context.Services.ToList();
+            Model.Comments = _context.UserComments.Include(x=> x.AppUser).OrderByDescending(x => x.CreatedAt).Take(10).ToList();
             Model.Settings = _context.Settings.ToDictionary(x=> x.Key, x=> x.Value);
-
             ViewBag.Cities = Model.Cities;
             ViewBag.Categories = Model.Categories;
 
