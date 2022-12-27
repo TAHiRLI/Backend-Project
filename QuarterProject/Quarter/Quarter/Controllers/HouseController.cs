@@ -99,7 +99,7 @@ namespace Quarter.Controllers
                 Text = CommentVm.Text,
                 AppUserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
                 CreatedAt = DateTime.UtcNow.AddHours(4),
-                IsApproved = null
+                IsApproved = false
             };
 
             house.UserComments.Add(userComment);

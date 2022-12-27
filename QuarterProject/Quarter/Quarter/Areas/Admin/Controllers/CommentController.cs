@@ -56,7 +56,7 @@ namespace Quarter.Areas.Admin.Controllers
             if (comment == null)
                 return NotFound();
 
-            comment.IsApproved = false;
+            _context.UserComments.Remove(comment);
             _context.SaveChanges();
 
             return RedirectToAction("index",new { id = comment.HouseId });
