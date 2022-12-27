@@ -12,12 +12,6 @@ C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quart
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\MailKit.dll
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\MessagePack.dll
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\MessagePack.Annotations.dll
-C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\System.Web.Mvc.dll
-C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\System.Web.Razor.dll
-C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\System.Web.Helpers.dll
-C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
-C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
-C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\System.Web.WebPages.dll
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Google.dll
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
@@ -69,7 +63,6 @@ C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quart
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
-C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\MimeKit.dll
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\Newtonsoft.Json.dll

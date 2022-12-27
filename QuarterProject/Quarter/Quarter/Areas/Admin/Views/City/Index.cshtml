@@ -1,9 +1,14 @@
-﻿@model List<City>
-
-@{
+﻿@{
     ViewData["Title"] = "Index";
-    var counter = 0;
+    var counter = (ViewBag.PageNumber - 1) * ViewBag.PageSize;
+    var pagedList = (IPagedList)ViewBag.Cities;
 }
+
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+<link href="~/admin/css/PagedList.css" rel="stylesheet" type="text/css" />
 
 <div class="w-100 grid-margin stretch-card">
     <div class="card">
@@ -22,7 +27,7 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var city in Model)
+                        @foreach (var city in ViewBag.Cities)
                         {
                             counter++;
                             <tr>
@@ -38,6 +43,11 @@
                     
                     </tbody>
                 </table>
+                <div>
+                    <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+                    @Html.PagedListPager(pagedList, page => Url.Action("Index", new { page }))
+
+                </div>
             </div>
         </div>
     </div>

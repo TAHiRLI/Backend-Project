@@ -1,9 +1,14 @@
-﻿@model List<Setting>
-
-@{
-    ViewData["Title"] = "Index";
-    var counter = 0;
+﻿ @{   ViewData["Title"] = "Index";
+    var counter = (ViewBag.PageNumber - 1)*ViewBag.PageSize;
+    var pagedList = (IPagedList)ViewBag.Settings;
 }
+
+@using X.PagedList.Mvc.Core; 
+@using X.PagedList;
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+
+
 
 <div class="w-100 grid-margin stretch-card">
     <div class="card">
@@ -22,7 +27,7 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var setting in Model)
+                        @foreach (var setting in ViewBag.Settings)
                         {
                             counter++;
                             <tr>
@@ -38,6 +43,10 @@
 
                     </tbody>
                 </table>
+                <div>
+                    <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+                    @Html.PagedListPager(pagedList, page => Url.Action("Index", new { page }))
+                </div>
             </div>
         </div>
     </div>

@@ -22,15 +22,30 @@ namespace Quarter.Areas.Admin.Controllers
             this._context = context;
             this._env = env;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
-            var model = _context.Houses
+            var Houses = _context.Houses
                 .Include(x => x.Category)
                 .Include(x => x.Owner)
                 .Include(x => x.City)
                 .Include(x => x.HouseImages)
                 .ToList();
-            return View(model);
+
+
+
+            int pageSize = 5;
+            Pagination<House> paginatedList = new Pagination<House>();
+
+            ViewBag.Houses = paginatedList.GetPagedNames(Houses, page, pageSize);
+            ViewBag.PageNumber = (page ?? 1);
+            ViewBag.PageSize = pageSize;
+            if (ViewBag.Houses == null)
+                return NotFound();
+
+
+
+
+            return View();
         }
         public IActionResult Create()
         {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Quarter.DAL;
 using Quarter.Helpers;
@@ -20,10 +21,21 @@ namespace Quarter.Areas.Admin.Controllers
             this._context = context;
             this._env = env;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
-            var model = _context.HomeSliders.OrderBy(x=> x.Order).ToList();
-            return View(model);
+            var Sliders = _context.HomeSliders.OrderBy(x=> x.Order).ToList();
+
+
+            int pageSize = 5;
+            Pagination<HomeSlider> paginatedList = new Pagination<HomeSlider>();
+
+            ViewBag.Sliders = paginatedList.GetPagedNames(Sliders, page, pageSize);
+            ViewBag.PageNumber = (page ?? 1);
+            ViewBag.PageSize = pageSize;
+            if (ViewBag.Sliders == null)
+                return NotFound();
+
+            return View();
         }
         public IActionResult Create()
         {

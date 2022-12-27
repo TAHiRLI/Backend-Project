@@ -1,17 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Index";
-    var counter = 0;
+    var counter = (ViewBag.PageNumber - 1)*ViewBag.PageSize;
     var pagedList = (IPagedList)ViewBag.Amenities;
 }
 
-@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
-@using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+@using X.PagedList.Mvc.Core; 
+@using X.PagedList; 
 @using X.PagedList.Mvc.Core.Fluent
 @using X.PagedList.Web.Common
 
-
-<!-- import the included stylesheet for some (very basic) default styling -->
-<link href="~/admin/css/PagedList.css" rel="stylesheet" type="text/css" />
 
 <div class="w-100 grid-margin stretch-card">
     <div class="card">
@@ -30,17 +27,17 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var service in ViewBag.Amenities)
+                        @foreach (var amenity in ViewBag.Amenities)
                         {
                             counter++;
                             <tr>
                                 <td>@counter</td>
-                                <td>@service.Name</td>
-                                <td><label class="badge badge-@(!service.IsFeatured? "danger":"success")">@(service.IsFeatured ? "Featured" : "Ordinary")</label></td>
+                                <td>@amenity.Name</td>
+                                <td><label class="badge badge-@(!amenity.IsFeatured? "danger":"success")">@(amenity.IsFeatured ? "Featured" : "Ordinary")</label></td>
 
                                 <td>
-                                    <a asp-action="edit" asp-action="Amenity" asp-route-id="@service.Id"><i style="font-size:20px" class="mdi mdi-lead-pencil"></i></a>
-                                    <a class="delete-btn" asp-action="delete" asp-action="Amenity" asp-route-id="@service.Id"><i style="font-size:20px" class="mdi mdi-close-circle text-danger "></i></a>
+                                    <a asp-action="edit" asp-action="Amenity" asp-route-id="@amenity.Id"><i style="font-size:20px" class="mdi mdi-lead-pencil"></i></a>
+                                    <a class="delete-btn" asp-action="delete" asp-action="Amenity" asp-route-id="@amenity.Id"><i style="font-size:20px" class="mdi mdi-close-circle text-danger "></i></a>
                                 </td>
                             </tr>
                         }
@@ -48,9 +45,7 @@
                     </tbody>
                 </table>
                 <div >
-                    <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
                     @Html.PagedListPager(pagedList, page => Url.Action("Index", new { page }))
-             
                 </div>
             </div>
         </div>

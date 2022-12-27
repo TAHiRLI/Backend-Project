@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Quarter.DAL;
+using Quarter.Helpers;
 using Quarter.Models;
 using System.Data;
 
@@ -17,10 +18,21 @@ namespace Quarter.Areas.Admin.Controllers
         {
             this._context = context;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
+            int pageSize = 5;
             var model = _context.Categories.Include(x => x.Houses).ToList();
-            return View(model);
+
+            Pagination<Category> paginatedList = new Pagination<Category>();
+
+            ViewBag.Categories = paginatedList.GetPagedNames(model, page, pageSize);
+            ViewBag.PageNumber = (page ?? 1);
+            ViewBag.PageSize = pageSize;
+            if (ViewBag.Categories == null)
+                return NotFound();
+
+
+            return View();
         }
         public IActionResult Create()
         {

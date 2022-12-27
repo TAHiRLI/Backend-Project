@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Quarter.DAL;
+using Quarter.Helpers;
 using Quarter.Models;
 using System.Data;
 
@@ -17,10 +18,19 @@ namespace Quarter.Areas.Admin.Controllers
         {
             this._context = context;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
-            var model = _context.Services.ToList();
-            return View(model);
+            var Services = _context.Services.ToList();
+            int pageSize = 5;
+            Pagination<Service> paginatedList = new Pagination<Service>();
+
+            ViewBag.Services = paginatedList.GetPagedNames(Services, page, pageSize);
+            ViewBag.PageNumber = (page ?? 1);
+            ViewBag.PageSize = pageSize;
+            if (ViewBag.Services == null)
+                return NotFound();
+
+            return View();
         }
         public IActionResult Create()
         {

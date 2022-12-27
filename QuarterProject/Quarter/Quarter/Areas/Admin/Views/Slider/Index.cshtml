@@ -1,11 +1,13 @@
-﻿
-
-@model List<HomeSlider>
-
-@{
+﻿@{
     ViewData["Title"] = "Index";
-    var counter = 0;
+    var counter = (ViewBag.PageNumber - 1) * ViewBag.PageSize;
+    var pagedList = (IPagedList)ViewBag.Sliders;
 }
+
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
 
 <div class="w-100 grid-margin stretch-card">
     <div class="card">
@@ -26,7 +28,7 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var slider in Model)
+                        @foreach (var slider in ViewBag.Sliders)
                         {
                             counter++;
                             <tr>
@@ -47,6 +49,9 @@
 
                     </tbody>
                 </table>
+                <div>
+                    @Html.PagedListPager(pagedList, page => Url.Action("Index", new { page }))
+                </div>
             </div>
         </div>
     </div>

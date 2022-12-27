@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Quarter.DAL;
+using Quarter.Helpers;
 using Quarter.Models;
 using System.Data;
 using System.Net;
@@ -22,15 +23,18 @@ namespace Quarter.Areas.Admin.Controllers
         }
         public IActionResult Index(int? page =1 )
         {
-            var amenities = _context.Amenities;
 
-            
-            ViewBag.Amenities = GetPagedNames(page);
+            int pageSize = 5;
+            var Amenities = _context.Amenities.ToList();
+            Pagination<Amenity> paginatedList = new Pagination<Amenity>();
 
+            ViewBag.Amenities = paginatedList.GetPagedNames(Amenities,page, pageSize);
+            ViewBag.PageNumber =(page ?? 1) ;
+            ViewBag.PageSize =pageSize ;
             if (ViewBag.Amenities == null)
-            {
                 return NotFound();
-            }
+
+
             return View();
         }
         public IActionResult Create()
@@ -84,24 +88,6 @@ namespace Quarter.Areas.Admin.Controllers
             return Ok();
         }
 
-        protected IPagedList<Amenity> GetPagedNames(int? page)
-        {
-            // return a 404 if user browses to before the first page
-            if (page.HasValue && page < 1)
-                return null;
-
-            // retrieve list from database/whereverand
-            var listUnpaged = _context.Amenities.ToList();
-
-            // page the list
-            const int pageSize = 1;
-            var listPaged = listUnpaged.ToPagedList(page ?? 1, pageSize);
-
-            // return a 404 if user browses to pages beyond last page. special case first page if no items exist
-            if (listPaged.PageNumber != 1 && page.HasValue && page > listPaged.PageCount)
-                return null;
-
-            return listPaged;
-        }
+      
     }
 }

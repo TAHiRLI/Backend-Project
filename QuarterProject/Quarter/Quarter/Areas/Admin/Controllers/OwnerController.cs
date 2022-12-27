@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Quarter.Areas.Admin.ViewModels;
 using Quarter.DAL;
@@ -22,10 +23,21 @@ namespace Quarter.Areas.Admin.Controllers
             this._context = context;
             _env = env;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
-            var model = _context.Owners.Include(x => x.Houses).ToList();
-            return View(model);
+            var Owners = _context.Owners.Include(x => x.Houses).ToList();
+
+
+            int pageSize = 5;
+            Pagination<Owner> paginatedList = new Pagination<Owner>();
+
+            ViewBag.Owners = paginatedList.GetPagedNames(Owners, page, pageSize);
+            ViewBag.PageNumber = (page ?? 1);
+            ViewBag.PageSize = pageSize;
+            if (ViewBag.Owners == null)
+                return NotFound();
+
+            return View();
         }
 
       
