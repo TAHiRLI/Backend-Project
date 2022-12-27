@@ -10208,7 +10208,7 @@ blockquote {
     margin-right: 10px; }
     .ltn__pagination ul li:last-child {
       margin-right: 0px; }
-    .ltn__pagination ul li a {
+    .ltn__pagination ul li a , .ltn__pagination ul li span {
       height: 50px;
       width: 50px;
       line-height: 46px;
@@ -10217,7 +10217,9 @@ blockquote {
       display: block;
       font-weight: 700;
       border-radius: 100%; }
-    .ltn__pagination ul li:hover a, .ltn__pagination ul li.active a {
+    .ltn__pagination ul li:hover a , .ltn__pagination ul li.active a ,
+    .ltn__pagination ul li:hover span , .ltn__pagination ul li.active span 
+    {
       background-color: var(--ltn__secondary-color);
       border-color: var(--ltn__secondary-color);
       color: var(--white); }

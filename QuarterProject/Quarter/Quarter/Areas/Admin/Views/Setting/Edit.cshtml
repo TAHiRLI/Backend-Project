@@ -11,14 +11,10 @@
             <h4 class="card-title">Edit Setting</h4>
 
             <form asp-action="Edit" method="post" class="">
-                <div class="form-group">
-                    <label asp-for="Key">Key</label>
-                    <input asp-for="Key" type="text" class="form-control">
-                    <span class="text-danger" asp-validation-for="Key"></span>
-                </div>
+               
 
                 <div class="form-group">
-                    <label asp-for="Value"></label>
+                    <label asp-for="Value">@Model?.Key</label>
                     <input asp-for="Value" type="text" class="form-control">
                     <span class="text-danger" asp-validation-for="Value"></span>
                 </div>

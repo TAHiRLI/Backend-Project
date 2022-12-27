@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Quarter.DAL;
+using Quarter.Helpers;
 using Quarter.Models;
 using Quarter.ViewModels;
 
@@ -14,7 +15,7 @@ namespace Quarter.Controllers
         {
             this._context = context;
         }
-        public IActionResult Index(string? Search =null, List<int>? CategoryIds = null, List<int>? AmenityIds = null, List<int>? CityIds= null, decimal? minPrice= null, decimal? maxPrice = null)
+        public IActionResult Index(int? page, string? Search, List<int>? CategoryIds, List<int>? AmenityIds, List<int>? CityIds, decimal? minPrice, decimal? maxPrice)
         {
             ViewBag.SelectedCategoryIds = CategoryIds;
             ViewBag.SelectedAmenityIds = AmenityIds;
@@ -56,6 +57,19 @@ namespace Quarter.Controllers
             ShopVm.MinPrice = _context.Houses.Min(x => x.Price);
             ViewBag.SelectedMinPrice = minPrice ?? ShopVm.MinPrice;
             ViewBag.SelectedMaxPrice = maxPrice ?? ShopVm.MaxPrice;
+
+
+
+            int pageSize = 1;
+            Pagination<House> paginatedList = new Pagination<House>();
+
+            ViewBag.Houses = paginatedList.GetPagedNames(house.ToList(), page, pageSize);
+            ViewBag.PageNumber = (page ?? 1);
+            ViewBag.PageSize = pageSize;
+            if (ViewBag.Houses == null)
+                return NotFound();
+
+
 
             return View(ShopVm);
         }

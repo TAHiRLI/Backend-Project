@@ -14,7 +14,6 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Settings</h4>
-            <div class="col-12  text-end"><a class="text-end d-block" asp-action="create" asp-controller="setting">Create</a></div>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -36,7 +35,6 @@
                                 <td>@setting.Value</td>
                                 <td>
                                     <a asp-action="edit" asp-action="setting" asp-route-id="@setting.Id"><i style="font-size:20px" class="mdi mdi-lead-pencil"></i></a>
-                                    <a class="delete-btn" asp-action="delete" asp-action="setting" asp-route-id="@setting.Id"><i style="font-size:20px" class="mdi mdi-close-circle text-danger "></i></a>
                                 </td>
                             </tr>
                         }

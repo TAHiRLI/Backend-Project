@@ -7,7 +7,7 @@ namespace Quarter.Helpers
     public  class Pagination<T>:List<T>
     {
 
-        public IPagedList<T> GetPagedNames(List<T> listUnpaged, int? page, int pageSize)
+        public IPagedList<T> GetPagedNames(List<T> listUnpaged, int? page, int pageSize =1)
         {
             // return a 404 if user browses to before the first page
             if (page.HasValue && page < 1)

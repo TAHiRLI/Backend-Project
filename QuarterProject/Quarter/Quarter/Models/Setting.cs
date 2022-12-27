@@ -7,8 +7,8 @@ namespace Quarter.Models
     {
         public int Id { get; set; }
         [MaxLength(50)]
-        public string Key { get; set; }
+        public string? Key { get; set; }
         [MaxLength(250)]
-        public string Value { get; set; }
+        public string? Value { get; set; }
     }
 }

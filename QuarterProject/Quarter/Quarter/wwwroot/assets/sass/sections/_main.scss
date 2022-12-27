@@ -2196,7 +2196,7 @@ blockquote {
             &:last-child {
                 margin-right: 0px;
             }
-            a {
+            a, span {
                 height: 50px;
                 width: 50px;
                 line-height: 46px;
@@ -2207,7 +2207,7 @@ blockquote {
                 border-radius: 100%;
             }
             &:hover, &.active {
-                a {
+                a,span {
                 background-color: var(--ltn__secondary-color);
                 border-color: var(--ltn__secondary-color);
                 color: var(--white);
@@ -2223,7 +2223,7 @@ blockquote {
            li {
                 margin-right: 5px;
                 font-size: 14px;
-                a {
+                a, span {
                     height: 40px;
                     width: 40px;
                     line-height: 36px;

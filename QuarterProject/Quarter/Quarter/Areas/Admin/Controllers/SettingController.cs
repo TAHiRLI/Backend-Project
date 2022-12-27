@@ -33,23 +33,7 @@ namespace Quarter.Areas.Admin.Controllers
 
             return View();
         }
-        public IActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Create(Setting setting)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            _context.Settings.Add(setting);
-            _context.SaveChanges();
-
-            return RedirectToAction("index");
-        }
+   
 
         public IActionResult Edit(int id)
         {
@@ -61,6 +45,8 @@ namespace Quarter.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(Setting setting)
         {
+            if (setting.Value == null)
+                ModelState.AddModelError("Value", "This field is required");
             if (!ModelState.IsValid)
             {
                 return View();
@@ -69,23 +55,12 @@ namespace Quarter.Areas.Admin.Controllers
             if (existSetting == null)
                 return NotFound();
 
-            existSetting.Key = setting.Key;
             existSetting.Value = setting.Value;
             _context.SaveChanges();
 
             return RedirectToAction("index");
         }
 
-        public IActionResult Delete(int id)
-        {
-            var setting = _context.Settings.FirstOrDefault(x => x.Id == id);
-            if (setting == null)
-                return NotFound();
-
-            _context.Settings.Remove(setting);
-            _context.SaveChanges();
-
-            return Ok();
-        }
+       
     }
 }
