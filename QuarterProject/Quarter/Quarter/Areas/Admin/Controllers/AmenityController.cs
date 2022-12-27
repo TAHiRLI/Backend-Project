@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Quarter.DAL;
 using Quarter.Models;
 using System.Data;
+using System.Net;
 using X.PagedList;
 
 namespace Quarter.Areas.Admin.Controllers
@@ -23,10 +24,14 @@ namespace Quarter.Areas.Admin.Controllers
         {
             var amenities = _context.Amenities;
 
-            int pageSize = 1;
-            int pageNumber = (page ?? 1);
-            ViewBag.Names = GetPagedNames(page);
-            return View( amenities.ToPagedList(pageNumber, pageSize));
+            
+            ViewBag.Amenities = GetPagedNames(page);
+
+            if (ViewBag.Amenities == null)
+            {
+                return NotFound();
+            }
+            return View();
         }
         public IActionResult Create()
         {
@@ -89,7 +94,7 @@ namespace Quarter.Areas.Admin.Controllers
             var listUnpaged = _context.Amenities.ToList();
 
             // page the list
-            const int pageSize = 2;
+            const int pageSize = 1;
             var listPaged = listUnpaged.ToPagedList(page ?? 1, pageSize);
 
             // return a 404 if user browses to pages beyond last page. special case first page if no items exist
