@@ -112,7 +112,12 @@ namespace Quarter.Controllers
         }
 
     
+        public IActionResult GetComment(int houseId,int count = 3, int skipCount = 3)
+        {
 
+            var comments = _context.UserComments.Include(x=> x.AppUser).Where(x=> x.HouseId == houseId).Skip(skipCount).Take(count).ToList();   
+            return PartialView("_CommentsPartial", comments );
+        }
 
 
     }

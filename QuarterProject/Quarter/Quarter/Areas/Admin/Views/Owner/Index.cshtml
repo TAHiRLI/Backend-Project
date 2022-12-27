@@ -46,8 +46,8 @@
                                 <td>@owner.Desc</td>
                                 <td>@owner.Houses.Count</td>
                                 <td>
-                                    <a asp-action="edit" asp-action="owner" asp-route-id="@owner.Id"><i style="font-size:20px" class="mdi mdi-lead-pencil"></i></a>
-                                    <a class="delete-btn" asp-action="delete" asp-action="owner" asp-route-id="@owner.Id"><i style="font-size:20px" class="mdi mdi-close-circle text-danger "></i></a>
+                                    <a asp-action="edit" asp-controller="owner" asp-route-id="@owner.Id"><i style="font-size:20px" class="mdi mdi-lead-pencil"></i></a>
+                                    <a class="delete-btn" asp-action="delete" asp-controller="owner" asp-route-id="@owner.Id"><i style="font-size:20px" class="mdi mdi-close-circle text-danger "></i></a>
                                 </td>
                             </tr>
                         }

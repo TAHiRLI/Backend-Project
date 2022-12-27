@@ -52,8 +52,9 @@
 
                                 <td>@house.Price</td>
                                 <td>
-                                    <a asp-action="edit" asp-action="house" asp-route-id="@house.Id"><i style="font-size:20px" class="mdi mdi-lead-pencil"></i></a>
-                                    <a class="delete-btn" asp-action="delete" asp-action="house" asp-route-id="@house.Id"><i style="font-size:20px" class="mdi mdi-close-circle text-danger "></i></a>
+                                    <a class="mx-1 " asp-action="edit" asp-controller="house" asp-route-id="@house.Id"><i style="font-size:20px" class="mdi mdi-lead-pencil"></i></a>
+                                    <a class="mx-1 " asp-action="Index" asp-controller="Comment" asp-route-id="@house.Id"><i style="font-size:20px" class="mdi mdi-message "></i></a>
+                                    <a class="mx-1 delete-btn" asp-action="delete" asp-controller="house" asp-route-id="@house.Id"><i style="font-size:20px" class="mdi mdi-close-circle text-danger "></i></a>
                                 </td>
                             </tr>
                         }

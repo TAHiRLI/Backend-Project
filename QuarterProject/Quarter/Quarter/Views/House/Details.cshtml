@@ -22,7 +22,7 @@
 <div class="ltn__img-slider-area mb-90">
     <div class="container-fluid">
         <div class="row ltn__image-slider-5-active slick-arrow-1 slick-arrow-1-inner ltn__no-gutter-all">
-         
+
             @foreach (var image in Model.House.HouseImages)
             {
                 <div class="col-lg-12">
@@ -49,23 +49,24 @@
                         <ul>
                             @{
 
+
                                 if (Model.House.IsSold)
                                 {
-                                                     <li class="ltn__blog-category bg-dark text-light p-2">
-                                                    <a href="#">Sold</a>
-                                                </li>
+                                    <li class="ltn__blog-category  text-light p-2">
+                                        <a href="#">Sold</a>
+                                    </li>
                                 }
-                                 if (Model.House.IsFeatured)
+                                if (Model.House.IsFeatured)
                                 {
-                                                    <li class="ltn__blog-category ">
-                                                    <a href="#">Special</a>
-                                                </li>
+                                    <li class="ltn__blog-category ">
+                                        <a href="#">Special</a>
+                                    </li>
                                 }
-                                 if (Model.House.DiscountPercent > 0)
+                                if (Model.House.DiscountPercent > 0)
                                 {
-                                                     <li class="ltn__blog-category ">
-                                                    <a href="#">Discounted</a>
-                                                </li>
+                                    <li class="ltn__blog-category ">
+                                        <a href="#">Discounted</a>
+                                    </li>
                                 }
                             }
                             <li class="ltn__blog-date">
@@ -96,8 +97,9 @@
                             <li><label>Price:</label> <span>@Model.House.Price.ToString("0.00")</span></li>
                         </ul>
                     </div>
-                    @if(Model.House.HouseAmenities.Count > 0){
-                    <h4 class="title-2">Amenities</h4>
+                    @if (Model.House.HouseAmenities.Count > 0)
+                    {
+                        <h4 class="title-2">Amenities</h4>
 
                     }
                     <div class="property-detail-feature-list clearfix mb-45">
@@ -129,38 +131,31 @@
 
                         <hr>
                         <!-- comment-area -->
-                        <div class="ltn__comment-area mb-30">
+                        <div class="ltn__comment-area mb-30" id="comment-container">
                             <div class="ltn__comment-inner">
-                                <ul>
-
-                                    @foreach (var comment in Model.House.UserComments.Where(x=> x.IsApproved).Take(3).ToList())
-                                    {
-                                        <li>
-                                            <div class="ltn__comment-item clearfix">
-                                                <div class="ltn__commenter-img">
-                                                    <img style="max-height:40px" src="~/Uploads/Users/@comment.AppUser.UserPhoto" alt="Image">
-                                                </div>
-                                                <div class="ltn__commenter-comment">
-                                                    <h6><a href="#">@comment.AppUser.UserName</a></h6>
-
-                                                    <p>@comment.Text</p>
-                                                    <span class="ltn__comment-reply-btn">@comment.CreatedAt.ToString("dd MMMM yyyy")</span>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                    }
-
+                                <ul id="load-more-btn">
+                            @await Html.PartialAsync("_CommentsPartial", Model.House.UserComments.Where(x=> x.IsApproved).Take(3).ToList())
 
                                 </ul>
+                                
                             </div>
+
+
+                        </div>
+                        <div class="text-center mt-3 ">
+                            @if (Model.House.UserComments.Count(x => x.IsApproved) > 3)
+                            {
+                                <a asp-action="getcomment" asp-controller="house" asp-route-Count="3" asp-route-houseId="@Model.House.Id" class="btn theme-btn-1 load-more-btn" skipCount="3" takeCount="3">Load More</a>
+
+                            }
                         </div>
                         <!-- comment-reply -->
+                            
                         @await Html.PartialAsync("_CommentFormPartial", Model.CommentFormVm)
                     </div>
 
 
-                  
+
                     <h4 class="title-2">Related Properties</h4>
                     <div class="row">
                         @foreach (var house in Model.RelatedProducts)
@@ -182,16 +177,16 @@
                                                 @{
                                                     if (house.IsSold)
                                                     {
-                                                                        <li class="sale-badge bg-dark">Sold</li>
+                                                        <li class="sale-badge bg-dark">Sold</li>
                                                     }
                                                     else if (house.IsFeatured)
                                                     {
-                                                                        <li class="sale-badge bg-blue">Special</li>
+                                                        <li class="sale-badge bg-blue">Special</li>
 
                                                     }
                                                     else if (house.DiscountPercent > 0)
                                                     {
-                                                                        <li class="sale-badge bg-red">Discounted</li>
+                                                        <li class="sale-badge bg-red">Discounted</li>
                                                     }
                                                 }
                                             </ul>
@@ -243,13 +238,13 @@
                                             @{
                                                 if (house.DiscountPercent > 0)
                                                 {
-                                                                    <span>$@((house.Price * (100 - house.DiscountPercent) / 100).ToString("0.00"))</span>
-                                                                    <del>$@house.Price.ToString("0.00")</del>
+                                                    <span>$@((house.Price * (100 - house.DiscountPercent) / 100).ToString("0.00"))</span>
+                                                    <del>$@house.Price.ToString("0.00")</del>
 
                                                 }
                                                 else
                                                 {
-                                                                    <span>$@house.Price.ToString("0.00")</span>
+                                                    <span>$@house.Price.ToString("0.00")</span>
                                                 }
 
                                             }
@@ -270,7 +265,7 @@
                         <div class="ltn__author-widget-inner text-center">
                             <img src="~/Uploads/Owners/@Model.House.Owner.ImageUrl" alt="Image">
                             <h5>@Model.House.Owner.Fullname</h5>
-                     
+
                             <p>@Model.House.Owner.Desc</p>
                             <div class="ltn__social-media">
                                 <ul>
@@ -283,7 +278,7 @@
                             </div>
                         </div>
                     </div>
-                
+
                     <!-- Form Widget -->
                     <div class="widget ltn__form-widget">
                         <h4 class="ltn__widget-title ltn__widget-title-border-2">Drop Messege For Book</h4>
@@ -294,21 +289,20 @@
                             <button type="submit" class="btn theme-btn-1">Send Messege</button>
                         </form>
                     </div>
-         
+
                     <!-- Menu Widget (Category) -->
                     <div class="widget ltn__menu-widget ltn__menu-widget-2--- ltn__menu-widget-2-color-2---">
                         <h4 class="ltn__widget-title ltn__widget-title-border-2">Top Categories</h4>
                         <ul>
                             @foreach (var category in Model.TopCategories)
                             {
-                            <li><a asp-action="index" asp-controller="shop" asp-route-categoryIds= "@category.Id">@category.Name <span>(@category.Houses.Count)</span></a></li>
-                                
+                                <li><a asp-action="index" asp-controller="shop" asp-route-categoryIds="@category.Id">@category.Name <span>(@category.Houses.Count)</span></a></li>
+
                             }
-                    
+
                         </ul>
                     </div>
                     <!-- Popular Product Widget -->
-        
                     <!-- Social Media Widget -->
                     <div class="widget ltn__social-media-widget">
                         <h4 class="ltn__widget-title ltn__widget-title-border-2">Follow us</h4>
@@ -322,14 +316,16 @@
                             </ul>
                         </div>
                     </div>
-                
+
                 </aside>
             </div>
         </div>
     </div>
 </div>
 <!-- SHOP DETAILS AREA END -->
-
 @section Scripts{
     @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script src="~/assets/js/MyMain.js"></script>
+
 }

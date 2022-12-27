@@ -39,8 +39,8 @@
                                 <td><label class="badge badge-@(!service.IsFeatured? "danger":"success")">@(service.IsFeatured ? "Featured" : "Ordinary")</label></td>
                               
                                 <td>
-                                    <a asp-action="edit" asp-action="Service" asp-route-id="@service.Id"><i style="font-size:20px" class="mdi mdi-lead-pencil"></i></a>
-                                    <a class="delete-btn" asp-action="delete" asp-action="Service" asp-route-id="@service.Id"><i style="font-size:20px" class="mdi mdi-close-circle text-danger "></i></a>
+                                    <a asp-action="edit" asp-controller="Service" asp-route-id="@service.Id"><i style="font-size:20px" class="mdi mdi-lead-pencil"></i></a>
+                                    <a class="delete-btn" asp-controller="delete" asp-action="Service" asp-route-id="@service.Id"><i style="font-size:20px" class="mdi mdi-close-circle text-danger "></i></a>
                                 </td>
                             </tr>
                         }

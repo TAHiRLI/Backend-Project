@@ -60,7 +60,7 @@ namespace Quarter.Controllers
 
 
 
-            int pageSize = 1;
+            int pageSize = 4;
             Pagination<House> paginatedList = new Pagination<House>();
 
             ViewBag.Houses = paginatedList.GetPagedNames(house.ToList(), page, pageSize);

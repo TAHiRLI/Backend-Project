@@ -1,0 +1,23 @@
+﻿
+@{
+    Layout = null;
+
+}
+@model List<UserComment>
+        @foreach (var comment in Model)
+        {
+            <li style="list-style:none">
+                <div class="ltn__comment-item clearfix">
+                    <div class="ltn__commenter-img">
+                        <img style="max-height:40px" src="~/Uploads/Users/@comment.AppUser.UserPhoto" alt="Image">
+                    </div>
+                    <div class="ltn__commenter-comment">
+                        <h6><a href="#">@comment.AppUser.UserName</a></h6>
+                        <p>@comment.Text</p>
+                        <span class="ltn__comment-reply-btn">@comment.CreatedAt.ToString("dd MMMM yyyy")</span>
+                    </div>
+                </div>
+            </li>
+        }
+
+

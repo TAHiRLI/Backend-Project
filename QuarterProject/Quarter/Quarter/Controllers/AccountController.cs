@@ -182,7 +182,7 @@ namespace Quarter.Controllers
                 AppUser user = new AppUser
                 {
                     Email = info.Principal.FindFirst(ClaimTypes.Email).Value,
-                    UserName = info.Principal.FindFirst(ClaimTypes.Email).Value.Split("@")[0],
+                    UserName = info.Principal.FindFirst(ClaimTypes.Email).Value,
                     EmailConfirmed = true,
                     
                 };
