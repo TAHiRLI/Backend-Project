@@ -23,6 +23,7 @@ namespace Quarter.DAL
         public DbSet<Service> Services { get; set; } 
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<UserComment> UserComments { get; set; }
+        public DbSet<UserBookingMessage> UserBookingMessages { get; set; }
 
 
     }

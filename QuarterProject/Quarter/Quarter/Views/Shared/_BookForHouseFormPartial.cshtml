@@ -1,0 +1,15 @@
+﻿@model UserBookingMessageViewModel
+
+
+<form asp-action="BookHouse" method="post">
+    <input asp-for="Fullname" type="text"  placeholder="Your Name*"><br/>
+    <span class="text-danger" asp-validation-for="Fullname"></span>
+    <input asp-for="Email" type="email"  placeholder="Your e-Mail*"><br/>
+    <span class="text-danger" asp-validation-for="Email"></span>
+
+    <textarea asp-for="Message" placeholder="Write Message..."></textarea><br/>
+    <span class="text-danger" asp-validation-for="Message"></span>
+
+    <input  type="hidden" asp-for="HouseId" value="@Model.HouseId"/>
+    <button type="submit" class="btn theme-btn-1">Send Messege</button>
+</form>

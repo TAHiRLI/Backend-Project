@@ -209,7 +209,7 @@ namespace Quarter.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Login(MemberLoginViewModel LoginVm, string? returnUrl = null)
+        public async Task<IActionResult> Login(MemberLoginViewModel LoginVm, string? ReturnUrl = null)
         {
             if (!ModelState.IsValid)
                 return View();
@@ -257,8 +257,8 @@ namespace Quarter.Controllers
                 return View();
             }
 
-            if (returnUrl != null)
-                return Redirect(returnUrl);
+            if (ReturnUrl != null)
+                return Redirect(ReturnUrl);
 
             return RedirectToAction("index", "home");
         }

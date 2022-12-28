@@ -8,5 +8,6 @@ namespace Quarter.ViewModels
         public List<House> RelatedProducts { get; set; }
         public List<Category> TopCategories { get; set; }
         public CommentViewModel CommentFormVm { get; set; }
+        public UserBookingMessageViewModel UserBookingMessageVm { get; set; } = new UserBookingMessageViewModel();
     }
 }
