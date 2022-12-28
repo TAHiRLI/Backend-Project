@@ -56,7 +56,7 @@
                 </table>
                 <div>
                     <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
-                    @Html.PagedListPager(pagedList, page => Url.Action("Index", new { page }))
+                    @Html.PagedListPager(pagedList, page => Url.Action("index", new { page }))
 
                 </div>
             </div>

@@ -60,7 +60,7 @@
                 </table>
                 <div>
                     <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
-                    @Html.PagedListPager(pagedList, page => Url.Action("Index", new { page }))
+                    @Html.PagedListPager(pagedList, page => Url.Action("BookingRequest", new { page }))
 
                 </div>
             </div>
@@ -71,8 +71,7 @@
 
 @section Scripts{
     <script src="~/admin/js/Main.js"></script>
-
-
+    @await Html.PartialAsync("_ValidationScriptsPartial")
 }
 
 

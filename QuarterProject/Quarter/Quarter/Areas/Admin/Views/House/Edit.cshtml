@@ -20,7 +20,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Desc">Description</label>
-                        <textarea asp-for="Desc" type="number" step="0.001" class="form-control" placeholder="Desc"></textarea>
+                        <textarea asp-for="Desc" id="editor" type="number" step="0.001" class="form-control" placeholder="Desc"></textarea>
                         <span class="text-danger" asp-validation-for="Desc"></span>
                     </div>
                     <div class="form-group">
@@ -155,8 +155,16 @@
             $(this).parent().remove();
         })
     </script>
+
+
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 }
-
-
-
 

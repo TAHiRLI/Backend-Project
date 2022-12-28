@@ -68,7 +68,6 @@ namespace Quarter.Controllers
         }
         [HttpPost]
         [Authorize(Roles = "Member")]
-        
         public IActionResult Comment(CommentViewModel CommentVm)
         {
             var house = _context.Houses

@@ -13,7 +13,7 @@
             <form action="create" method="post" class="forms-sample" enctype="multipart/form-data">
                 <div class="form-group">
                     <label asp-for="Title">Title</label>
-                    <input asp-for="Title" type="text" class="form-control" placeholder="Name">
+                    <input asp-for="Title" id="editor" type="text" class="form-control" placeholder="Name">
                     <span class="text-danger" asp-validation-for="Title"></span>
                 </div>
             
@@ -65,3 +65,20 @@
 
 
 
+
+@section Scripts{
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+
+}
