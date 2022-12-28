@@ -42,7 +42,7 @@
                                 </td>
                                 <td>@message.Fullname</td>
                                 <td>@message.Email</td>
-                                <td>@message.House.Title</td>
+                                <td> <a asp-action="edit" asp-controller="house" asp-route-id="@message.House.Id"> @message.House.Title</a> </td>
                                 <td>@message.Message</td>
                                 <td>
 
@@ -51,7 +51,6 @@
                                     }
                                     else{
                                         <a class="replied" asp-action="GetReplyMessage" asp-controller="house" asp-route-id="@message.Id"><i style="font-size:26px" class="mdi mdi-receipt"></i></a>
-
                                     }
                                 </td>
                             </tr>

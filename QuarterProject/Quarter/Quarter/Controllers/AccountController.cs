@@ -266,7 +266,6 @@ namespace Quarter.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel ForgotVm)
         {
@@ -370,7 +369,11 @@ namespace Quarter.Controllers
             ProfileVm.ProfileEditVm.Email = user.Email;
             ProfileVm.ProfileEditVm.Username = user.UserName;
             ProfileVm.ProfileEditVm.UserPhoto = user.UserPhoto;
-
+            ProfileVm.UserBookingMessages = _context.UserBookingMessages
+                .Include(x=> x.BookingRequestReply)
+                .Include(x=>x.House)
+                .Where(x => x.AppUserId == user.Id && x.IsReplied)
+                .ToList();
 
             return View(ProfileVm);
         }

@@ -12,5 +12,6 @@ namespace Quarter.Models
         [MaxLength(100)]
         public string UserPhoto { get; set; } = "defaultUser.jpeg";
 
+
     }
 }

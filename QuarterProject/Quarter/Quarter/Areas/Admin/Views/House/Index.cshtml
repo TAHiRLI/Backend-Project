@@ -55,8 +55,8 @@
                                     <a class="mx-1 " asp-action="edit" asp-controller="house" asp-route-id="@house.Id"><i style="font-size:26px" class="mdi mdi-lead-pencil"></i></a>
                                     <a class="mx-1 position-relative d-block-inline " asp-action="Index" asp-controller="Comment" asp-route-id="@house.Id">
                                         <i style="font-size:26px" class="mdi mdi-message "></i>
-                                        @if (house.UserComments.Count(x => x.IsApproved == null)>0){
-                                        <span class="comment-count bg-success ">@house.UserComments.Count(x=> x.IsApproved == null)</span>
+                                        @if (house.UserComments.Count(x => !x.IsApproved)>0){
+                                        <span class="comment-count bg-success ">@house.UserComments.Count(x=> !x.IsApproved)</span>
 
                                         }
                                     </a>
