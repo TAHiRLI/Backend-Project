@@ -1,4 +1,6 @@
 ﻿
+
+
 $(document).on("click", ".delete-btn", function (e) {
     e.preventDefault();
     console.log($(this));
@@ -37,3 +39,66 @@ $(document).on("click", ".delete-btn", function (e) {
             }
         })
 })
+
+
+$(document).on("click", ".reply",async function (e){
+    e.preventDefault();
+    let link = $(this).attr("href");
+
+    const { value: text } = await Swal.fire({
+        input: 'textarea',
+        inputLabel: 'Message',
+        inputPlaceholder: 'Type your message here...',
+        inputAttributes: {
+            'aria-label': 'Type your message here'
+        },
+        showCancelButton: true
+    })
+    if (text) {
+    link += `?replyMessage=${text}`;
+    fetch(link)
+        .then(res => {
+            if (!res.ok) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                })
+               
+            }
+            else {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Your reply is sent',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    location.reload();
+                })
+            }
+        })
+
+
+      
+    }
+})
+
+$(document).on("click", ".replied", function (e) {
+    e.preventDefault();
+    let link = $(this).attr("href");
+    fetch(link)
+        .then(res => res.json())
+        .then(data => {
+            Swal.fire({
+                icon: 'info',
+                text: data.replyMessage,
+            })
+        })
+
+            
+
+
+    
+})
+

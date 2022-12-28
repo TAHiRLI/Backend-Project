@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    var counter = (ViewBag.PageNumber - 1) * ViewBag.PageSize;
+    var pagedList = (IPagedList)ViewBag.Requests;
+}
+
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+<link href="~/admin/css/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+
+<div class="w-100 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Create Owner</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>User Image</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>House Title</th>
+                            <th>Message</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (UserBookingMessage message in ViewBag.Requests)
+                        {
+                            counter++;
+                            <tr>
+                                <td>@counter</td>
+                                <td>
+                                    <img width="50" class="border-circle" src="~/Uploads/Users/@message.AppUser.UserPhoto" />
+
+                                </td>
+                                <td>@message.Fullname</td>
+                                <td>@message.Email</td>
+                                <td>@message.House.Title</td>
+                                <td>@message.Message</td>
+                                <td>
+
+                                    @if(!message.IsReplied){
+                                    <a class="reply" asp-action="ReplyToBookingRequest" asp-controller="house" asp-route-id="@message.Id"><i style="font-size:26px" class="mdi mdi-reply"></i></a>
+                                    }
+                                    else{
+                                        <a class="replied" asp-action="GetReplyMessage" asp-controller="house" asp-route-id="@message.Id"><i style="font-size:26px" class="mdi mdi-receipt"></i></a>
+
+                                    }
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+                <div>
+                    <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+                    @Html.PagedListPager(pagedList, page => Url.Action("Index", new { page }))
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/admin/js/Main.js"></script>
+
+
+}
+
+

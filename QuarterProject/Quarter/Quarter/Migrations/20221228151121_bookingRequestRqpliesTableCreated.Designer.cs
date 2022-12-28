@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quarter.DAL;
 
@@ -11,9 +12,10 @@ using Quarter.DAL;
 namespace Quarter.Migrations
 {
     [DbContext(typeof(QuarterDbContext))]
-    partial class QuarterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221228151121_bookingRequestRqpliesTableCreated")]
+    partial class bookingRequestRqpliesTableCreated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -265,8 +267,7 @@ namespace Quarter.Migrations
 
                     b.Property<string>("ReplyMessage")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -276,8 +277,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserBookingMessageId")
-                        .IsUnique();
+                    b.HasIndex("UserBookingMessageId");
 
                     b.ToTable("BookingRequestReplies");
                 });
@@ -740,8 +740,8 @@ namespace Quarter.Migrations
             modelBuilder.Entity("Quarter.Models.BookingRequestReply", b =>
                 {
                     b.HasOne("Quarter.Models.UserBookingMessage", "UserBookingMessage")
-                        .WithOne("BookingRequestReply")
-                        .HasForeignKey("Quarter.Models.BookingRequestReply", "UserBookingMessageId")
+                        .WithMany()
+                        .HasForeignKey("UserBookingMessageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -872,11 +872,6 @@ namespace Quarter.Migrations
             modelBuilder.Entity("Quarter.Models.Owner", b =>
                 {
                     b.Navigation("Houses");
-                });
-
-            modelBuilder.Entity("Quarter.Models.UserBookingMessage", b =>
-                {
-                    b.Navigation("BookingRequestReply");
                 });
 #pragma warning restore 612, 618
         }

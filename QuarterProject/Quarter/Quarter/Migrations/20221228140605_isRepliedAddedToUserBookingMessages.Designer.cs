@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quarter.DAL;
 
@@ -11,9 +12,10 @@ using Quarter.DAL;
 namespace Quarter.Migrations
 {
     [DbContext(typeof(QuarterDbContext))]
-    partial class QuarterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221228140605_isRepliedAddedToUserBookingMessages")]
+    partial class isRepliedAddedToUserBookingMessages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -250,36 +252,6 @@ namespace Quarter.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Amenities");
-                });
-
-            modelBuilder.Entity("Quarter.Models.BookingRequestReply", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ReplyMessage")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserBookingMessageId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserBookingMessageId")
-                        .IsUnique();
-
-                    b.ToTable("BookingRequestReplies");
                 });
 
             modelBuilder.Entity("Quarter.Models.Category", b =>
@@ -737,17 +709,6 @@ namespace Quarter.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Quarter.Models.BookingRequestReply", b =>
-                {
-                    b.HasOne("Quarter.Models.UserBookingMessage", "UserBookingMessage")
-                        .WithOne("BookingRequestReply")
-                        .HasForeignKey("Quarter.Models.BookingRequestReply", "UserBookingMessageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("UserBookingMessage");
-                });
-
             modelBuilder.Entity("Quarter.Models.House", b =>
                 {
                     b.HasOne("Quarter.Models.Category", "Category")
@@ -872,11 +833,6 @@ namespace Quarter.Migrations
             modelBuilder.Entity("Quarter.Models.Owner", b =>
                 {
                     b.Navigation("Houses");
-                });
-
-            modelBuilder.Entity("Quarter.Models.UserBookingMessage", b =>
-                {
-                    b.Navigation("BookingRequestReply");
                 });
 #pragma warning restore 612, 618
         }

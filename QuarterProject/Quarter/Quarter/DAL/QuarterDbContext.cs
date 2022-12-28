@@ -24,6 +24,7 @@ namespace Quarter.DAL
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<UserComment> UserComments { get; set; }
         public DbSet<UserBookingMessage> UserBookingMessages { get; set; }
+        public DbSet<BookingRequestReply> BookingRequestReplies { get; set; }
 
 
     }

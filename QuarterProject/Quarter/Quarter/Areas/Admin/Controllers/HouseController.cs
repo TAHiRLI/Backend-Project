@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.DotNet.Scaffolding.Shared.Project;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
+using NuGet.Protocol;
 using Quarter.DAL;
 using Quarter.Helpers;
 using Quarter.Models;
@@ -12,8 +14,8 @@ namespace Quarter.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "SuperAdmin, Admin")]
-    public class HouseController : Controller
-    {
+    public class HouseController : BaseController
+        {
         private readonly QuarterDbContext _context;
         private readonly IWebHostEnvironment _env;
 
@@ -238,6 +240,65 @@ namespace Quarter.Areas.Admin.Controllers
 
             _context.SaveChanges();
             return RedirectToAction("index");
+        }
+
+        public IActionResult BookingRequest(int? page)
+        {
+            //shows all the booking requests to the admin
+
+            var Requests = _context.UserBookingMessages.Include(x => x.AppUser).Include(x => x.House).ToList();
+
+
+            int pageSize = 5;
+            Pagination<UserBookingMessage> paginatedList = new Pagination<UserBookingMessage>();
+
+            ViewBag.Requests = paginatedList.GetPagedNames(Requests, page, pageSize);
+            ViewBag.PageNumber = (page ?? 1);
+            ViewBag.PageSize = pageSize;
+            if (ViewBag.Requests == null)
+                return NotFound();
+
+
+            return View();
+        }
+        public IActionResult ReplyToBookingRequest(int id, string replyMessage)
+        {
+            // js input takes string and replies to request
+
+            var request = _context.UserBookingMessages.FirstOrDefault(x => x.Id == id);
+            if (request == null || request.IsReplied)
+                return NotFound();
+
+            if (replyMessage.Length > 150) 
+                return NotFound();
+
+            BookingRequestReply reply = new BookingRequestReply
+            {
+                CreatedAt = DateTime.UtcNow.AddHours(4),
+                ReplyMessage = replyMessage,
+            };
+
+            request.BookingRequestReply = reply;
+            request.IsReplied = true;
+
+            _context.SaveChanges();
+
+
+
+
+            
+
+            return Ok();
+        }
+        public IActionResult GetReplyMessage(int id)
+        {
+            // gets a request id and returns its reply 
+
+            var replyMessage = _context.UserBookingMessages.Include(x=> x.BookingRequestReply).FirstOrDefault(x => x.Id == id);
+            if (replyMessage == null || replyMessage.BookingRequestReply == null)
+                return NotFound();
+
+            return Ok(replyMessage.BookingRequestReply);
         }
     }
 }
