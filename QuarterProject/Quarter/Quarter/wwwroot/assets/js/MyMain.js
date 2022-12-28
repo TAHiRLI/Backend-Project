@@ -41,4 +41,24 @@ $(document).on("click", ".load-more-btn", function (e) {
 
 
 
+let link = "/house/GetSearchRecommendation?search=";
+let timeout = null;
+
+$(document).on("keyup", ".searchInput", function (e) {
+
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+    let newLink = link + e.target.value
+    
+    fetch(newLink)
+        .then(res => res.text())
+        .then(data => {
+            console.log(data)
+            $("#search-holder").html(data);
+        })
+
+    },1000)
+})
+
+
 

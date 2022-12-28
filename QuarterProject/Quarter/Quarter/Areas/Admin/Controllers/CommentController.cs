@@ -23,7 +23,10 @@ namespace Quarter.Areas.Admin.Controllers
         public IActionResult Index(int id, int? page)
         {
 
-           var house = _context.Houses.Include(x=> x.UserComments).ThenInclude(x=> x.AppUser).FirstOrDefault(x => x.Id == id);
+           var house = _context.Houses
+                .Include(x=> x.UserComments)
+                .ThenInclude(x=> x.AppUser)
+                .FirstOrDefault(x => x.Id == id);
            if(house == null)
                 return NotFound();
             

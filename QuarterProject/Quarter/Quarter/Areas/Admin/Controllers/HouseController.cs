@@ -246,7 +246,11 @@ namespace Quarter.Areas.Admin.Controllers
         {
             //shows all the booking requests to the admin
 
-            var Requests = _context.UserBookingMessages.Include(x => x.AppUser).Include(x => x.House).ToList();
+            var Requests = _context.UserBookingMessages
+                .Include(x => x.AppUser)
+                .Include(x => x.House)
+                .OrderByDescending(x=> x.CreatedAt)
+                .ToList();
 
 
             int pageSize = 5;

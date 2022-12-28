@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Newtonsoft.Json;
 using Quarter.DAL;
 using Quarter.Models;
@@ -32,6 +33,13 @@ namespace Quarter.Controllers
                 .Include(x=>x.HouseImages)
                 .FirstOrDefault(x => x.Id == id);
             return PartialView("_HouseModalPartial", house);
+        }
+        public IActionResult GetSearchRecommendation(string search)
+        {
+            var model = _context.Houses
+                .Include(x=> x.HouseImages)
+                .Where(x => x.Title.Contains(search)).Take(5).ToList();
+            return PartialView("_SearchRecommendPartial", model);
         }
         public IActionResult Details(int id )
         {

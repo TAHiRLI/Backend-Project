@@ -158,13 +158,17 @@
                                         <i class="icon-cancel  for-search-close"></i>
                                     </div>
                                 </div>
-                                <div class="header-search-1-form">
-                                    <form id="#" method="get" action="#">
-                                        <input type="text" name="search" value="" placeholder="Search here..." />
+                                <div class="header-search-1-form" >
+                                    <form asp-action="index" asp-controller="shop" method="get" >
+                                        <input type="text" name="search"  class="searchInput" value="" placeholder="Search here..." />
                                         <button type="submit">
                                             <span><i class="icon-search"></i></span>
                                         </button>
                                     </form>
+                                    <div id="search-holder">
+
+                                    </div>
+                         
                                 </div>
                             </div>
                             <!-- user-menu -->
@@ -288,8 +292,8 @@
                     <button class="ltn__utilize-close">×</button>
                 </div>
                 <div class="ltn__utilize-menu-search-form">
-                    <form action="#">
-                        <input type="text" placeholder="Search...">
+                    <form asp-action="index" asp-controller="shop">
+                        <input type="text" name="search" placeholder="Search...">
                         <button><i class="fas fa-search"></i></button>
                     </form>
                 </div>
@@ -700,6 +704,7 @@
     <script src="~/assets/js/plugins.js"></script>
     <!-- Main JS -->
     <script src="~/assets/js/main.js"></script>
+    <script src="~/assets/js/MyMain.js"></script>
     @RenderSection("Scripts", required:false)
 
 </body>

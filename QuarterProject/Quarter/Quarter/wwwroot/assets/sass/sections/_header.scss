@@ -945,7 +945,7 @@
 .header-search-1-form {
     background-color: var(--white);
     box-shadow: var(--ltn__box-shadow-3);
-    height: 0;
+    max-height: 0;
     margin-right: 0;
     overflow: hidden;
     position: absolute;
@@ -996,7 +996,7 @@
 }
 .search-open {
     &.header-search-1-form {
-        height: 90px;
+        max-height: 600px;
     }
     .for-search-show {
         opacity: 0;
