@@ -56,23 +56,23 @@
                         </li>
                         <li>
                             <div class="short-by text-center">
-                                <select class="nice-select">
-                                    <option>Default Sorting</option>
-                                    <option>Sort by popularity</option>
-                                    <option>Sort by new arrivals</option>
-                                    <option>Sort by price: low to high</option>
-                                    <option>Sort by price: high to low</option>
+                                <select name="sort" onchange="this.form.submit()" value="@ViewBag.SelectedSort" form="filter-form" class="nice-select">
+                                    <option selected="selected">Default Sorting</option>
+                                    <option value="AZ">Sort by name: A to Z</option>
+                                    <option value="ZA">Sort by name: Z to A</option>
+                                    <option value="LowToHigh">Sort by price: low to high</option>
+                                    <option value="HighToLow">Sort by price: high to low</option>
                                 </select>
                             </div>
                         </li>
                         <li>
                             <div class="short-by text-center">
-                                <select class="nice-select">
-                                    <option>Per Page: 12</option>
-                                    <option>Per Page: 20</option>
-                                    <option>Per Page: 30</option>
-                                    <option>Per Page: 50</option>
-                                    <option>Per Page: 100</option>
+                                <select name="pageSize" onchange="this.form.submit()" form="filter-form" class="nice-select">
+                                    <option selected="selected" value="">Per Page: 4</option>
+                                    <option value="10">Per Page: 10</option>
+                                    <option value="30">Per Page: 30</option>
+                                    <option value="40">Per Page: 40</option>
+                                    <option value="50">Per Page: 50</option>
                                 </select>
                             </div>
                         </li>
@@ -292,20 +292,30 @@
                     </div>
                 </div>
                 <div class="ltn__pagination-area text-center">
-                   
-                
-                  @Html.PagedListPager(pagedList, page => 
-                        Url.Action("Index", new { page = page }), 
-                        new PagedListRenderOptions {
-                            LiElementClasses = new string[] { "page-item" },
-                            PageClasses = new string[] { "page-link" },
-                            MaximumPageNumbersToDisplay = 5,
-                            ContainerDivClasses = new [] { "ltn__pagination" },
-                        ClassToApplyToLastListItemInPager = "d-none",
-                        LinkToPreviousPageFormat = "<i class=\"fas fa-angle-double-left\"></i>",
-                        LinkToNextPageFormat = "<i class=\"fas fa-angle-double-right\"></i>",
+
+                    @Html.PagedListPager(pagedList, page =>
+                    Url.Action("Index", new {
+                    page = page,
+                    Search =ViewBag.SelectedSearch ,
+                    categoryIds =  ViewBag.SelectedCategoryIds,
+                    AmenityIds = ViewBag.SelectedAmenityIds,
+                    cityIds = ViewBag.SelectedCityIds,
+                    minPrice =  ViewBag.SelectedMinPrice,
+                    maxPrice =  ViewBag.SelectedMaxPrice,
+                    sort = ViewBag.SelectedSort,
+                    pageSize = ViewBag.SelectedPageSize
+                    }),
+
+                    new PagedListRenderOptions {
+                    LiElementClasses = new string[] { "page-item" },
+                    PageClasses = new string[] { "page-link" },
+                    MaximumPageNumbersToDisplay = 5,
+                    ContainerDivClasses = new [] { "ltn__pagination" },
+                    ClassToApplyToLastListItemInPager = "d-none",
+                    LinkToPreviousPageFormat = "<i class=\"fas fa-angle-double-left\"></i>",
+                    LinkToNextPageFormat = "<i class=\"fas fa-angle-double-right\"></i>",
                     })
-              
+
                 </div>
             </div>
             <div class="col-lg-4  mb-100">

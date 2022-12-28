@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using JetBrains.Annotations;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using Quarter.DAL;
 using Quarter.Helpers;
 using Quarter.Models;
@@ -15,12 +17,24 @@ namespace Quarter.Controllers
         {
             this._context = context;
         }
-        public IActionResult Index(int? page, string? Search, List<int>? CategoryIds, List<int>? AmenityIds, List<int>? CityIds, decimal? minPrice, decimal? maxPrice)
+        public IActionResult Index(
+            int? page,
+            string? search, 
+            List<int>? categoryIds,
+            List<int>? amenityIds,
+            List<int>? cityIds,
+            decimal?minPrice,
+            decimal? maxPrice,
+            int pageSize = 4,
+            string? sort = "AZ"
+            )
         {
-            ViewBag.SelectedCategoryIds = CategoryIds;
-            ViewBag.SelectedAmenityIds = AmenityIds;
-            ViewBag.SelectedCityIds = CityIds;
-            ViewBag.SelectedSearch = Search;
+            ViewBag.SelectedCategoryIds = categoryIds;
+            ViewBag.SelectedAmenityIds = amenityIds;
+            ViewBag.SelectedCityIds = cityIds;
+            ViewBag.SelectedSearch = search;
+            ViewBag.SelectedSort = sort;
+            ViewBag.SelectedPageSize = pageSize;    
     
 
             ShopViewModel ShopVm = new ShopViewModel
@@ -39,16 +53,33 @@ namespace Quarter.Controllers
                 .Include(x=> x.HouseAmenities)
                 .AsQueryable();
 
-            if(Search != null)
-                house =  house.Where(x=> x.Title.Contains(Search));
-            if (CategoryIds != null && CategoryIds.Count >0)
-                house = house.Where(x => CategoryIds.Contains(x.CategoryId));
-            if (AmenityIds != null && AmenityIds.Count > 0)
-                house = house.Where(x => x.HouseAmenities.Any(b=> AmenityIds.Contains(b.AmenityId)));
-            if (CityIds != null && CityIds.Count > 0)
-                house = house.Where(x => CityIds.Contains(x.CityId));
+            if(search != null)
+                house =  house.Where(x=> x.Title.Contains(search));
+            if (categoryIds != null && categoryIds.Count >0)
+                house = house.Where(x => categoryIds.Contains(x.CategoryId));
+            if (amenityIds != null && amenityIds.Count > 0)
+                house = house.Where(x => x.HouseAmenities.Any(b=> amenityIds.Contains(b.AmenityId)));
+            if (cityIds != null && cityIds.Count > 0)
+                house = house.Where(x => cityIds.Contains(x.CityId));
             if(minPrice != null && maxPrice != null)
                 house = house.Where(x => x.Price >= minPrice && x.Price<= maxPrice);
+
+            switch (sort)
+            {
+                case "ZA":
+                    house = house.OrderByDescending(x => x.Title);
+                    break;
+                case "HighToLow":
+                    house = house.OrderByDescending(x => x.Price);
+                    break;
+                case "LowToHigh":
+                    house = house.OrderBy(x => x.Price);
+                    break;
+
+                default:
+                    house = house.OrderBy(x => x.Title);
+                    break;
+            }
 
 
             ShopVm.Houses = house.ToList();
@@ -60,7 +91,7 @@ namespace Quarter.Controllers
 
 
 
-            int pageSize = 4;
+          
             Pagination<House> paginatedList = new Pagination<House>();
 
             ViewBag.Houses = paginatedList.GetPagedNames(house.ToList(), page, pageSize);
