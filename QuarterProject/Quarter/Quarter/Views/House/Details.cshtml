@@ -1,6 +1,6 @@
 ﻿@model DetailsViewModel
 <!-- BREADCRUMB AREA START -->
-<div class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image mb-0" data-bs-bg="img/bg/14.jpg">
+<div class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image mb-0" data-bs-bg="assets/img/bg/14.jpg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -304,22 +304,12 @@
                     </div>
                     <!-- Popular Amenities Widget -->
                     <div class="widget ltn__tagcloud-widget">
-                        <h4 class="ltn__widget-title ltn__widget-title-border-2">Popular Tags</h4>
+                        <h4 class="ltn__widget-title ltn__widget-title-border-2">Popular Amenities</h4>
                         <ul>
-                            <li><a href="#">Popular</a></li>
-                            <li><a href="#">desgin</a></li>
-                            <li><a href="#">ux</a></li>
-                            <li><a href="#">usability</a></li>
-                            <li><a href="#">develop</a></li>
-                            <li><a href="#">icon</a></li>
-                            <li><a href="#">Car</a></li>
-                            <li><a href="#">Service</a></li>
-                            <li><a href="#">Repairs</a></li>
-                            <li><a href="#">Auto Parts</a></li>
-                            <li><a href="#">Oil</a></li>
-                            <li><a href="#">Dealer</a></li>
-                            <li><a href="#">Oil Change</a></li>
-                            <li><a href="#">Body Color</a></li>
+                            @foreach (var amenity in  Model.House.HouseAmenities)
+                            {
+                                 <li><a  asp-action="index" asp-controller="shop" asp-route-AmenityIds="@amenity.Id">@amenity.Amenity.Name</a></li>
+                            }
                         </ul>
                     </div>
                     

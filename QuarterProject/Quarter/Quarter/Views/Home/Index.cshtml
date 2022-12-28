@@ -332,7 +332,7 @@
                     <div class="ltn__product-item ltn__product-item-4 text-center---">
                         <div class="product-img">
                             <a asp-action="details" asp-controller="house" asp-route-id="@house.Id">
-                                <img style="max-height: 270px; width: 100%;object-fit: contain;" src="~/Uploads/Houses/@house.HouseImages.FirstOrDefault(x=> x.PosterStatus==true)?.ImageUrl" alt="#">
+                                <img style="height: 270px; width: 100%;object-fit: contain;" src="~/Uploads/Houses/@house.HouseImages.FirstOrDefault(x=> x.PosterStatus==true)?.ImageUrl" alt="#">
                             </a>
                             <div class="product-badge">
                                 <ul>
@@ -413,10 +413,10 @@
                         <div class="product-info-bottom">
                             <div class="real-estate-agent">
                                 <div class="agent-img">
-                                    <a href="team-details.html"><img src="~/Uploads//Owners/@house.Owner.ImageUrl" alt="#"></a>
+                                    <a ><img src="~/Uploads//Owners/@house.Owner.ImageUrl" alt="#"></a>
                                 </div>
                                 <div class="agent-brief">
-                                    <h6><a href="team-details.html">@house.Owner.Fullname</a></h6>
+                                    <h6><a >@house.Owner.Fullname</a></h6>
                                     <small>Estate Agents</small>
                                 </div>
                             </div>
@@ -482,7 +482,7 @@
 </div>
 <!-- CATEGORY AREA END -->
 <!-- TESTIMONIAL AREA START (testimonial-7) -->
-<div class="ltn__testimonial-area section-bg-1--- bg-image-top pt-115 pb-70" data-bs-bg="img/bg/20.jpg">
+<div class="ltn__testimonial-area section-bg-1--- bg-image-top pt-115 pb-70" data-bs-bg="assets/img/bg/20.jpg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
