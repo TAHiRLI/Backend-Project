@@ -1,0 +1,46 @@
+﻿
+  <script>
+        $(document).on("click", ".add-to-wishlist", function(e){
+            e.preventDefault();
+
+            let link = $(this).attr("href")
+
+            fetch(link)
+                .then(res=> {
+                    if(!res.ok){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Something went wrong',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        return
+                    }
+                    
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Your work has been saved',
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+                    
+                   
+                    return res.text()
+                })
+                .then(data=> {
+                    console.log(data)
+                    $("#wishlist-container").html(data);
+                })
+                .then(()=>{
+                    fetch("/house/GetWishlistCount")
+                     .then(res => res.text())
+                      .then(count => $("#whitslist-count").html(count))
+
+                })
+            
+
+        })
+    </script>
+}

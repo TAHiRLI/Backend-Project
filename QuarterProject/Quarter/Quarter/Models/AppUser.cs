@@ -11,6 +11,7 @@ namespace Quarter.Models
         public bool IsSubscribed { get; set; }
         [MaxLength(100)]
         public string UserPhoto { get; set; } = "defaultUser.jpeg";
+        public List<WishlistItem>? WishlistItems { get; set; }  = new List<WishlistItem>();
 
 
     }

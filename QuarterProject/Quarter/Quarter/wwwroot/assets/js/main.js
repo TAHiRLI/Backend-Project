@@ -1987,3 +1987,8 @@
 
   
 })(jQuery);
+
+
+fetch("/house/GetWishlistCount")
+    .then(res => res.text())
+    .then(count => $("#whitslist-count").html(count))

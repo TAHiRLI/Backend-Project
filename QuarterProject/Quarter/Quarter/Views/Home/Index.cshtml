@@ -339,16 +339,16 @@
                                     @{
                                         if (house.IsSold)
                                         {
-                                                    <li class="sale-badge bg-dark">Sold</li>
+                                                                                                        <li class="sale-badge bg-dark">Sold</li>
                                         }
                                         else if (house.IsFeatured)
                                         {
-                                                    <li class="sale-badge bg-blue">Special</li>
+                                                                                                        <li class="sale-badge bg-blue">Special</li>
 
                                         }
                                         else if (house.DiscountPercent > 0)
                                         {
-                                                    <li class="sale-badge bg-red">Discounted</li>
+                                                                                                        <li class="sale-badge bg-red">Discounted</li>
                                         }
                                     }
                                 </ul>
@@ -378,13 +378,13 @@
                                 @{
                                     if (house.DiscountPercent > 0)
                                     {
-                                            <span>$@((house.Price * (100 - house.DiscountPercent) / 100).ToString("0.00"))</span>
-                                            <del>$@house.Price.ToString("0.00")</del>
+                                                                                                <span>$@((house.Price * (100 - house.DiscountPercent) / 100).ToString("0.00"))</span>
+                                                                                                <del>$@house.Price.ToString("0.00")</del>
 
                                     }
                                     else
                                     {
-                                            <span>$@house.Price.ToString("0.00")</span>
+                                                                                                <span>$@house.Price.ToString("0.00")</span>
                                     }
 
                                 }
@@ -428,7 +428,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                        <a class="add-to-wishlist" asp-action="setItem" asp-controller="house" asp-route-id="@house.Id" >
                                             <i class="flaticon-heart-1"></i>
                                         </a>
                                     </li>
@@ -562,4 +562,6 @@
 <!-- BRAND LOGO AREA END -->
 @section Scripts{
     <script src="~/assets/js/modal.js"></script>
+    @await Html.PartialAsync("_AddToWishlistScript")
 }
+  

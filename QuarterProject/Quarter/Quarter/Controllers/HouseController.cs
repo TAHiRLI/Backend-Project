@@ -27,20 +27,6 @@ namespace Quarter.Controllers
         {
             return View();
         }
-        public IActionResult GetHouseData(int id)
-        {
-            var house = _context.Houses
-                .Include(x=>x.HouseImages)
-                .FirstOrDefault(x => x.Id == id);
-            return PartialView("_HouseModalPartial", house);
-        }
-        public IActionResult GetSearchRecommendation(string search)
-        {
-            var model = _context.Houses
-                .Include(x=> x.HouseImages)
-                .Where(x => x.Title.Contains(search)).Take(5).ToList();
-            return PartialView("_SearchRecommendPartial", model);
-        }
         public IActionResult Details(int id )
         {
             var house = _context.Houses
@@ -74,6 +60,29 @@ namespace Quarter.Controllers
             DetailsVm.UserBookingMessageVm.HouseId = house.Id;
             return View(DetailsVm);
         }
+
+        //================================
+        // Get partialview
+        //================================
+        public IActionResult GetHouseData(int id)
+        {
+            var house = _context.Houses
+                .Include(x=>x.HouseImages)
+                .FirstOrDefault(x => x.Id == id);
+            return PartialView("_HouseModalPartial", house);
+        }
+        public IActionResult GetSearchRecommendation(string search)
+        {
+            var model = _context.Houses
+                .Include(x=> x.HouseImages)
+                .Where(x => x.Title.Contains(search)).Take(5).ToList();
+            return PartialView("_SearchRecommendPartial", model);
+        }
+
+        //================================
+        // Comment to House
+        //================================
+
         [HttpPost]
         [Authorize(Roles = "Member")]
         public IActionResult Comment(CommentViewModel CommentVm)
@@ -129,6 +138,10 @@ namespace Quarter.Controllers
             return PartialView("_CommentsPartial", comments );
         }
         [Authorize(Roles ="Member")]
+
+        //================================
+        // Book a house
+        //================================
         public async Task<IActionResult>  BookHouse(UserBookingMessageViewModel UserMessageVm)
         {
             // user sends a message to the admin for ordering book
@@ -194,6 +207,99 @@ namespace Quarter.Controllers
             
 
         }
+
+
+        //================================
+        // Wishlist 
+        // creates new wishlist item removes if this item exists
+        //================================
+        public async Task<IActionResult> SetItem(int id)
+        {
+
+            var house = _context.Houses.Include(x=> x.HouseImages).FirstOrDefault(x => x.Id == id);
+            if (house == null)
+                return NotFound();
+
+
+            List<int> WishlistHouseIds = new List<int>();
+
+            AppUser user = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                user = _context.AppUsers.Include(x=>x.WishlistItems).FirstOrDefault(x=> x.UserName == User.Identity.Name);
+            }
+            if (user != null)
+            {
+
+                if(!user.WishlistItems.Any(x=> x.HouseId == house.Id))
+                {
+                    // create if does not exist
+                  WishlistItem wishlistItem = new WishlistItem { HouseId = house.Id };
+                  user.WishlistItems.Add(wishlistItem);
+                }
+                else
+                {
+                    // delete if exists
+                    user.WishlistItems.RemoveAll(x => x.HouseId == house.Id);
+                }
+                _context.SaveChanges();
+
+                WishlistHouseIds = user.WishlistItems.Select(x => x.HouseId).ToList() ;
+            }
+            else
+            {
+                List<int> HouseIds = new List<int>();
+
+                var wishlistStr =  Request.Cookies["wishlist"];
+
+                if (wishlistStr != null)
+                    HouseIds = JsonConvert.DeserializeObject < List<int> > (wishlistStr);
+
+                if (!HouseIds.Contains(id))
+                {
+                   HouseIds.Add(house.Id);
+                }
+                else
+                {
+                    HouseIds.Remove(id);
+                }
+
+                Response.Cookies.Append("wishlist", JsonConvert.SerializeObject(HouseIds));
+                WishlistHouseIds = HouseIds;
+            }
+            var houses = _context.Houses.Include(x=> x.HouseImages).Where(x => WishlistHouseIds.Contains(x.Id)).ToList();
+            return PartialView("_WishlistItemsPartial", houses);
+        }
+        
+        public async Task<int> GetWishlistCount()
+        {
+            // SetItem action returns only partial view, in js i need to take wislist item count
+            //this action returns the count of items in the wishlist
+
+            int count = 0;
+            AppUser? user = null;
+            if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
+            {
+                user = _context.AppUsers.Include(x=> x.WishlistItems).FirstOrDefault(x=> x.UserName == User.Identity.Name);
+            }
+
+            if(user != null)
+            {
+                count = user.WishlistItems.Count;
+            }
+            else
+            {
+                List<int> HouseIds = new List<int>();
+
+                var wishlistStr = Request.Cookies["wishlist"];
+
+                if (wishlistStr != null)
+                    count = JsonConvert.DeserializeObject<List<int>>(wishlistStr).Count;
+            }
+
+            return count;
+        }
+
 
     }
 }

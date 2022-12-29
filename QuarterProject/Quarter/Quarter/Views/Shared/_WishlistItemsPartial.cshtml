@@ -1,0 +1,18 @@
+﻿@model List<House>
+@foreach (var house in Model)
+{
+    <div class="mini-cart-item clearfix">
+        <div class="mini-cart-img">
+            <a asp-action="details" asp-controller="house" asp-route-id="@house.Id"><img src="~/Uploads/Houses/@house.HouseImages.FirstOrDefault(x=> x.PosterStatus)?.ImageUrl" alt="Image"></a>
+            <a class="add-to-wishlist" asp-action="setItem" asp-controller="house" asp-route-id="@house.Id">
+            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+            </a>
+
+        </div>
+        <div class="mini-cart-info">
+            <h6><a asp-action="details" asp-controller="house" asp-route-id="@house.Id">@house.Title</a></h6>
+            <span  class="mini-cart-Price">$@((house.Price*(100-house.DiscountPercent)/100).ToString("0.00"))</span>
+        </div>
+    </div>
+}
+

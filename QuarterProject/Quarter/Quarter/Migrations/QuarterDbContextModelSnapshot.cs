@@ -666,6 +666,36 @@ namespace Quarter.Migrations
                     b.ToTable("UserComments");
                 });
 
+            modelBuilder.Entity("Quarter.Models.WishlistItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("HouseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("HouseId");
+
+                    b.ToTable("WishlistItems");
+                });
+
             modelBuilder.Entity("Quarter.Models.AppUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -843,6 +873,25 @@ namespace Quarter.Migrations
                     b.Navigation("House");
                 });
 
+            modelBuilder.Entity("Quarter.Models.WishlistItem", b =>
+                {
+                    b.HasOne("Quarter.Models.AppUser", "AppUser")
+                        .WithMany("WishlistItems")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Quarter.Models.House", "House")
+                        .WithMany()
+                        .HasForeignKey("HouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("House");
+                });
+
             modelBuilder.Entity("Quarter.Models.Amenity", b =>
                 {
                     b.Navigation("HouseAmenities");
@@ -877,6 +926,11 @@ namespace Quarter.Migrations
             modelBuilder.Entity("Quarter.Models.UserBookingMessage", b =>
                 {
                     b.Navigation("BookingRequestReply");
+                });
+
+            modelBuilder.Entity("Quarter.Models.AppUser", b =>
+                {
+                    b.Navigation("WishlistItems");
                 });
 #pragma warning restore 612, 618
         }
