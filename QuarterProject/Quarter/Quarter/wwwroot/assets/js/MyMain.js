@@ -5,8 +5,13 @@ $(document).on("click", ".load-more-btn", function (e) {
     let link = $(this).attr("href");
     let skipCount = parseInt($(this).attr("skipCount"))
     let takeCount = parseInt($(this).attr("takeCount"))
+    let commentCount = parseInt($(this).attr("commentCount"))
+
 
     let newSkipCount = skipCount + takeCount;
+    if (newSkipCount + takeCount >= commentCount) {
+        e.target.classList.add("d-none");
+    }
     link += "&skipCount=" + `${newSkipCount}`
 
 
@@ -33,6 +38,7 @@ $(document).on("click", ".load-more-btn", function (e) {
 
         .then(() => {
             $(this).attr("skipCount", newSkipCount)
+          
         })
         .catch(err => console.log(err))
 

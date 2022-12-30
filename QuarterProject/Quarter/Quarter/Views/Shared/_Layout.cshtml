@@ -5,10 +5,26 @@
 @inject UserManager<AppUser> _userManager
 
 @{
+
     var settings = layoutService.GetSettings();
-    List<House> houses =await layoutService.GetWishList();
+    List<House> houses = await layoutService.GetWishList();
+
+
 }
 
+
+@{
+    string getClass(string actionName, string controllerName)
+    {
+        string action = ViewContext.RouteData.Values["Action"].ToString();
+        string controller = ViewContext.RouteData.Values["Controller"].ToString();
+        if (controller == controllerName && action == actionName)
+            return "active";
+        return "";
+
+
+    }
+}
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -128,22 +144,22 @@
                                 <nav>
                                     <div class="ltn__main-menu">
                                         <ul>
-                                            <li >
-                                                <a asp-action="index" asp-controller="home">Home</a>
+                                            <li>
+                                                @Html.ActionLink("Home", "Index", "home",new {area = ""}, new { @class = getClass("Index","Home") })
                                             </li>
-                                            <li >
+                                            <li>
                                                 <a href="#">About</a>
                                             </li>
-                                            <li >
-                                                <a asp-action="index" asp-controller="shop">Shop</a>
+                                            <li>
+                                                @Html.ActionLink("Shop", "Index", "Shop",new {area = ""}, new { @class = getClass("Index","Shop") })
                                             </li>
-                                            <li >
+                                            <li>
                                                 <a href="#">News</a>
                                             </li>
-                                            <li >
+                                            <li>
                                                 <a href="#">Pages</a>
                                             </li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="#">Contact</a></li>
                                         </ul>
                                     </div>
                                 </nav>
@@ -158,17 +174,16 @@
                                         <i class="icon-cancel  for-search-close"></i>
                                     </div>
                                 </div>
-                                <div class="header-search-1-form" >
-                                    <form asp-action="index" asp-controller="shop" method="get" >
-                                        <input type="text" name="search"  class="searchInput" value="" placeholder="Search here..." />
+                                <div class="header-search-1-form">
+                                    <form asp-action="index" asp-controller="shop" method="get">
+                                        <input type="text" name="search" class="searchInput" value="" placeholder="Search here..." />
                                         <button type="submit">
                                             <span><i class="icon-search"></i></span>
                                         </button>
                                     </form>
                                     <div id="search-holder">
-
                                     </div>
-                         
+
                                 </div>
                             </div>
                             <!-- user-menu -->
@@ -184,12 +199,12 @@
                                                 }
                                                 else
                                                 {
-                                            <li><a asp-action="login" asp-controller="account">Sign in</a></li>
-                                            <li><a asp-action="register" asp-controller="account">Register</a></li>
+                                                    <li><a asp-action="login" asp-controller="account">Sign in</a></li>
+                                                    <li><a asp-action="register" asp-controller="account">Register</a></li>
                                                 }
 
                                             }
-                                            <li><a href="wishlist.html">Wishlist</a></li>
+                                            <li><a asp-action="index" asp-controller="WishList">Wishlist</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -198,7 +213,7 @@
                             <div class="mini-cart-icon">
                                 <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
                                     <i class="flaticon-heart-1"></i>
-                                    <sup id="whitslist-count"cl>2</sup>
+                                    <sup id="whitslist-count" cl>2</sup>
                                 </a>
                             </div>
                             <!-- mini-cart -->
@@ -231,7 +246,7 @@
                 </div>
                 <div class="mini-cart-footer">
                     <div class="btn-wrapper">
-                        <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Wishlist</a>
+                        <a asp-action="index" asp-controller="WishList" class="theme-btn-1 btn btn-effect-1">View Wishlist</a>
                     </div>
                 </div>
 
@@ -281,7 +296,7 @@
                                 <li><a href="portfolio-2.html">Portfolio - 02</a></li>
                                 <li><a href="portfolio-details.html">Portfolio Details</a></li>
                                 <li><a href="team.html">Team</a></li>
-                                <li><a >Team Details</a></li>
+                                <li><a>Team Details</a></li>
                                 <li><a href="faq.html">FAQ</a></li>
                                 <li><a href="locations.html">Google Map Locations</a></li>
                             </ul>
@@ -294,8 +309,8 @@
                                 <li><a asp-action="index" asp-controller="shop">Shop Left sidebar</a></li>
                                 <li><a href="shop-right-sidebar.html">Shop right sidebar</a></li>
                                 <li><a href="product-details.html">Shop details </a></li>
-                                <li><a href="cart.html">Cart</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
+                                <li><a asp-action="index" asp-controller="WishList">Cart</a></li>
+                                <li><a asp-action="index" asp-controller="WishList">Wishlist</a></li>
                                 <li><a href="checkout.html">Checkout</a></li>
                                 <li><a href="order-tracking.html">Order Tracking</a></li>
                                 @{
@@ -332,7 +347,7 @@
                                 <li><a href="portfolio-2.html">Portfolio - 02</a></li>
                                 <li><a href="portfolio-details.html">Portfolio Details</a></li>
                                 <li><a href="team.html">Team</a></li>
-                                <li><a >Team Details</a></li>
+                                <li><a>Team Details</a></li>
                                 <li><a href="faq.html">FAQ</a></li>
                                 <li><a href="history.html">History</a></li>
                                 <li><a href="add-listing.html">Add Listing</a></li>
@@ -356,7 +371,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="wishlist.html" title="Wishlist">
+                            <a asp-action="index" asp-controller="WishList" title="Wishlist">
                                 <span class="utilize-btn-icon">
                                     <i class="far fa-heart"></i>
                                     <sup>3</sup>
@@ -365,7 +380,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="cart.html" title="Shoping Cart">
+                            <a asp-action="index" asp-controller="WishList" title="Shoping Cart">
                                 <span class="utilize-btn-icon">
                                     <i class="flaticon-heart-1"></i>
                                     <sup>5</sup>
@@ -485,7 +500,7 @@
                                 <div class="footer-menu">
                                     <ul>
                                         <li><a href="order-tracking.html">Order tracking</a></li>
-                                        <li><a href="wishlist.html">Wish List</a></li>
+                                        <li><a asp-action="index" asp-controller="WishList">Wish List</a></li>
                                         <li><a asp-action="login" asp-controller="account">Login</a></li>
                                         <li><a asp-action="profile" asp-controller="account">My account</a></li>
                                         <li><a href="about.html">Terms & Conditions</a></li>
@@ -501,7 +516,7 @@
                                     <ul>
                                         <li><a asp-action="login" asp-controller="account">Login</a></li>
                                         <li><a asp-action="profile" asp-controller="account">My account</a></li>
-                                        <li><a href="wishlist.html">Wish List</a></li>
+                                        <li><a asp-action="index" asp-controller="WishList">Wish List</a></li>
                                         <li><a href="order-tracking.html">Order tracking</a></li>
                                         <li><a href="faq.html">FAQ</a></li>
                                         <li><a href="contact.html">Contact us</a></li>
@@ -580,7 +595,7 @@
                                                 <h5><a href="product-details.html">Brake Conversion Kit</a></h5>
                                                 <p class="added-cart"><i class="fa fa-check-circle"></i>  Successfully added to your Cart</p>
                                                 <div class="btn-wrapper">
-                                                    <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                                                    <a asp-action="index" asp-controller="WishList" class="theme-btn-1 btn btn-effect-1">View Cart</a>
                                                     <a href="checkout.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
                                                 </div>
                                             </div>
@@ -601,7 +616,7 @@
             </div>
         </div>
         <!-- MODAL AREA END -->
-      
+
 
     </div>
     <!-- Body main wrapper end -->
