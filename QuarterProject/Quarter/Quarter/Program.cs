@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Quarter.DAL;
+using Quarter.Hubs;
 using Quarter.Models;
 using Quarter.Services;
 
@@ -106,7 +107,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-
+app.MapHub <RealTimeHub> ("/RealtimeHub");
 
 
 

@@ -8,14 +8,13 @@
 @using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
 @using X.PagedList.Mvc.Core.Fluent
 @using X.PagedList.Web.Common
-<link href="~/admin/css/PagedList.css" rel="stylesheet" type="text/css" />
 
 
 
 <div class="w-100 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Create Owner</h4>
+            <h4 class="card-title"> Owners</h4>
             <div class="col-12  text-end"><a class="text-end d-block" asp-action="create" asp-controller="Owner">Create</a></div>
             <div class="table-responsive">
                 <table class="table">

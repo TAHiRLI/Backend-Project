@@ -11,7 +11,13 @@ namespace Quarter.Models
         public bool IsSubscribed { get; set; }
         [MaxLength(100)]
         public string UserPhoto { get; set; } = "defaultUser.jpeg";
+        [MaxLength(200)]
+        public string? ConnectionId { get; set; }
+        public bool IsAdmin { get; set; } = false;
+        public DateTime LastConnectedAt { get; set; }
         public List<WishlistItem>? WishlistItems { get; set; }  = new List<WishlistItem>();
+        public List<UserComment>? Comments { get; set; } = new List<UserComment>();
+
 
 
     }

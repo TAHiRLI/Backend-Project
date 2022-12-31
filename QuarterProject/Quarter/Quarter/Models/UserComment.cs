@@ -5,8 +5,8 @@ namespace Quarter.Models
     public class UserComment
     {
         public int Id { get; set; }
-        public int HouseId { get; set; }
-        public string AppUserId{ get; set; }
+        public int? HouseId { get; set; }
+        public string? AppUserId{ get; set; }
         [MaxLength(500)]
         public string Text { get; set; }
         public DateTime CreatedAt { get; set; }

@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Org.BouncyCastle.Asn1.Cms;
 using Quarter.Areas.Admin.ViewModels;
 using Quarter.Models;
+using System.Data;
 
 namespace Quarter.Areas.Admin.Controllers
 {
@@ -17,21 +19,40 @@ namespace Quarter.Areas.Admin.Controllers
             this._userManager = userManager;
             this._signInManager = signInManager;
         }
-        //public async Task<IActionResult>  CreateAdmin()
-        // {
-        //     AppUser admin = new AppUser
-        //     {
-        //         Fullname = "Tahir Tahrli",
-        //         UserName = "TahirAdmin",
-        //         Email = "admin@ad.com",
-        //         EmailConfirmed = true
-        //     };
+        //public async Task<IActionResult> CreateSuperAdmin()
+        //{
+        //    AppUser admin = new AppUser
+        //    {
+        //        Fullname = "Tahir Tahrli",
+        //        UserName = "TahirAdmin",
+        //        Email = "admin@ad.com",
+        //        EmailConfirmed = true,
+        //        IsAdmin = true
 
-        //     await _userManager.CreateAsync(admin, "admin123");
-        //     await _userManager.AddToRoleAsync(admin,"SuperAdmin");
+        //    };
 
-        //     return Ok();
-        // }
+        //    await _userManager.CreateAsync(admin, "admin123");
+        //    await _userManager.AddToRoleAsync(admin, "SuperAdmin");
+
+        //    return Ok();
+        //}
+
+        //public async Task<IActionResult> CreateAdmin()
+        //{
+        //    AppUser admin = new AppUser
+        //    {
+        //        Fullname = "Tahir Tahrli",
+        //        UserName = "SamirAdmin",
+        //        Email = "admin@adaa.com",
+        //        EmailConfirmed = true,
+        //        IsAdmin = true
+        //    };
+
+        //    await _userManager.CreateAsync(admin, "admin123");
+        //    await _userManager.AddToRoleAsync(admin, "Admin");
+
+        //    return Ok(admin);
+        //}
 
         public IActionResult Login()
         {
@@ -52,5 +73,16 @@ namespace Quarter.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index), "dashboard");
         }
+        [Authorize(Roles = "SuperAdmin, Admin")]
+        public async Task<IActionResult> Logout()
+        {
+            var user = _userManager.FindByNameAsync(User.Identity.Name);
+            if (user == null)
+                return NotFound();
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("login", "account");
+        }
+
     }
 }

@@ -3,9 +3,9 @@
     $(document).on("click", ".add-to-wishlist", function (e) {
         e.preventDefault();
 
-        let link = $(this).attr("href")
+        let wishlist_link = $(this).attr("href")
 
-        fetch(link)
+        fetch(wishlist_link)
             .then(res => {
                 if (!res.ok) {
                     Swal.fire({

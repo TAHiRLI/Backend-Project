@@ -700,13 +700,23 @@ namespace Quarter.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
+                    b.Property<string>("ConnectionId")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<string>("Fullname")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsSubscribed")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastConnectedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserPhoto")
                         .IsRequired()
@@ -857,7 +867,7 @@ namespace Quarter.Migrations
             modelBuilder.Entity("Quarter.Models.UserComment", b =>
                 {
                     b.HasOne("Quarter.Models.AppUser", "AppUser")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -930,6 +940,8 @@ namespace Quarter.Migrations
 
             modelBuilder.Entity("Quarter.Models.AppUser", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("WishlistItems");
                 });
 #pragma warning restore 612, 618

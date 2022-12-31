@@ -635,8 +635,26 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Main JS -->
     <script src="~/assets/js/main.js"></script>
-    <script src="~/assets/js/MyMain.js"></script>
+    @*<script src="~/assets/js/MyMain.js"></script>*@
     @RenderSection("Scripts", required:false)
+
+    <script src="~/lib/signalr.min.js"></script>
+    <script>
+
+        let connection = new signalR.HubConnectionBuilder()
+            .withUrl("/RealTimeHub")
+            .build();
+
+        connection.start().then(function () {
+           
+            console.log(connection.connectionId)
+
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+
+    </script>
 
 </body>
 </html>

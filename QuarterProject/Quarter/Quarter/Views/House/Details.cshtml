@@ -1,6 +1,6 @@
 ﻿@model DetailsViewModel
 <!-- BREADCRUMB AREA START -->
-<div class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image mb-0" data-bs-bg="assets/img/bg/14.jpg">
+<div class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image mb-0" data-bs-bg="../../assets/img/bg/14.jpg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -32,7 +32,6 @@
                         </a>
                     </div>
                 </div>
-
             }
 
         </div>
@@ -48,25 +47,23 @@
                     <div class="ltn__blog-meta">
                         <ul>
                             @{
-
-
                                 if (Model.House.IsSold)
                                 {
-                                        <li class="ltn__blog-category  text-light p-2">
-                                            <a href="#">Sold</a>
-                                        </li>
+                                    <li class="ltn__blog-category  text-light p-2">
+                                        <a href="#">Sold</a>
+                                    </li>
                                 }
                                 if (Model.House.IsFeatured)
                                 {
-                                        <li class="ltn__blog-category ">
-                                            <a href="#">Special</a>
-                                        </li>
+                                    <li class="ltn__blog-category ">
+                                        <a href="#">Special</a>
+                                    </li>
                                 }
                                 if (Model.House.DiscountPercent > 0)
                                 {
-                                        <li class="ltn__blog-category ">
-                                            <a href="#">Discounted</a>
-                                        </li>
+                                    <li class="ltn__blog-category ">
+                                        <a href="#">Discounted</a>
+                                    </li>
                                 }
                             }
                             <li class="ltn__blog-date">
@@ -94,7 +91,7 @@
                         <ul>
                             <li><label>Year built:</label> <span>@Model.House.BathroomCount</span></li>
                             <li><label>Beds:</label> <span>@Model.House.BedroomCount</span></li>
-                            <li><label>Price:</label> <span>@((Model.House.Price*(100-Model.House.DiscountPercent)/100).ToString("0.00"))</span></li>
+                            <li><label>Price:</label> <span>@((Model.House.Price * (100 - Model.House.DiscountPercent) / 100).ToString("0.00"))</span></li>
                         </ul>
                     </div>
                     @if (Model.House.HouseAmenities.Count > 0)
@@ -134,25 +131,23 @@
                         <div class="ltn__comment-area mb-30" id="comment-container">
                             <div class="ltn__comment-inner">
                                 <ul id="load-more-btn">
-                            @await Html.PartialAsync("_CommentsPartial", Model.House.UserComments.Where(x=> x.IsApproved==true).Take(3).ToList())
+                                    @await Html.PartialAsync("_CommentsPartial", Model.House.UserComments.Where(x=> x.IsApproved==true).Take(3).ToList())
 
                                 </ul>
-                                
+
                             </div>
 
 
                         </div>
                         <div class="text-center mt-3 ">
-                            @if (Model.House.UserComments.Count(x => x.IsApproved==true) > 3)
+                            @if (Model.House.UserComments.Count(x => x.IsApproved == true) > 3)
                             {
-                                <a asp-action="getcomment"  commentCount = "@(Model.House.UserComments.Count)" asp-controller="house" asp-route-Count="3" asp-route-houseId="@Model.House.Id" class="btn my-1 theme-btn-1 load-more-btn" skipCount="0" takeCount="3">Load More</a>
+                                <a asp-action="getcomment" commentCount="@(Model.House.UserComments.Count)" asp-controller="house" asp-route-Count="3" asp-route-houseId="@Model.House.Id" class="btn my-1 theme-btn-1 load-more-btn" skipCount="0" takeCount="3">Load More</a>
                             }
                         </div>
                         <!-- comment-reply -->
-                            
                         @await Html.PartialAsync("_CommentFormPartial", Model.CommentFormVm)
                     </div>
-
 
 
                     <h4 class="title-2">Related Properties</h4>
@@ -176,16 +171,16 @@
                                                 @{
                                                     if (house.IsSold)
                                                     {
-                                                            <li class="sale-badge ">Sold</li>
+                                                        <li class="sale-badge ">Sold</li>
                                                     }
                                                     else if (house.IsFeatured)
                                                     {
-                                                            <li class="sale-badge bg-blue">Special</li>
+                                                        <li class="sale-badge bg-blue">Special</li>
 
                                                     }
                                                     else if (house.DiscountPercent > 0)
                                                     {
-                                                            <li class="sale-badge bg-red">Discounted</li>
+                                                        <li class="sale-badge bg-red">Discounted</li>
                                                     }
                                                 }
                                             </ul>
@@ -237,13 +232,13 @@
                                             @{
                                                 if (house.DiscountPercent > 0)
                                                 {
-                                                        <span>$@((house.Price * (100 - house.DiscountPercent) / 100).ToString("0.00"))</span>
-                                                        <del>$@house.Price.ToString("0.00")</del>
+                                                    <span>$@((house.Price * (100 - house.DiscountPercent) / 100).ToString("0.00"))</span>
+                                                    <del>$@house.Price.ToString("0.00")</del>
 
                                                 }
                                                 else
                                                 {
-                                                        <span>$@house.Price.ToString("0.00")</span>
+                                                    <span>$@house.Price.ToString("0.00")</span>
                                                 }
 
                                             }
@@ -284,6 +279,12 @@
                         @await Html.PartialAsync("_BookForHouseFormPartial", Model.UserBookingMessageVm)
                     </div>
 
+                    <!-- Buy house Widget -->
+
+                    <div class="text-center">
+                        <a asp-action="OrderHouse" asp-controller="house" asp-route-id="@Model.House.Id" class="btn my-2 theme-btn-1 order-btn">Order This Property</a>
+                    </div>
+
                     <!-- Menu Widget (Category) -->
                     <div class="widget ltn__menu-widget ltn__menu-widget-2--- ltn__menu-widget-2-color-2---">
                         <h4 class="ltn__widget-title ltn__widget-title-border-2">Top Categories</h4>
@@ -300,13 +301,13 @@
                     <div class="widget ltn__tagcloud-widget">
                         <h4 class="ltn__widget-title ltn__widget-title-border-2">Popular Amenities</h4>
                         <ul>
-                            @foreach (var amenity in  Model.House.HouseAmenities)
+                            @foreach (var amenity in Model.House.HouseAmenities)
                             {
-                                 <li><a  asp-action="index" asp-controller="shop" asp-route-AmenityIds="@amenity.AmenityId">@amenity.Amenity.Name</a></li>
+                                <li><a asp-action="index" asp-controller="shop" asp-route-AmenityIds="@amenity.AmenityId">@amenity.Amenity.Name</a></li>
                             }
                         </ul>
                     </div>
-                    
+
 
                 </aside>
             </div>
@@ -318,5 +319,45 @@
     @await Html.PartialAsync("_ValidationScriptsPartial")
     <script src="~/assets/js/MyMain.js"></script>
     <script src="~/assets/js/modal.js"></script>
+
+    <script>
+
+        $(document).on("click", ".order-btn", function (e) {
+            e.preventDefault();
+            var order_link = $(this).attr("href")
+
+
+            fetch(order_link)
+                .then(res => {
+                    if (!res.ok && !res.redirected) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Something went wrong',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        return
+                    }
+                    if (res.redirected) {
+                        location.replace("/account/login");
+                    }
+
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Your work has been saved',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+
+
+                })
+
+
+        })
+
+    </script>
+
 
 }

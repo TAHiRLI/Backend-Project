@@ -47,14 +47,14 @@ $(document).on("click", ".load-more-btn", function (e) {
 
 
 
-let link = "/house/GetSearchRecommendation?search=";
+let search_link = "/house/GetSearchRecommendation?search=";
 let timeout = null;
 
 $(document).on("keyup", ".searchInput", function (e) {
 
     clearTimeout(timeout);
     timeout = setTimeout(() => {
-    let newLink = link + e.target.value
+        let newLink = search_link + e.target.value
     
     fetch(newLink)
         .then(res => res.text())

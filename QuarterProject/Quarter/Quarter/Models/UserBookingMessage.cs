@@ -14,8 +14,8 @@ namespace Quarter.Models
         public string Message { get; set; }
         public bool IsReplied { get; set; } = false;
 
-        public string AppUserId { get; set; }
-        public int HouseId { get; set; }
+        public string? AppUserId { get; set; }
+        public int? HouseId { get; set; }
         public AppUser? AppUser { get; set; }
         public House? House { get; set; }
         public BookingRequestReply? BookingRequestReply { get; set; }

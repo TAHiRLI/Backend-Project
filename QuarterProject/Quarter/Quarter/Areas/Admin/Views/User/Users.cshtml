@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    var counter = (ViewBag.PageNumber - 1) * ViewBag.PageSize;
+    var pagedList = (IPagedList)ViewBag.Users;
+}
+
+@inject UserManager<AppUser> _userManager
+
+@using Microsoft.AspNetCore.Identity
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+
+
+
+<div class="w-100 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Users</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Username</th>
+                            <th>Fullname</th>
+                            <th>Email</th>
+                            <th>Comment count</th>
+                            <th>Last time online</th>
+                            <th>Roles</th>
+                            <th>Is Subscribed</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (AppUser user in ViewBag.Users)
+                        {
+                            counter++;
+                            <tr>
+                                <td>@counter</td>
+                                <td id="@user.Id">
+                                    <div class="position-relative d-inline-block">
+                                        <img width="50" class="border-circle" src="~/Uploads/Users/@user.UserPhoto" />
+                                        <div class="position-absolute user-status @(user.ConnectionId== null?"bg-danger":"bg-success")" ></div>
+                                    </div>
+                                        
+                                </td>
+                                <td>@user.UserName</td>
+                                <td>@(user.Fullname ?? "undefined")</td>
+                                <td>@user.Email</td>
+                                <td>@user.Comments.Count</td>
+                                <td>@user.LastConnectedAt.ToString("dd MMMM yyyy HH:mm")</td>
+                                <td>
+                                     @string.Join(", ", _userManager.GetRolesAsync(user).Result.ToList()) 
+                                </td>
+
+                                <td class="text-center">
+                                    @if(user.IsSubscribed){
+                                    <i class="mdi mdi-checkbox-marked-outline"></i>
+                                    }
+                                    else{
+                                   <i class="mdi mdi-checkbox-blank-outline"></i>
+                                    }
+                                
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div>
+                    <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+                    @Html.PagedListPager(pagedList, page => Url.Action("Users", new { page }))
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script src="~/lib/signalr.min.js"></script>
+    <script>
+
+
+        let connection = new signalR.HubConnectionBuilder()
+            .withUrl("/RealTimeHub")
+            .build();
+
+        connection.start().then(function () {
+            console.log(connection.connectionId)
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+
+        connection.on("setAsOnline", function(userId){
+            console.log("userId")
+            var element  = document.querySelector("#"+userId + " .user-status");
+
+            console.log(element)
+
+            element?.classList.remove("bg-danger");
+            element?.classList.add("bg-success")
+        })
+
+        connection.on("setAsOffline", function (userId) {
+            console.log("userId")
+            var element = document.querySelector("#" + userId + " .user-status");
+
+            console.log(element)
+
+            element?.classList.add("bg-danger");
+            element?.classList.remove("bg-success")
+        })
+
+
+
+    </script>
+}

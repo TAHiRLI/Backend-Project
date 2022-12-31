@@ -25263,4 +25263,14 @@ body.avgrund-active {
   color: #9a9ea2;
 }
 
+.user-status {
+    right: -5px;
+    top: 0;
+    width: 13px;
+    height: 13px;
+    display: block;
+    border-radius: 50%;
+}
+
+
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */

@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    var counter = (ViewBag.PageNumber - 1) * ViewBag.PageSize;
+    var pagedList = (IPagedList)ViewBag.Users;
+}
+@inject UserManager<AppUser> _userManager
+
+@using Microsoft.AspNetCore.Identity
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+
+
+
+<div class="w-100 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Admin Users</h4>
+            <div class="col-12  text-end"><a class="text-end d-block" asp-action="CreateUser" asp-controller="user">Create</a></div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Username</th>
+                            <th>Fullname</th>
+                            <th>Email</th>
+                            <th>Roles</th>
+                            <th>Last time online</th>
+                            <th>Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (AppUser user in ViewBag.Users)
+                        {
+                            counter++;
+                            <tr>
+                                <td>@counter</td>
+                                <td id="@user.Id">
+                                    <div class="position-relative d-inline-block">
+                                        <img width="50" class="border-circle" src="~/Uploads/Users/@user.UserPhoto" />
+                                    </div>
+
+                                </td>
+                                <td>@user.UserName</td>
+                                <td>@(user.Fullname ?? "undefined")</td>
+                                <td>@user.Email</td>
+                                <td>
+                                    @string.Join(", ", _userManager.GetRolesAsync(user).Result.ToList())
+                                </td>
+                                <td>@user.LastConnectedAt.ToString("dd MMMM yyyy HH:mm")</td>
+                                <td>
+                                    <a asp-action="EditUser" asp-controller="user" asp-route-userId="@user.Id"><i style="font-size:26px" class="mdi mdi-lead-pencil"></i></a>
+                                    <a class="delete-btn" asp-action="DeleteUser" asp-controller="user" asp-route-userId="@user.Id"><i style="font-size:26px" class="mdi mdi-close-circle text-danger "></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div>
+                    <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+                    @Html.PagedListPager(pagedList, page => Url.Action("AdminUsers", new { page }))
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script src="~/admin/js/Main.js"></script>
+}

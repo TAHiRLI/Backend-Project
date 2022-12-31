@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@model EditUserViewModel
+<div class="w-100 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Edit user roles</h4>
+
+            <form asp-action="editUser" method="post" class="forms-sample" >
+                
+                    <div class="form-group">
+                        <label asp-for="RoleNames">Roles</label><br />
+                        <select class="col-3" asp-for="RoleNames"  asp-items="@(new SelectList(ViewBag.Roles, nameof(IdentityRole.Name), nameof(IdentityRole.Name)))"></select>
+                        <span class="text-danger" asp-validation-for="RoleNames"></span>
+                    </div>
+               
+                    <input asp-for="UserId"  type="hidden" value="@Model.UserId"/>
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <a class="btn btn-light" asp-action="AdminUsers" asp-controller="user">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+

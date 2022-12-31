@@ -1,7 +1,7 @@
 ﻿$(document).on("click", ".modalBtn", function (e) {
     e.preventDefault();
-    let link = $(this).attr("href");
-    fetch(link)
+    let modal_link = $(this).attr("href");
+    fetch(modal_link)
         .then(res => {
             if (!res.ok) {
                 Swal.fire({
