@@ -6,5 +6,6 @@ namespace Quarter.ViewModels
     {
        public ProfileEditViewModel ProfileEditVm { get; set; } = new ProfileEditViewModel();
         public List<UserBookingMessage> UserBookingMessages { get; set; }
+        public List<Order> Orders { get; set; } = new List<Order>();
     }
 }

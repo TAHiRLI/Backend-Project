@@ -20,6 +20,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Org.BouncyCastle.Tls;
 using Org.BouncyCastle.Asn1.X509;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 
 namespace Quarter.Controllers
 {
@@ -365,14 +366,17 @@ namespace Quarter.Controllers
             if (user == null)
                 return NotFound();
             ProfileViewModel ProfileVm = new ProfileViewModel();
+            ProfileVm.Orders = _context.Orders.Include(x => x.House).Where(x => x.AppUserId == user.Id).OrderByDescending(x=> x.CreatedAt).Take(15).ToList();
             ProfileVm.ProfileEditVm.Fullname = user.Fullname;
             ProfileVm.ProfileEditVm.Email = user.Email;
             ProfileVm.ProfileEditVm.Username = user.UserName;
             ProfileVm.ProfileEditVm.UserPhoto = user.UserPhoto;
             ProfileVm.UserBookingMessages = _context.UserBookingMessages
-                .Include(x=> x.BookingRequestReply)
-                .Include(x=>x.House)
+                .OrderByDescending(x => x.CreatedAt)
+                .Include(x => x.BookingRequestReply)
+                .Include(x => x.House)
                 .Where(x => x.AppUserId == user.Id && x.IsReplied)
+                .Take(10)
                 .ToList();
 
             return View(ProfileVm);

@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewData["Title"] = "Profile";
+    var counter = 0;
 }
 @model ProfileViewModel
 <!-- BREADCRUMB AREA START -->
@@ -61,31 +62,20 @@
                                                             <th>Date</th>
                                                             <th>Status</th>
                                                             <th>Total</th>
-                                                            <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Jun 22, 2019</td>
-                                                            <td>Pending</td>
-                                                            <td>$3000</td>
-                                                            <td><a href="cart.html">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>Nov 22, 2019</td>
-                                                            <td>Approved</td>
-                                                            <td>$200</td>
-                                                            <td><a href="cart.html">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>Jan 12, 2020</td>
-                                                            <td>On Hold</td>
-                                                            <td>$990</td>
-                                                            <td><a href="cart.html">View</a></td>
-                                                        </tr>
+                                                        @foreach (var order in Model.Orders)
+                                                        {
+                                                            counter++;
+                                                            <tr>
+                                                                <td>@counter</td>
+                                                                <td>@order.CreatedAt?.ToString("dd MMMM yyyy")</td>
+                                                                <td>@(order.OrderStatus==true? "Approved":order.OrderStatus==false?"Rejected":"Pending")</td>
+                                                                <td>$@order.HousePrice.ToString("0.00")</td>
+                                                            </tr>
+                                                        }
+                                                      
                                                     </tbody>
                                                 </table>
                                             </div>

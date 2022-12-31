@@ -17,6 +17,7 @@ namespace Quarter.Models
         public DateTime LastConnectedAt { get; set; }
         public List<WishlistItem>? WishlistItems { get; set; }  = new List<WishlistItem>();
         public List<UserComment>? Comments { get; set; } = new List<UserComment>();
+        public List<Order>? Orders { get; set; } = new List<Order>();
 
 
 
