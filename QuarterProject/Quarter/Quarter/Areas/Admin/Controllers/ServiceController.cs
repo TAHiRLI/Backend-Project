@@ -84,7 +84,7 @@ namespace Quarter.Areas.Admin.Controllers
                 return NotFound();
             _context.Services.Remove(serive);
             _context.SaveChanges();
-            return Ok();
+            return RedirectToAction("index");
         }
     }
 }

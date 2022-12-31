@@ -78,7 +78,12 @@ namespace Quarter.Areas.Admin.Controllers
 
         public IActionResult Delete(int id)
         {
-            return Ok();
+            var category = _context.Categories.FirstOrDefault(x => x.Id == id);
+            if (category == null)
+                return NotFound();
+            _context.Categories.Remove(category);
+            _context.SaveChanges();
+            return RedirectToAction("index");
         }
     }
 }

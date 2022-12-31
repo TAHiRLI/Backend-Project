@@ -134,7 +134,7 @@ namespace Quarter.Areas.Admin.Controllers
 
 
             _context.SaveChanges();
-            return Ok();
+            return RedirectToAction("index");
         }
 
     }

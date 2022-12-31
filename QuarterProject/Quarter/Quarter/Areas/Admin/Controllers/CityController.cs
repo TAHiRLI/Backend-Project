@@ -80,7 +80,12 @@ namespace Quarter.Areas.Admin.Controllers
 
         public IActionResult Delete(int id)
         {
-            return Ok();
+            var city = _context.Cities.FirstOrDefault(x => x.Id == id);
+            if (city == null)
+                return NotFound();
+            _context.Cities.Remove(city);
+            _context.SaveChanges();
+            return RedirectToAction("index");
         }
     }
 }

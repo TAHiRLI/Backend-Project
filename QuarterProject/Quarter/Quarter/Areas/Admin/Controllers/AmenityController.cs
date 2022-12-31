@@ -84,8 +84,14 @@ namespace Quarter.Areas.Admin.Controllers
 
         public IActionResult Delete(int id)
         {
+            var amenity = _context.Amenities.FirstOrDefault(x => x.Id == id);
+            if (amenity == null)
+                return NotFound();
+            
+            _context.Amenities.Remove(amenity);
+            _context.SaveChanges();
 
-            return Ok();
+            return RedirectToAction("index");
         }
 
       

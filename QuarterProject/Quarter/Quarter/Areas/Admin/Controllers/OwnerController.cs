@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.EntityFrameworkCore;
 using Quarter.Areas.Admin.ViewModels;
 using Quarter.DAL;
@@ -103,7 +104,15 @@ namespace Quarter.Areas.Admin.Controllers
 
         public IActionResult Delete(int id)
         {
-            return Ok();
+            var owner = _context.Owners.FirstOrDefault(x => x.Id == id);
+            if (owner == null)
+                return NotFound();
+
+            FileManager.Delete(_env.WebRootPath, "Uploads/Owners", owner.ImageUrl);
+
+            _context.Owners.Remove(owner);
+            _context.SaveChanges();
+            return RedirectToAction("index")
         }
     }
 }

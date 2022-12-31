@@ -7,7 +7,7 @@
         public int AmenityId { get; set; }
 
 
-        public House House { get; set; }
-        public Amenity Amenity { get; set; }
+        public House? House { get; set; }
+        public Amenity? Amenity { get; set; }
     }
 }

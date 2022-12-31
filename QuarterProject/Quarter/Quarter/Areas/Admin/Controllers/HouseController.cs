@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AspNetCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.DotNet.Scaffolding.Shared.Project;
@@ -242,6 +243,21 @@ namespace Quarter.Areas.Admin.Controllers
             return RedirectToAction("index");
         }
 
+        public IActionResult Delete(int id)
+        {
+            var house = _context.Houses.Include(x=> x.HouseImages).FirstOrDefault(x => x.Id == id);
+            if (house == null)
+                return NotFound();
+            foreach (var hImage in house.HouseImages)
+            {
+                FileManager.Delete(_env.WebRootPath, "Uploads/Houses", hImage.ImageUrl);
+            }
+
+            _context.Houses.Remove(house);
+            _context.SaveChanges();
+            
+            return RedirectToAction("index");
+        }
         public IActionResult BookingRequest(int? page)
         {
             //shows all the booking requests to the admin
