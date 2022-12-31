@@ -282,7 +282,7 @@
                     <!-- Buy house Widget -->
 
                     <div class="text-center">
-                        <a asp-action="OrderHouse" asp-controller="house" asp-route-id="@Model.House.Id" class="btn my-2 theme-btn-1 order-btn">Order This Property</a>
+                        <a asp-action="Checkout" asp-controller="Order" asp-route-HouseId="@Model.House.Id" class="btn my-2 theme-btn-1 ">Order This Property</a>
                     </div>
 
                     <!-- Menu Widget (Category) -->
@@ -319,45 +319,5 @@
     @await Html.PartialAsync("_ValidationScriptsPartial")
     <script src="~/assets/js/MyMain.js"></script>
     <script src="~/assets/js/modal.js"></script>
-
-    <script>
-
-        $(document).on("click", ".order-btn", function (e) {
-            e.preventDefault();
-            var order_link = $(this).attr("href")
-
-
-            fetch(order_link)
-                .then(res => {
-                    if (!res.ok && !res.redirected) {
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'error',
-                            title: 'Something went wrong',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                        return
-                    }
-                    if (res.redirected) {
-                        location.replace("/account/login");
-                    }
-
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'Your work has been saved',
-                        showConfirmButton: false,
-                        timer: 1000
-                    })
-
-
-                })
-
-
-        })
-
-    </script>
-
 
 }

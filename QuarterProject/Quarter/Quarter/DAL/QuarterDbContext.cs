@@ -26,6 +26,7 @@ namespace Quarter.DAL
         public DbSet<UserBookingMessage> UserBookingMessages { get; set; }
         public DbSet<BookingRequestReply> BookingRequestReplies { get; set; }
         public DbSet<WishlistItem> WishlistItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
 
     }

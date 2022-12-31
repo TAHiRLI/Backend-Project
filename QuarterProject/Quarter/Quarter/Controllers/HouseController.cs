@@ -208,24 +208,6 @@ namespace Quarter.Controllers
 
         }
 
-        //================================
-        // Order a house
-        // Only members send order request
-        //================================
-        [Authorize(Roles ="Member")]
-        public async Task<IActionResult> OrderHouse(int id)
-        {
-            var user =await _userManager.FindByNameAsync(User.Identity.Name);
-            if (user == null)
-                return NotFound();
-
-            var House = _context.Houses.FirstOrDefault(x=> id== x.Id);
-            if (House == null)
-                return NotFound();
-
-
-            return Ok();
-        }
 
         //================================
         // Wishlist 
