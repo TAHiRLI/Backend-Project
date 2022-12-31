@@ -38,6 +38,7 @@
 
     <!-- Place favicon.png in the root directory -->
     <link rel="shortcut icon" href="~/assets/img/favicon.png" type="image/x-icon" />
+
     @RenderSection("StyleSheets", required:false)
     <!-- Font Icons css -->
     <link rel="stylesheet" href="~/assets/css/font-icons.css">
@@ -47,6 +48,7 @@
     <link rel="stylesheet" href="~/assets/css/style.css">
     <!-- Responsive css -->
     <link rel="stylesheet" href="~/assets/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -633,6 +635,8 @@
     <!-- All JS Plugins -->
     <script src="~/assets/js/plugins.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Main JS -->
     <script src="~/assets/js/main.js"></script>
     @*<script src="~/assets/js/MyMain.js"></script>*@
@@ -640,19 +644,31 @@
 
     <script src="~/lib/signalr.min.js"></script>
     <script>
+       toastr.options ={
+            "positionClass": "toast-bottom-right",
+       }
+    </script>
+    <script>
 
         let connection = new signalR.HubConnectionBuilder()
             .withUrl("/RealTimeHub")
             .build();
 
         connection.start().then(function () {
-           
+
             console.log(connection.connectionId)
 
         }).catch(function (err) {
             return console.error(err.toString());
         });
+        connection.on("OrderAccepted", () => {
+        toastr["success"]("Your order is approved")
 
+        })
+         connection.on("OrderRejected", () => {
+        toastr["error"]("Your order is Rejected")
+
+        })
 
     </script>
 

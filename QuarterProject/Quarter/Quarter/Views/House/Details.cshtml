@@ -280,10 +280,13 @@
                     </div>
 
                     <!-- Buy house Widget -->
+                    @if (!Model.House.IsSold)
+                    {
+                        <div class="text-center">
+                            <a asp-action="Checkout" asp-controller="Order" asp-route-HouseId="@Model.House.Id" class="btn my-2 theme-btn-1 ">Order This Property</a>
+                        </div>
+                    }
 
-                    <div class="text-center">
-                        <a asp-action="Checkout" asp-controller="Order" asp-route-HouseId="@Model.House.Id" class="btn my-2 theme-btn-1 ">Order This Property</a>
-                    </div>
 
                     <!-- Menu Widget (Category) -->
                     <div class="widget ltn__menu-widget ltn__menu-widget-2--- ltn__menu-widget-2-color-2---">

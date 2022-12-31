@@ -21,7 +21,7 @@ namespace Quarter.Controllers
         public async Task<IActionResult > Checkout(int HouseId)
         {
             var house = _context.Houses.Include(x=> x.Owner).FirstOrDefault(x => x.Id == HouseId);
-            if(house == null) return NotFound();
+            if(house == null || house.IsSold) return NotFound();
            
 
             Order order = new Order();
@@ -34,6 +34,7 @@ namespace Quarter.Controllers
             order.House = house;
             order.HouseId = house.Id;
             order.HousePrice = house.Price;
+            order.HouseTitle = house.Title;
 
             return View(order);
         }

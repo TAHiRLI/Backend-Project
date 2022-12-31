@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+}
+@model Order
+
+<div class="card col-4 m-auto"  >
+    <img src="~/Uploads/Houses/@Model.House?.HouseImages?.FirstOrDefault(x=> x.PosterStatus)?.ImageUrl" class="card-img-top" >
+    <div class="card-body">
+        <h5 class="card-title">@Model.HouseTitle</h5>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>Fullname</td>
+                    <td>@Model.Fullname</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <td>Username</td>
+                    <td>@Model.AppUser?.UserName</td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td>@Model.PhoneNumber</td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td>@Model.City</td>
+                </tr>
+                <tr>
+                    <td>Address 1</td>
+                    <td>@Model.Address1</td>
+                </tr>
+                <tr>
+                    <td>Address 2</td>
+                    <td>@Model.Address2</td>
+                </tr>
+                <tr>
+                    <td>Zip</td>
+                    <td>@Model.ZipCode</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>
+                        <div class="badge bg-@(Model.OrderStatus==true?"success":Model.OrderStatus==false?"danger":"warning")">@(Model.OrderStatus == true ? "Approved" : Model.OrderStatus == false ? "Rejected" : "Pending")</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="card-footer row text-end">
+             <a asp-action="approve" asp-controller="order" asp-route-id="@Model.Id" class="btn d-inline-block btn-success mx-1">Approve</a>
+            <a asp-action="reject" asp-controller="order" asp-route-id="@Model.Id" class="btn d-inline-block btn-danger">Reject</a>
+        </div>
+    </div>
+</div>

@@ -79,6 +79,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG91c2VcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Hp/Desktop/BackEnd_Project/Backend-Project/QuarterProject/Quarter/Quarter/Areas/Admin/Views/Order/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcT3JkZXJcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Hp/Desktop/BackEnd_Project/Backend-Project/QuarterProject/Quarter/Quarter/Areas/Admin/Views/Order/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcT3JkZXJcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Hp/Desktop/BackEnd_Project/Backend-Project/QuarterProject/Quarter/Quarter/Areas/Admin/Views/Owner/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcT3duZXJcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

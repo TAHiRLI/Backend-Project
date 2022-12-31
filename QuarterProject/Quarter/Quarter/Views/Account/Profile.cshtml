@@ -35,9 +35,7 @@
                             <div class="col-lg-4">
                                 <div class="ltn__tab-menu-list mb-50">
                                     <div class="nav">
-                                        <a data-bs-toggle="tab" href="#liton_tab_1_1">Dashboard <i class="fas fa-home"></i></a>
                                         <a data-bs-toggle="tab" href="#liton_tab_1_2">Orders <i class="fas fa-file-alt"></i></a>
-                                        <a data-bs-toggle="tab" href="#liton_tab_1_3">Downloads <i class="fas fa-arrow-down"></i></a>
                                         <a data-bs-toggle="tab" href="#liton_tab_1_4">Messages <i class="fa-sharp fa-solid fa-message"></i></a>
                                         <a class="active show" data-bs-toggle="tab" href="#liton_tab_1_5">Account Details <i class="fas fa-user"></i></a>
                                         <a asp-action="logout" asp-controller="account">Logout <i class="fas fa-sign-out-alt"></i></a>
@@ -46,12 +44,6 @@
                             </div>
                             <div class="col-lg-8">
                                 <div class="tab-content">
-                                    <div class="tab-pane fade" id="liton_tab_1_1">
-                                        <div class="ltn__myaccount-tab-content-inner">
-                                            <p>Hello <strong>UserName</strong> (not <strong>UserName</strong>? <small><a href="login-register.html">Log out</a></small> )</p>
-                                            <p>From your account dashboard you can view your <span>recent orders</span>, manage your <span>shipping and billing addresses</span>, and <span>edit your password and account details</span>.</p>
-                                        </div>
-                                    </div>
                                     <div class="tab-pane fade" id="liton_tab_1_2">
                                         <div class="ltn__myaccount-tab-content-inner">
                                             <div class="table-responsive">
@@ -59,6 +51,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Order</th>
+                                                            <th>Property</th>
                                                             <th>Date</th>
                                                             <th>Status</th>
                                                             <th>Total</th>
@@ -70,48 +63,13 @@
                                                             counter++;
                                                             <tr>
                                                                 <td>@counter</td>
+                                                                <td> <a asp-action="details" asp-controller="house" asp-route-id="@order.HouseId">@order.HouseTitle</a> </td>
                                                                 <td>@order.CreatedAt?.ToString("dd MMMM yyyy")</td>
                                                                 <td>@(order.OrderStatus==true? "Approved":order.OrderStatus==false?"Rejected":"Pending")</td>
                                                                 <td>$@order.HousePrice.ToString("0.00")</td>
                                                             </tr>
                                                         }
                                                       
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="liton_tab_1_3">
-                                        <div class="ltn__myaccount-tab-content-inner">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Product</th>
-                                                            <th>Date</th>
-                                                            <th>Expire</th>
-                                                            <th>Download</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Carsafe - Car Service PSD Template</td>
-                                                            <td>Nov 22, 2020</td>
-                                                            <td>Yes</td>
-                                                            <td><a href="#"><i class="far fa-arrow-to-bottom mr-1"></i> Download File</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Carsafe - Car Service HTML Template</td>
-                                                            <td>Nov 10, 2020</td>
-                                                            <td>Yes</td>
-                                                            <td><a href="#"><i class="far fa-arrow-to-bottom mr-1"></i> Download File</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Carsafe - Car Service WordPress Theme</td>
-                                                            <td>Nov 12, 2020</td>
-                                                            <td>Yes</td>
-                                                            <td><a href="#"><i class="far fa-arrow-to-bottom mr-1"></i> Download File</a></td>
-                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>

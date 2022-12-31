@@ -23,6 +23,8 @@ namespace Quarter.Models
         public string? Note { get; set; }
         [Column(TypeName ="decimal(18,2)")]
         public decimal HousePrice { get; set; }
+        [MaxLength(100)]
+        public string HouseTitle { get; set; }
         public string? AppUserId { get; set; }
         public int? HouseId { get; set; }
         public House? House { get; set; }

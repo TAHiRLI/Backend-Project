@@ -1,0 +1,73 @@
+﻿
+
+@{
+    ViewData["Title"] = "Index";
+    var counter = (ViewBag.PageNumber - 1) * ViewBag.PageSize;
+    var pagedList = (IPagedList)ViewBag.Orders;
+}
+
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+
+
+<div class="w-100 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Orders</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Property</th>
+                            <th>Fullname</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>PhoneNumber</th>
+                            <th>Zip Code</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (Order order in ViewBag.Orders)
+                        {
+                            counter++;
+                            <tr>
+                                <td>@counter</td>
+                                <td>@order.HouseTitle</td>
+                                <td>@order.Fullname</td>
+                                <td>@order.AppUser?.UserName</td>
+                                <td>@order.Email</td>
+                                <td>@order.PhoneNumber</td>
+                                <td>@order.ZipCode</td>
+                                <td>
+                                    <div class="badge bg-@(order.OrderStatus==true?"success":order.OrderStatus==false?"danger":"warning")">@(order.OrderStatus==true ? "Approved" : order.OrderStatus==false ? "Rejected" : "Pending")</div>
+                                </td>
+                                <td>
+                                    <a class="@(order.OrderStatus != null?"d-none":"")" asp-action="edit" asp-controller="order" asp-route-id="@order.Id"><i style="font-size:26px" class="mdi mdi-lead-pencil"></i></a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+                <div>
+                    <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+                    @Html.PagedListPager(pagedList, page => Url.Action("index", new { page }))
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

@@ -96,7 +96,8 @@
                                      <span class="text-danger" asp-validation-for="Note"></span>
                                 </div>
                                 <input type="hidden" asp-for="HousePrice" value="@Model.HousePrice"/>
-                                <input type="hidden" asp-for="HouseId" value="@Model.HouseId"/>
+                                <input type="hidden" asp-for="HouseId" value="@Model.HouseId" />
+                                <input type="hidden" asp-for="HouseTitle" value="@Model.HouseTitle" />
                                 <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Place order</button>
                             </form>
                         </div>
@@ -132,5 +133,5 @@
 
 
  @section Scripts{
-    @*@await Html.PartialAsync("_ValidationScriptsPartial")*@
+    @await Html.PartialAsync("_ValidationScriptsPartial")
  }
