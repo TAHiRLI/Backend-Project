@@ -33,6 +33,7 @@ namespace Quarter.Areas.Admin.Controllers
         {
             var Users = _context.AppUsers
                 .Include(x => x.Comments)
+                .Include(x=> x.Orders)
                 .Where(x => !x.IsAdmin)
                 .ToList();
 

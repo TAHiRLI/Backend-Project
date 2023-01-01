@@ -28,6 +28,7 @@
                             <th>Fullname</th>
                             <th>Email</th>
                             <th>Comment count</th>
+                            <th>Order count</th>
                             <th>Last time online</th>
                             <th>Roles</th>
                             <th>Is Subscribed</th>
@@ -51,7 +52,8 @@
                                 <td>@user.UserName</td>
                                 <td>@(user.Fullname ?? "undefined")</td>
                                 <td>@user.Email</td>
-                                <td>@user.Comments.Count</td>
+                                <td>@user.Comments?.Count</td>
+                                <td>@user.Orders.Count</td>
                                 <td>@user.LastConnectedAt.ToString("dd MMMM yyyy HH:mm")</td>
                                 <td>
                                      @string.Join(", ", _userManager.GetRolesAsync(user).Result.ToList()) 

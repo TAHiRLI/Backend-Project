@@ -8,14 +8,13 @@
 @using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
 @using X.PagedList.Mvc.Core.Fluent
 @using X.PagedList.Web.Common
-<link href="~/admin/css/PagedList.css" rel="stylesheet" type="text/css" />
 
 
 
 <div class="w-100 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Create Owner</h4>
+            <h4 class="card-title">User Requests</h4>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -47,7 +46,7 @@
                                 <td>
 
                                     @if(!message.IsReplied){
-                                    <a class="reply" asp-action="ReplyToBookingRequest" asp-controller="house" asp-route-id="@message.Id"><i style="font-size:26px" class="mdi mdi-reply"></i></a>
+                                    <a class="reply" asp-action="ReplyToBookingRequest" asp-controller="house" asp-route-id="@message.Id"><i style="font-size:26px" class="mdi mdi-reply text-success"></i></a>
                                     }
                                     else{
                                         <a class="replied" asp-action="GetReplyMessage" asp-controller="house" asp-route-id="@message.Id"><i style="font-size:26px" class="mdi mdi-receipt"></i></a>

@@ -273,12 +273,12 @@
                                                 <div class="product-hover-action">
                                                     <ul>
                                                         <li>
-                                                            <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                           <a asp-action="gethousedata" asp-controller="house" asp-route-id="@house.Id" class="modalBtn" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
                                                                 <i class="flaticon-expand"></i>
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                            <a class="add-to-wishlist" asp-action="setItem" asp-controller="house" asp-route-id="@house.Id">
                                                                 <i class="flaticon-heart-1"></i>
                                                             </a>
                                                         </li>
@@ -434,5 +434,6 @@
 
     </script>
     <script src="~/assets/js/modal.js"></script>
+    @await Html.PartialAsync("_AddToWishlistScript")
 }
 

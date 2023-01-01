@@ -31,8 +31,11 @@
                     <label asp-for="File">File upload</label>
                     <input asp-for="File" type="file" class="form-controll">
                     <span class="text-danger" asp-validation-for="File"></span>
+                    <div>
+                        <img width="100" class="border-rounded" src="~/Uploads/Owners/@Model.ImageUrl">
+                    </div>
                 </div>
-                <input type="hidden" asp-for="Id" value="@Model.Id"></input>
+                <input type="hidden" asp-for="Id" value="@Model.Id"></button>
 
                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
                 <a class="btn btn-light" asp-action="index" asp-controller="owner">Cancel</a>

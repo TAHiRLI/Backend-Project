@@ -5,15 +5,14 @@
 @inject UserManager<AppUser> _userManager
 
 @{
-
     var settings = layoutService.GetSettings();
     List<House> houses = await layoutService.GetWishList();
-
-
 }
 
 
 @{
+    // To show active link in navbar
+    // returns active class when given controller name and action name matches
     string getClass(string actionName, string controllerName)
     {
         string action = ViewContext.RouteData.Values["Action"].ToString();
@@ -639,7 +638,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Main JS -->
     <script src="~/assets/js/main.js"></script>
-    @*<script src="~/assets/js/MyMain.js"></script>*@
+    <script src="~/assets/js/MyMain.js"></script>
     @RenderSection("Scripts", required:false)
 
     <script src="~/lib/signalr.min.js"></script>

@@ -50,7 +50,7 @@
                 </tr>
             </tbody>
         </table>
-        <div class="card-footer row text-end">
+        <div class="card-footer row text-end  @(Model.OrderStatus != null?"d-none":"")">
              <a asp-action="approve" asp-controller="order" asp-route-id="@Model.Id" class="btn d-inline-block btn-success mx-1">Approve</a>
             <a asp-action="reject" asp-controller="order" asp-route-id="@Model.Id" class="btn d-inline-block btn-danger">Reject</a>
         </div>

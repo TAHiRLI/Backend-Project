@@ -70,7 +70,7 @@
                                 <i class="far fa-calendar-alt"></i>@((Model.House.CreatedAt)?.ToString(" dd MMMM yyyy"))
                             </li>
                             <li>
-                                <a href="#"><i class="far fa-comments"></i>@Model.House.UserComments.Count</a>
+                                <span><i class="far fa-comments"></i>@Model.House.UserComments.Count</span>
                             </li>
                         </ul>
                     </div>
@@ -215,15 +215,11 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                    <a class="add-to-wishlist" asp-action="setItem" asp-controller="house" asp-route-id="@house.Id">
                                                         <i class="flaticon-heart-1"></i>
                                                     </a>
                                                 </li>
-                                                <li>
-                                                    <a href="portfolio-details.html" title="Compare">
-                                                        <i class="flaticon-add"></i>
-                                                    </a>
-                                                </li>
+                                            
                                             </ul>
                                         </div>
                                     </div>
@@ -320,6 +316,7 @@
 <!-- SHOP DETAILS AREA END -->
 @section Scripts{
     @await Html.PartialAsync("_ValidationScriptsPartial")
+    @await Html.PartialAsync("_AddToWishlistScript")
     <script src="~/assets/js/MyMain.js"></script>
     <script src="~/assets/js/modal.js"></script>
 

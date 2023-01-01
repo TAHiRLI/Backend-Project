@@ -55,5 +55,30 @@ namespace Quarter.Services
 
             return Houses;
         }
+
+        //=================================
+        //Admin related services
+        //=================================
+
+        public int GetPendingOrderCount()
+        {
+            int count = 0;
+            count = _context.Orders.Count(x => x.OrderStatus == null);
+            return count;
+        }
+        public int GetPendingCommentCount()
+        {
+            int count = 0;
+            count = _context.UserComments.Count(x => x.IsApproved == false);
+            return count;   
+        }
+        public int GetPendingBookingRequestCount()
+        {
+            int count = 0;
+            count = _context.UserBookingMessages.Count(x => x.IsReplied == false);
+            return count;
+        }
+
+
     }
 }

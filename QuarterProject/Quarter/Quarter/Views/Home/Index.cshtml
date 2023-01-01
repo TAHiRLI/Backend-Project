@@ -339,16 +339,16 @@
                                     @{
                                         if (house.IsSold)
                                         {
-                                                                                                        <li class="sale-badge bg-dark">Sold</li>
+                                            <li class="sale-badge bg-dark">Sold</li>
                                         }
                                         else if (house.IsFeatured)
                                         {
-                                                                                                        <li class="sale-badge bg-blue">Special</li>
+                                            <li class="sale-badge bg-blue">Special</li>
 
                                         }
                                         else if (house.DiscountPercent > 0)
                                         {
-                                                                                                        <li class="sale-badge bg-red">Discounted</li>
+                                            <li class="sale-badge bg-red">Discounted</li>
                                         }
                                     }
                                 </ul>
@@ -378,13 +378,13 @@
                                 @{
                                     if (house.DiscountPercent > 0)
                                     {
-                                                                                                <span>$@((house.Price * (100 - house.DiscountPercent) / 100).ToString("0.00"))</span>
-                                                                                                <del>$@house.Price.ToString("0.00")</del>
+                                        <span>$@((house.Price * (100 - house.DiscountPercent) / 100).ToString("0.00"))</span>
+                                        <del>$@house.Price.ToString("0.00")</del>
 
                                     }
                                     else
                                     {
-                                                                                                <span>$@house.Price.ToString("0.00")</span>
+                                        <span>$@house.Price.ToString("0.00")</span>
                                     }
 
                                 }
@@ -413,22 +413,22 @@
                         <div class="product-info-bottom">
                             <div class="real-estate-agent">
                                 <div class="agent-img">
-                                    <a ><img src="~/Uploads//Owners/@house.Owner.ImageUrl" alt="#"></a>
+                                    <a><img src="~/Uploads//Owners/@house.Owner.ImageUrl" alt="#"></a>
                                 </div>
                                 <div class="agent-brief">
-                                    <h6><a >@house.Owner.Fullname</a></h6>
+                                    <h6><a>@house.Owner.Fullname</a></h6>
                                     <small>Estate Agents</small>
                                 </div>
                             </div>
                             <div class="product-hover-action">
                                 <ul>
-                                   <li>
-                                        <a  asp-action="gethousedata" asp-controller="house" asp-route-id="@house.Id" class="modalBtn" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                    <li>
+                                        <a asp-action="gethousedata" asp-controller="house" asp-route-id="@house.Id" class="modalBtn" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
                                             <i class="flaticon-expand"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="add-to-wishlist" asp-action="setItem" asp-controller="house" asp-route-id="@house.Id" >
+                                        <a class="add-to-wishlist" asp-action="setItem" asp-controller="house" asp-route-id="@house.Id">
                                             <i class="flaticon-heart-1"></i>
                                         </a>
                                     </li>
@@ -450,7 +450,6 @@
     </div>
 </div>
 <!-- PRODUCT SLIDER AREA END -->
-
 <!-- CATEGORY AREA START -->
 <div class="ltn__category-area ltn__product-gutter section-bg-1--- pt-115 pb-90 ">
     <div class="container">
@@ -495,28 +494,28 @@
         <div class="row ltn__testimonial-slider-5-active slick-arrow-1">
             @foreach (var comment in Model.Comments)
             {
-            <div class="col-lg-4">
-                <div class="ltn__testimonial-item ltn__testimonial-item-7">
-                    <div class="ltn__testimoni-info" >
+                <div class="col-lg-4">
+                    <div class="ltn__testimonial-item ltn__testimonial-item-7">
+                        <div class="ltn__testimoni-info">
                             <p style="min-height:130px; overflow:hidden">
-                            <i class="flaticon-left-quote-1"></i>
-                          @comment.Text
-                        </p>
-                        <div class="ltn__testimoni-info-inner">
-                            <div class="ltn__testimoni-img">
-                                <img src="~/Uploads/Users/@comment.AppUser.UserPhoto" alt="#">
-                            </div>
-                            <div class="ltn__testimoni-name-designation">
-                                <h5>@comment.AppUser.UserName</h5>
-                                <label>Selling Agents</label>
+                                <i class="flaticon-left-quote-1"></i>
+                                @comment.Text
+                            </p>
+                            <div class="ltn__testimoni-info-inner">
+                                <div class="ltn__testimoni-img">
+                                    <img src="~/Uploads/Users/@comment.AppUser.UserPhoto" alt="#">
+                                </div>
+                                <div class="ltn__testimoni-name-designation">
+                                    <h5>@comment.AppUser.UserName</h5>
+                                    <label>Selling Agents</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-                
+
             }
-     
+
             <!--  -->
         </div>
     </div>
@@ -564,4 +563,3 @@
     <script src="~/assets/js/modal.js"></script>
     @await Html.PartialAsync("_AddToWishlistScript")
 }
-  

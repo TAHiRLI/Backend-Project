@@ -112,7 +112,7 @@ namespace Quarter.Areas.Admin.Controllers
 
             _context.Owners.Remove(owner);
             _context.SaveChanges();
-            return RedirectToAction("index")
+            return RedirectToAction("index");
         }
     }
 }

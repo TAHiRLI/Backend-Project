@@ -1,9 +1,14 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Quarter.Services
 
-@inject UserManager<AppUser> _userManager;
+@inject LayoutService layoutService
+@inject UserManager<AppUser> _userManager
 
 @{
     AppUser admin = _userManager.FindByNameAsync(User.Identity.Name).Result;
+    var pendingOrderCount = layoutService.GetPendingOrderCount();
+    var pendingCommentCount = layoutService.GetPendingCommentCount();
+    var pendingMessageCount = layoutService.GetPendingBookingRequestCount();
 }
 
 
@@ -240,7 +245,6 @@
                                 </p>
                             </div>
                         </div>
-
                         <p class="sidebar-menu-title">Dash menu</p>
                     </li>
                     <li class="nav-item">
@@ -249,7 +253,6 @@
                             <span class="menu-title">Dashboard @*<span class="badge badge-primary ml-3">New</span>*@</span>
                         </a>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#Users" aria-expanded="false" aria-controls="Users">
                             <i class="typcn typcn-user-add-outline menu-icon"></i>
@@ -266,17 +269,25 @@
                             </ul>
                         </div>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link" asp-action="BookingRequest" asp-controller="house">
                             <i class="mdi mdi-message-reply-text menu-icon"></i>
-                            <span class="menu-title">Booking Requests</span>
+                            <span class="menu-title">Booking Requests
+                                @if(pendingMessageCount > 0){
+                                    <span class="badge badge-primary ml-3">@pendingMessageCount</span>
+                                }
+                            </span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-action="index" asp-controller="Order">
                             <i class="mdi mdi-server menu-icon"></i>
-                            <span class="menu-title">Orders</span>
+                            <span class="menu-title">Orders
+                                @if (pendingOrderCount > 0)
+                                {
+                                    <span class="badge badge-primary ml-3">@pendingOrderCount</span>
+                                }
+                            </span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -300,7 +311,12 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-action="index" asp-controller="House">
                             <i class="mdi mdi-hospital-building menu-icon"></i>
-                            <span class="menu-title">Houses</span>
+                            <span class="menu-title">Houses
+                                @if (pendingCommentCount > 0)
+                                {
+                                    <span class="badge badge-primary ml-3">@pendingCommentCount</span>
+                                }
+                            </span>
                         </a>
                     </li>
                     <li class="nav-item">
