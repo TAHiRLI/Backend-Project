@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.VisualBasic;
 using Quarter.DAL;
 using Quarter.Helpers;
 using Quarter.Hubs;
@@ -29,9 +30,13 @@ namespace Quarter.Areas.Admin.Controllers
         {
 
             int pageSize = 5;
-            var Orders = _context.Orders.Include(x=> x.House).Include(x=> x.AppUser).ToList();
-            Pagination<Order> paginatedList = new Pagination<Order>();
+            var Orders = _context.Orders
+                .Include(x=> x.House)
+                .Include(x=> x.AppUser)
+                .OrderByDescending(x=> x.CreatedAt)
+                .ToList();
 
+            Pagination<Order> paginatedList = new Pagination<Order>();
             ViewBag.Orders = paginatedList.GetPagedNames(Orders, page, pageSize);
             ViewBag.PageNumber = (page ?? 1);
             ViewBag.PageSize = pageSize;
@@ -70,6 +75,10 @@ namespace Quarter.Areas.Admin.Controllers
             }
 
             _context.SaveChanges();
+
+
+         await   _hubContext.Clients.All.SendAsync("updateMonthlyEarning", _context.Orders.Where(x => x.CreatedAt.Month == DateTime.UtcNow.Month && x.OrderStatus==true).Sum(x => x.HousePrice));
+         await   _hubContext.Clients.All.SendAsync("updateAnnualEarning", _context.Orders.Where(x => x.CreatedAt.Year == DateTime.UtcNow.Year && x.OrderStatus==true).Sum(x => x.HousePrice));
 
             return RedirectToAction("index");
         }

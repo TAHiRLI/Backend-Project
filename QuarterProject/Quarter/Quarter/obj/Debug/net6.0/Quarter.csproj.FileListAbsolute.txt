@@ -280,3 +280,10 @@ C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quart
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\obj\Debug\net6.0\Quarter.pdb
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\obj\Debug\net6.0\Quarter.genruntimeconfig.cache
 C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\obj\Debug\net6.0\ref\Quarter.dll
+C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\ClosedXML.dll
+C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\DocumentFormat.OpenXml.dll
+C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\ExcelNumberFormat.dll
+C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\Irony.dll
+C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\SixLabors.Fonts.dll
+C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\System.IO.Packaging.dll
+C:\Users\Hp\Desktop\BackEnd_Project\Backend-Project\QuarterProject\Quarter\Quarter\bin\Debug\net6.0\XLParser.dll

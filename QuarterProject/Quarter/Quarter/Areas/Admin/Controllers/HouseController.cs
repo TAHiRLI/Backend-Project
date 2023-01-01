@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.DotNet.Scaffolding.Shared.Project;
@@ -9,6 +10,7 @@ using Quarter.DAL;
 using Quarter.Helpers;
 using Quarter.Models;
 using System.Data;
+using System.Security.AccessControl;
 
 namespace Quarter.Areas.Admin.Controllers
 {
@@ -32,6 +34,7 @@ namespace Quarter.Areas.Admin.Controllers
                 .Include(x => x.City)
                 .Include(x => x.HouseImages)
                 .Include(x=> x.UserComments)
+                .OrderByDescending(x=> x.UserComments.Max(x=> x.CreatedAt))
                 .ToList();
 
 
@@ -318,6 +321,28 @@ namespace Quarter.Areas.Admin.Controllers
                 return NotFound();
 
             return Ok(replyMessage.BookingRequestReply);
+        }
+
+
+        //=================================
+        // Export as Excel
+        //=================================
+        [HttpPost]
+         
+        public IActionResult ExportAsExcell()
+        {
+            var houses = _context.Houses.ToList();
+           using(XLWorkbook wb =new XLWorkbook())
+            {
+                wb.Worksheets.Add(Common.ToDataTable<House>(houses.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{DateTime.UtcNow.AddHours(4).Date}-houses.xlsx");
+                }
+            }  
+            
+            return View();
         }
     }
 }

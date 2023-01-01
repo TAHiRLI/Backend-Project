@@ -8,9 +8,12 @@
     var topCommentedHouses = Model.Houses.OrderByDescending(x => x.UserComments.Count(x=> x.IsApproved)).Take(4).ToList();
     var mostCommentedHouse = topCommentedHouses.Take(1).FirstOrDefault();
 
-   
-    
+    //==========================
+    // earning reports
+    //==========================
 
+    var AnnualEarning = Model.Orders.Where(x => x.CreatedAt.Year == DateTime.UtcNow.Year && x.OrderStatus == true).Sum(x => x.HousePrice);
+    var monthlyEarning = Model.Orders.Where(x => x.CreatedAt.Month == DateTime.UtcNow.Month && x.OrderStatus == true).Sum(x => x.HousePrice);
    
 }
 @model DashboardViewModel
@@ -185,103 +188,18 @@
                                 <div class="mb-5">
                                     <div class="mr-1">
                                         <div class="text-info mb-1">
-                                            Total Earning
+                                            Monhtly Earning
                                         </div>
-                                        <h2 class="mb-2 mt-2 font-weight-bold">287,493$</h2>
-                                        <div class="font-weight-bold">
-                                            1.4%  Since Last Month
-                                        </div>
+                                        <h2 class="mb-2 mt-2 font-weight-bold monthlyEarning">@monthlyEarning.ToString("0.##")$</h2>
+                                        
                                     </div>
                                     <hr>
                                     <div class="mr-1">
                                         <div class="text-info mb-1">
-                                            Total Earning
+                                            Annual Earning
                                         </div>
-                                        <h2 class="mb-2 mt-2  font-weight-bold">87,493</h2>
-                                        <div class="font-weight-bold">
-                                            5.43%  Since Last Month
-                                        </div>
-                                    </div>
-                                </div>
-                                <canvas id="barChartStacked"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12 d-flex grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex flex-wrap justify-content-between">
-                            <h4 class="card-title mb-3">E-Commerce Analytics</h4>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-9">
-                                <div class="d-sm-flex justify-content-between">
-                                    <div class="dropdown">
-                                        <button class="btn bg-white btn-sm dropdown-toggle btn-icon-text pl-0" type="button" id="dropdownMenuSizeButton4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Mon,1 Oct 2019 - Tue,2 Oct 2019
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton4" data-x-placement="top-start">
-                                            <h6 class="dropdown-header">Mon,17 Oct 2019 - Tue,25 Oct 2019</h6>
-                                            <a class="dropdown-item" href="#">Tue,18 Oct 2019 - Wed,26 Oct 2019</a>
-                                            <a class="dropdown-item" href="#">Wed,19 Oct 2019 - Thu,26 Oct 2019</a>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <button type="button" class="btn btn-sm btn-light mr-2">Day</button>
-                                        <button type="button" class="btn btn-sm btn-light mr-2">Week</button>
-                                        <button type="button" class="btn btn-sm btn-light">Month</button>
-                                    </div>
-                                </div>
-                                <div class="chart-container mt-4">
-                                    <canvas id="ecommerceAnalytic"></canvas>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div>
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <div class="text-success font-weight-bold">Inbound</div>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <div class="font-weight-medium">Current</div>
-                                        <div class="text-muted">38.34M</div>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <div class="font-weight-medium">Average</div>
-                                        <div class="text-muted">38.34M</div>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <div class="font-weight-medium">Maximum</div>
-                                        <div class="text-muted">68.14M</div>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <div class="font-weight-medium">60th %</div>
-                                        <div class="text-muted">168.3GB</div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="mt-4">
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <div class="text-success font-weight-bold">Outbound</div>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <div class="font-weight-medium">Current</div>
-                                        <div class="text-muted">458.77M</div>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <div class="font-weight-medium">Average</div>
-                                        <div class="text-muted">1.45K</div>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <div class="font-weight-medium">Maximum</div>
-                                        <div class="text-muted">15.50K</div>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <div class="font-weight-medium">60th %</div>
-                                        <div class="text-muted">45.5</div>
+                                        <h2 class="mb-2 mt-2  font-weight-bold annualEarning">@AnnualEarning.ToString("0.##")$</h2>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -290,207 +208,38 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-4 d-flex grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex flex-wrap justify-content-between">
-                            <h4 class="card-title mb-3">Sale Analysis Trend</h4>
-                        </div>
-                        <div class="mt-2">
-                            <div class="d-flex justify-content-between">
-                                <small>Order Value</small>
-                                <small>155.5%</small>
-                            </div>
-                            <div class="progress progress-md  mt-2">
-                                <div class="progress-bar bg-secondary" role="progressbar" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <div class="d-flex justify-content-between">
-                                <small>Total Products</small>
-                                <small>238.2%</small>
-                            </div>
-                            <div class="progress progress-md  mt-2">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="mt-4 mb-5">
-                            <div class="d-flex justify-content-between">
-                                <small>Quantity</small>
-                                <small>23.30%</small>
-                            </div>
-                            <div class="progress progress-md mt-2">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <canvas id="salesTopChart"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8 d-flex grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex flex-wrap justify-content-between">
-                            <h4 class="card-title mb-3">Project status</h4>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex">
-                                                <img class="img-sm rounded-circle mb-md-0 mr-2" src="~/admin/images/faces/face30.png" alt="profile image">
-                                                <div>
-                                                    <div> Company</div>
-                                                    <div class="font-weight-bold mt-1">volkswagen</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            Budget
-                                            <div class="font-weight-bold  mt-1">$2322 </div>
-                                        </td>
-                                        <td>
-                                            Status
-                                            <div class="font-weight-bold text-success  mt-1">88% </div>
-                                        </td>
-                                        <td>
-                                            Deadline
-                                            <div class="font-weight-bold  mt-1">07 Nov 2019</div>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-secondary">edit actions</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex">
-                                                <img class="img-sm rounded-circle mb-md-0 mr-2" src="~/admin/images/faces/face31.png" alt="profile image">
-                                                <div>
-                                                    <div> Company</div>
-                                                    <div class="font-weight-bold  mt-1">Land Rover</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            Budget
-                                            <div class="font-weight-bold  mt-1">$12022  </div>
-                                        </td>
-                                        <td>
-                                            Status
-                                            <div class="font-weight-bold text-success  mt-1">70% </div>
-                                        </td>
-                                        <td>
-                                            Deadline
-                                            <div class="font-weight-bold  mt-1">08 Nov 2019</div>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-secondary">edit actions</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex">
-                                                <img class="img-sm rounded-circle mb-md-0 mr-2" src="~/admin/images/faces/face32.png" alt="profile image">
-                                                <div>
-                                                    <div> Company</div>
-                                                    <div class="font-weight-bold  mt-1">Bentley </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            Budget
-                                            <div class="font-weight-bold  mt-1">$8,725</div>
-                                        </td>
-                                        <td>
-                                            Status
-                                            <div class="font-weight-bold text-success  mt-1">87% </div>
-                                        </td>
-                                        <td>
-                                            Deadline
-                                            <div class="font-weight-bold  mt-1">11 Jun 2019</div>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-secondary">edit actions</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex">
-                                                <img class="img-sm rounded-circle mb-md-0 mr-2" src="~/admin/images/faces/face33.png" alt="profile image">
-                                                <div>
-                                                    <div> Company</div>
-                                                    <div class="font-weight-bold  mt-1">Morgan </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            Budget
-                                            <div class="font-weight-bold  mt-1">$5,220 </div>
-                                        </td>
-                                        <td>
-                                            Status
-                                            <div class="font-weight-bold text-success  mt-1">65% </div>
-                                        </td>
-                                        <td>
-                                            Deadline
-                                            <div class="font-weight-bold  mt-1">26 Oct 2019</div>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-secondary">edit actions</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex">
-                                                <img class="img-sm rounded-circle mb-md-0 mr-2" src="~/admin/images/faces/face34.png" alt="profile image">
-                                                <div>
-                                                    <div> Company</div>
-                                                    <div class="font-weight-bold  mt-1">volkswagen</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            Budget
-                                            <div class="font-weight-bold  mt-1">$2322 </div>
-                                        </td>
-                                        <td>
-                                            Status
-                                            <div class="font-weight-bold text-success mt-1">88% </div>
-                                        </td>
-                                        <td>
-                                            Deadline
-                                            <div class="font-weight-bold  mt-1">07 Nov 2019</div>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-secondary">edit actions</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      
     </div>
-    <!-- content-wrapper ends -->
-    <!-- partial:partials/_footer.html -->
-    <footer class="footer">
-        <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com</a> 2020</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard </a>templates from Bootstrapdash.com</span>
-        </div>
-    </footer>
-    <!-- partial -->
+
 </div>
-
-
-        @section Scripts{
+@section Scripts{
              @await Html.PartialAsync("_DasboardScriptPartial", Model.DashboardScriptVm)
-            <script>
+    <script src="~/lib/signalr.min.js"></script>
+    <script>
 
 
-            </script>
+        let connection = new signalR.HubConnectionBuilder()
+            .withUrl("/RealTimeHub")
+            .build();
+
+        connection.start().then(function () {
+            console.log(connection.connectionId)
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        connection.on("updateMonthlyEarning", (amount)=>{
+            $(".monthlyEarning").html(amount +"$");
+        })
+        connection.on("updateAnnualEarning", (amount) => {
+            $(".annualEarning").html(amount +"$");
+        })
+
+       
+
+
+    </script>
+
+
+
         }
