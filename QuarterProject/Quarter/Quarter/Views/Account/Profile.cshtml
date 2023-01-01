@@ -64,7 +64,7 @@
                                                             <tr>
                                                                 <td>@counter</td>
                                                                 <td> <a asp-action="details" asp-controller="house" asp-route-id="@order.HouseId">@order.HouseTitle</a> </td>
-                                                                <td>@order.CreatedAt?.ToString("dd MMMM yyyy")</td>
+                                                                <td>@order.CreatedAt.ToString("dd MMMM yyyy")</td>
                                                                 <td>@(order.OrderStatus==true? "Approved":order.OrderStatus==false?"Rejected":"Pending")</td>
                                                                 <td>$@order.HousePrice.ToString("0.00")</td>
                                                             </tr>

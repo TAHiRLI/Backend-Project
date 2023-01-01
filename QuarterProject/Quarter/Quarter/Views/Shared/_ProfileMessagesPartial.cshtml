@@ -9,13 +9,13 @@
              <div class="accordion-item">
         <h2 class="accordion-header" id="heading-@message.Id">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@message.Id" aria-expanded="true" aria-controls="collapse-@message.Id">
-                    @message.Message -- @message.CreatedAt?.ToString("dd MMMM yyyy")
+                    @message.Message -- @message.CreatedAt.ToString("dd MMMM yyyy")
             </button>
         </h2>
         <div id="collapse-@message.Id" class="accordion-collapse collapse " aria-labelledby="heading-@message.Id" data-bs-parent="#accordionExample">
             <div class="accordion-body">
                 <a asp-action="details" asp-controller="house" asp-route-id="@message.HouseId">@message.House?.Title</a> <br/>
-                    @message.BookingRequestReply.ReplyMessage -- @message.BookingRequestReply.CreatedAt?.ToString("dd MMMM yyyy")b
+                    @message.BookingRequestReply.ReplyMessage -- @message.BookingRequestReply.CreatedAt.ToString("dd MMMM yyyy")b
             </div>
         </div>
     </div>

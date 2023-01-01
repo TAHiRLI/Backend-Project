@@ -56,6 +56,7 @@ namespace Quarter.Models
         public List<HouseAmenity>? HouseAmenities { get; set; } = new List<HouseAmenity>();
         public List<UserComment> UserComments { get; set; } = new List<UserComment>();
         public List<UserBookingMessage> UserBookingMessages { get; set; } = new List<UserBookingMessage>();
+        public Order? Order { get; set; } 
 
 
 

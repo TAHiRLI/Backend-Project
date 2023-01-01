@@ -49,25 +49,25 @@
                             @{
                                 if (Model.House.IsSold)
                                 {
-                                    <li class="ltn__blog-category  text-light p-2">
+                                    <li class="ltn__blog-category  border-rounded text-light p-2">
                                         <a href="#">Sold</a>
                                     </li>
                                 }
                                 if (Model.House.IsFeatured)
                                 {
-                                    <li class="ltn__blog-category ">
+                                    <li class="ltn__blog-category  border-rounded p-2">
                                         <a href="#">Special</a>
                                     </li>
                                 }
                                 if (Model.House.DiscountPercent > 0)
                                 {
-                                    <li class="ltn__blog-category ">
+                                    <li class="ltn__blog-category border-rounded  p-2">
                                         <a href="#">Discounted</a>
                                     </li>
                                 }
                             }
                             <li class="ltn__blog-date">
-                                <i class="far fa-calendar-alt"></i>@((Model.House.CreatedAt)?.ToString(" dd MMMM yyyy"))
+                                <i class="far fa-calendar-alt"></i>@((Model.House.CreatedAt).ToString(" dd MMMM yyyy"))
                             </li>
                             <li>
                                 <span><i class="far fa-comments"></i>@Model.House.UserComments.Count</span>

@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Quarter.Models
 {
-    public class Order:BaseEntity
+    public class Order
     {
+        public int Id { get; set; }
         [MaxLength(30)]
         public string Fullname { get; set; }
         [MaxLength(100)]
@@ -30,6 +31,9 @@ namespace Quarter.Models
         public House? House { get; set; }
         public AppUser? AppUser { get; set; }
         public bool? OrderStatus { get; set; } = null;
+
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow.AddHours(4);
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow.AddHours(4);
 
 
 

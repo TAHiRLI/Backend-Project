@@ -33,7 +33,7 @@ namespace Quarter.Controllers
 
             order.House = house;
             order.HouseId = house.Id;
-            order.HousePrice = house.Price;
+            order.HousePrice = house.Price*(100-house.DiscountPercent)/100;
             order.HouseTitle = house.Title;
 
             return View(order);

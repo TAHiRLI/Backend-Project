@@ -6,5 +6,6 @@ namespace Quarter.Areas.Admin.Controllers
     public class BaseController : Controller
     {
         protected string UserId => User.FindFirstValue(ClaimTypes.NameIdentifier);
+        protected string UserName => User.FindFirstValue(ClaimTypes.Name);  
     }
 }

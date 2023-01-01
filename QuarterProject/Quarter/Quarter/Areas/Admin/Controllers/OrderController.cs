@@ -60,6 +60,7 @@ namespace Quarter.Areas.Admin.Controllers
                 return NotFound();
 
             order.OrderStatus = true;
+            order.UpdatedAt = DateTime.UtcNow.AddHours(4);
             order.House.IsSold = true;
 
 
