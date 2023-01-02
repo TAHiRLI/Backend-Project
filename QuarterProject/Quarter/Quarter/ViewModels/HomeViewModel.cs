@@ -4,6 +4,7 @@ namespace Quarter.ViewModels
 {
     public class HomeViewModel
     {
+        public House? LastOrderedHouse{ get; set; }
         public Dictionary<string, string> Settings = new Dictionary<string, string>();
         public List<House> Houses { get; set; } = new List<House>();
         public List<Amenity> Amenities { get; set; }= new List<Amenity>();

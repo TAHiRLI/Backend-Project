@@ -27,6 +27,15 @@ namespace Quarter.Controllers
             Model.Comments = _context.UserComments.Include(x=> x.AppUser).OrderByDescending(x => x.CreatedAt).Take(10).ToList();
             Model.Settings = _context.Settings.ToDictionary(x=> x.Key, x=> x.Value);
             Model.Services = _context.Services.ToList();
+            Model.LastOrderedHouse =  _context.Houses
+                 .Include(x => x.Order)
+                 .Include(x => x.HouseImages)
+                 .Include(x => x.HouseAmenities).ThenInclude(x=> x.Amenity)
+                 .Where(x => x.Order.OrderStatus == true)
+                 .OrderByDescending(x => x.Order.CreatedAt)
+                 .Take(1).FirstOrDefault();
+
+
             ViewBag.Cities = Model.Cities;
             ViewBag.Categories = Model.Categories;
 
