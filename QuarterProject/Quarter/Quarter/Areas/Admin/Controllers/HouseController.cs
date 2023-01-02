@@ -63,6 +63,8 @@ namespace Quarter.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+
         public IActionResult Create(House house)
         {
             if (!_context.Cities.Any(x => x.Id == house.CityId))
@@ -153,6 +155,8 @@ namespace Quarter.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+
         public IActionResult Edit(House house)
         {
             var existHouse = _context.Houses.Include(x=> x.HouseImages).Include(x=> x.HouseAmenities).FirstOrDefault(x => x.Id == house.Id);
@@ -261,6 +265,10 @@ namespace Quarter.Areas.Admin.Controllers
             
             return RedirectToAction("index");
         }
+
+        //====================================
+        // Booking requests
+        //====================================
         public IActionResult BookingRequest(int? page)
         {
             //shows all the booking requests to the admin
@@ -268,7 +276,8 @@ namespace Quarter.Areas.Admin.Controllers
             var Requests = _context.UserBookingMessages
                 .Include(x => x.AppUser)
                 .Include(x => x.House)
-                .OrderByDescending(x=> x.CreatedAt)
+                .OrderByDescending(x=> x.IsReplied == false)
+                .ThenByDescending(x=> x.CreatedAt)
                 .ToList();
 
 
@@ -329,7 +338,9 @@ namespace Quarter.Areas.Admin.Controllers
         // Export as Excel
         //=================================
         [HttpPost]
-         
+        //[ValidateAntiForgeryToken]
+
+
         public IActionResult ExportAsExcell()
         {
             var houses = _context.Houses.ToList();

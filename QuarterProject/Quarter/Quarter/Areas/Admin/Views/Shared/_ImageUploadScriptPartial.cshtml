@@ -1,0 +1,51 @@
+﻿@*===========================================
+    add imgInput class for reading single image
+    add imgInputCollection id for multiple image reader
+===========================================*@
+
+<script>
+
+    $(document).on("change", ".imgInput", function (e) {
+        let file = e.target.files[0];
+        let reader = new FileReader();
+
+        reader.readAsDataURL(file);
+
+        reader.onload = () => {
+            console.log(reader.result);
+            var div = document.getElementById("imgPreview");
+            let image = document.createElement("img");
+            image.setAttribute("src", reader.result);
+            image.setAttribute("width", '100');
+
+            div.innerHTML = "";
+            div.appendChild(image);
+        }
+
+    })
+
+    $(document).on("change", ".imgInputs", function (e) {
+        console.log("salam")
+                var div = document.getElementById("imgPreviews");
+                div.innerHTML = "";
+        for (let i = 0; i < e.target.files.length; i++) {
+
+
+            let file = e.target.files[i];
+            let reader = new FileReader();
+
+            reader.readAsDataURL(file);
+
+            reader.onload = () => {
+                console.log(reader.result);
+                let image = document.createElement("img");
+                image.setAttribute("src", reader.result);
+                image.setAttribute("width", '100');
+                div.appendChild(image);
+            }
+        }
+
+    })
+
+
+</script>

@@ -42,6 +42,8 @@ namespace Quarter.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+
         public IActionResult Create(Amenity amenity)
         {
             if (!ModelState.IsValid)
@@ -63,6 +65,8 @@ namespace Quarter.Areas.Admin.Controllers
             return View(amenity);
         }
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+
         public IActionResult Edit(Amenity amenity)
         {
             if (!ModelState.IsValid)

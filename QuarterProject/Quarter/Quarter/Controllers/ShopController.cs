@@ -77,7 +77,7 @@ namespace Quarter.Controllers
                     break;
 
                 default:
-                    house = house.OrderBy(x => x.Title);
+                    house = house.OrderBy(x => x.Title).ThenByDescending(x=> x.IsSold == false);
                     break;
             }
 

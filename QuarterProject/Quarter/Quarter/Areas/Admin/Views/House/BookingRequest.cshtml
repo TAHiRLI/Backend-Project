@@ -14,12 +14,7 @@
 <div class="w-100 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <div class="d-flex align-items-center justify-content-md-end">
-                <div class="pr-1 mb-3 mr-2 mb-xl-0">
-                    <button type="button" class="btn btn-sm bg-white btn-icon-text border" id="export" onclick="exportTableToExcel('tblData')"><i class="typcn typcn-arrow-forward-outline mr-2"></i>Export</button>
-                </div>
-
-            </div>
+      
 
             <div class="table-responsive">
                 <table class="table" id="tblData">
@@ -78,7 +73,9 @@
     <script src="~/admin/js/Main.js"></script>
     @await Html.PartialAsync("_ValidationScriptsPartial")
 
-    <script>
+@*    
+    //testing export to excell using js, check houses for mvc variation
+<script>
         function exportTableToExcel(tableID, filename = '') {
             var downloadLink;
             var dataType = 'application/vnd.ms-excel';
@@ -108,7 +105,7 @@
                 downloadLink.click();
             }
         }
-    </script>
+    </script>*@
 
 }
 

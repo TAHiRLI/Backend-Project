@@ -84,6 +84,7 @@ namespace Quarter.Controllers
         //================================
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Member")]
         public IActionResult Comment(CommentViewModel CommentVm)
         {

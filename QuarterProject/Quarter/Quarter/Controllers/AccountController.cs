@@ -33,8 +33,8 @@ namespace Quarter.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IWebHostEnvironment _env;
 
-        public string MyEmail = "macie.kuhic14@ethereal.email";
-        public string MyPassword = "HUmyGCuSUMUhhD23Kw";
+        public string MyEmail = "deangelo81@ethereal.email";
+        public string MyPassword = "HNANVb3Zsh6c5AndXG";
 
         public AccountController(UserManager<AppUser> userManager, QuarterDbContext context, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager, IWebHostEnvironment env)
         {
@@ -67,6 +67,7 @@ namespace Quarter.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(MemmberRegisterViewModel RegisterVm)
         {
 
@@ -205,11 +206,13 @@ namespace Quarter.Controllers
 
             return NotFound();
         }
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Login(MemberLoginViewModel LoginVm, string? ReturnUrl = null)
         {
             if (!ModelState.IsValid)
@@ -268,6 +271,8 @@ namespace Quarter.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel ForgotVm)
         {
             var user = await _userManager.FindByEmailAsync(ForgotVm.Email);
@@ -318,6 +323,8 @@ namespace Quarter.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel ResetVm)
         {
             if (ResetVm.Email == null || ResetVm.Token == null)
@@ -382,6 +389,7 @@ namespace Quarter.Controllers
             return View(ProfileVm);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles ="Member")]
         public async Task<IActionResult> Profile(ProfileEditViewModel MemberVm)
         {

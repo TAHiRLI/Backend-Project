@@ -33,7 +33,8 @@ namespace Quarter.Areas.Admin.Controllers
             var Orders = _context.Orders
                 .Include(x=> x.House)
                 .Include(x=> x.AppUser)
-                .OrderByDescending(x=> x.CreatedAt)
+                .OrderByDescending(x=> x.OrderStatus == null)
+                .ThenByDescending(x=> x.CreatedAt)
                 .ToList();
 
             Pagination<Order> paginatedList = new Pagination<Order>();

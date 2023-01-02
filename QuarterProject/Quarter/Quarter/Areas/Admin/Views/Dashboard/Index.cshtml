@@ -126,14 +126,14 @@
                                             <div class="font-weight-medium">Category</div>
                                             <div class="font-weight-medium">Total Income</div>
                                         </div>
-                                        @foreach (var city in Model.Cities)
+                                        @foreach (var city in Model.CityTotalVms)
                                         {
                                                 <div class="d-flex justify-content-between mb-4">
                                                     <div class="text-secondary font-weight-medium">
-                                                    @city.Name
+                                                    @city.CityName
                                                     </div>
                                                     <div class="small">
-                                                         @Model.Orders.Where(x=> x.House?.CityId == city.Id).Sum(x=> x.HousePrice)
+                                                         @city.Total
                                                     </div>
                                                 </div>
                                         }

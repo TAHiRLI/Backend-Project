@@ -39,6 +39,7 @@ namespace Quarter.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(Category category)
         {
             if (!ModelState.IsValid)
@@ -60,6 +61,8 @@ namespace Quarter.Areas.Admin.Controllers
             return View(category);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult Edit(Category category)
         {
             if (!ModelState.IsValid)

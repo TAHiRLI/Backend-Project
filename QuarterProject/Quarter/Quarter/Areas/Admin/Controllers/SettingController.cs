@@ -43,6 +43,7 @@ namespace Quarter.Areas.Admin.Controllers
             return View(setting);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(Setting setting)
         {
             if (setting.Value == null)

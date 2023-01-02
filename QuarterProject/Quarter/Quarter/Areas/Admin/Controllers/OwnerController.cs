@@ -40,14 +40,13 @@ namespace Quarter.Areas.Admin.Controllers
 
             return View();
         }
-
-      
-
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
+        //[ValidateAntiForgeryToken]  // results in bad request error
+
         public IActionResult Create(Owner owner)
         {
             if (owner.File == null)
@@ -71,6 +70,8 @@ namespace Quarter.Areas.Admin.Controllers
             return View(owner);
         }
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+
         public IActionResult Edit(Owner owner)
         {
             if (!ModelState.IsValid)

@@ -43,6 +43,10 @@
                     <td>@Model.ZipCode</td>
                 </tr>
                 <tr>
+                    <td>Price</td>
+                    <td>@Model.HousePrice</td>
+                </tr>
+                <tr>
                     <td>Status</td>
                     <td>
                         <div class="badge bg-@(Model.OrderStatus==true?"success":Model.OrderStatus==false?"danger":"warning")">@(Model.OrderStatus == true ? "Approved" : Model.OrderStatus == false ? "Rejected" : "Pending")</div>

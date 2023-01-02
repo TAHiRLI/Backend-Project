@@ -39,6 +39,7 @@ namespace Quarter.Controllers
             return View(order);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Checkout(Order order)
         {
             if (order.HouseId == null)

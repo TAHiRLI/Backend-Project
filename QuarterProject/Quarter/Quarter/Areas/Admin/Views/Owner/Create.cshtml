@@ -28,8 +28,9 @@
                
                 <div class="form-group">
                     <label asp-for="File">File upload</label>
-                    <input asp-for="File" type="file"  class="form-controll">
+                    <input asp-for="File" type="file" class="form-controll imgInput">
                     <span class="text-danger" asp-validation-for="File"></span>
+                    <div id="imgPreview"></div>
                 </div>
               
                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
@@ -43,4 +44,6 @@
 
 @section Scripts{
     @await Html.PartialAsync("_ValidationScriptsPartial")
+    @await Html.PartialAsync("_ImageUploadScriptPartial")
+
 }

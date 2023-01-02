@@ -36,6 +36,13 @@ namespace Quarter.Areas.Admin.Controllers
             DashboardVm.Admin = admin;
             DashboardVm.Categories = _context.Categories.Include(x => x.Houses).ToList();
             DashboardVm.Cities = _context.Cities.Include(x => x.Houses).ToList();
+            DashboardVm.CityTotalVms = _context.Cities.Select(x => new CityTotalViewModel
+            {
+                CityName = x.Name,
+                Total = x.Houses.Sum(x => x.Order.HousePrice)
+
+            }).Take(5).ToList();
+
             DashboardVm.Orders = _context.Orders
                 .Include(x=> x.House).ThenInclude(x=> x.Category)
                 .Include(x=> x.House).ThenInclude(x=> x.City)

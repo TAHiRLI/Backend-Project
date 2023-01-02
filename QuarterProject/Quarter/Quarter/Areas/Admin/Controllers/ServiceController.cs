@@ -37,6 +37,8 @@ namespace Quarter.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+
         public IActionResult Create(Service service)
         {
             if (!ModelState.IsValid)
@@ -58,6 +60,8 @@ namespace Quarter.Areas.Admin.Controllers
             return View(service);
         }
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+
         public IActionResult Edit(Service service)
         {
             if (!ModelState.IsValid)

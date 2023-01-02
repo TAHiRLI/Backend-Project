@@ -43,6 +43,8 @@ namespace Quarter.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+
         public IActionResult Create(HomeSlider slider)
         {
             if (slider.File == null)
@@ -77,6 +79,8 @@ namespace Quarter.Areas.Admin.Controllers
             return View(slider);
         }
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+
         public IActionResult Edit(HomeSlider slider)
         {
             if (!ModelState.IsValid)

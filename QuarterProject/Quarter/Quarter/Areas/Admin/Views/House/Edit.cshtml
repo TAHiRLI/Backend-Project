@@ -117,17 +117,18 @@
 
                     <div class="form-group">
                         <label asp-for="File">Poster Image</label>
-                        <input asp-for="File" type="file" class="form-controll">
+                        <input asp-for="File" type="file" class="form-controll imgInput">
                         <span class="text-danger" asp-validation-for="File"></span>
-                        <div>
+                        <div id="imgPreview">
                             <img width="100" class="border-rounded" src="~/Uploads/Houses/@Model.HouseImages.FirstOrDefault(x=> x.PosterStatus== true)?.ImageUrl">
                         </div>
                     </div>
                     <div class="form-group">
                         <label asp-for="Files">Other Images</label>
-                        <input asp-for="Files" class="form-controll">
+                        <input asp-for="Files" class="form-controll imgInputs">
                         <span class="text-danger" asp-validation-for="Files"></span>
                         <div class="row mt-3 ">
+                            <div id="imgPreviews" class="row g-2"></div>
 
                         @foreach (var image in Model.HouseImages.Where(x=> x.PosterStatus == false).ToList())
                         {
@@ -171,5 +172,8 @@
                 console.error(error);
             });
     </script>
+
+    @await Html.PartialAsync("_ImageUploadScriptPartial")
+
 }
 

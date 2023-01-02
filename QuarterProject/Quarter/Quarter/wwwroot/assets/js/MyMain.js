@@ -2,6 +2,7 @@
 
 $(document).on("click", ".load-more-btn", function (e) {
     e.preventDefault();
+
     let link = $(this).attr("href");
     let skipCount = parseInt($(this).attr("skipCount"))
     let takeCount = parseInt($(this).attr("takeCount"))
@@ -54,12 +55,12 @@ $(document).on("keyup", ".searchInput", function (e) {
 
     clearTimeout(timeout);
     timeout = setTimeout(() => {
-        let newLink = search_link + e.target.value
+        var values = e.target.value.split(" ").join("%20")
+        let newLink = search_link + values;
     
     fetch(newLink)
         .then(res => res.text())
         .then(data => {
-            console.log(data)
             $("#search-holder").html(data);
         })
 

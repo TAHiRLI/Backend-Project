@@ -52,11 +52,12 @@
 
                 <div class="form-group">
                     <label asp-for="File">File upload</label>
-                    <input asp-for="File" type="file" class="form-controll">
+                    <input asp-for="File" type="file" class="form-controll imgInput">
                     <span class="text-danger" asp-validation-for="File"></span>
+                    <div id="imgPreview"></div>
                 </div>
 
-                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button type="submit" class="btn btn-primary mr-2">Create</button>
                 <a class="btn btn-light" asp-action="index" asp-controller="Slider">Cancel</a>
             </form>
         </div>
@@ -79,6 +80,8 @@
     
 
     @await Html.PartialAsync("_ValidationScriptsPartial")
+    @await Html.PartialAsync("_ImageUploadScriptPartial")
+
 
 
 }

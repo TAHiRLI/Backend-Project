@@ -9,7 +9,7 @@ namespace Quarter.Areas.Admin.ViewModels
     {
         public AppUser Admin { get; set; }
 
-       
+       public List<CityTotalViewModel> CityTotalVms { get; set; } = new List<CityTotalViewModel>();
         public  List<House> Houses { get; set; } = new List<House>();
         public  List<Category> Categories { get; set; } = new List<Category>();
         public  List<Order> Orders { get; set; } = new List<Order>();

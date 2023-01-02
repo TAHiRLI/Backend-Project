@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Quarter.DAL;
 using Quarter.Hubs;
+using Quarter.Middlewares;
 using Quarter.Models;
 using Quarter.Services;
 
@@ -76,20 +77,9 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
-
-  
 }
 
-//app.Use(async (context, next) =>
-//{
-//    await next();
-//    if (context.Response.StatusCode == 404)
-//    {
-//        context.Response.Redirect("/home/error");
-//    }
-//});
-
-
+app.UseMiddleware<CheckNotFound>();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

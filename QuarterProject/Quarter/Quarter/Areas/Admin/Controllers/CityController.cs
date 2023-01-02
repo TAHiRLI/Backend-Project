@@ -41,6 +41,7 @@ namespace Quarter.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(City city)
         {
             if (!ModelState.IsValid)
@@ -62,6 +63,7 @@ namespace Quarter.Areas.Admin.Controllers
             return View(city);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(City city)
         {
             if (!ModelState.IsValid)
