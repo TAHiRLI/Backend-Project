@@ -225,7 +225,8 @@ namespace Quarter.Areas.Admin.Controllers
 
             existHouse.Title = house.Title;
             existHouse.Desc = house.Desc;
-            existHouse.Location = house.Location;
+            existHouse.Longitude = house.Longitude;
+            existHouse.Latitude = house.Latitude;
             existHouse.CategoryId = house.CategoryId;
             existHouse.OwnerId = house.OwnerId;
             existHouse.CityId = house.CityId;

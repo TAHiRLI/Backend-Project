@@ -8,8 +8,12 @@ namespace Quarter.Models
     {
         [MaxLength(100)]
         public string Title { get; set; }
-        [MaxLength(500)]
-        public string Location { get; set; }
+        //[MaxLength(500)]
+        //public string Location { get; set; }
+        [Column(TypeName ="decimal(18,8)")]
+        public decimal? Longitude { get; set; }
+        [Column(TypeName = "decimal(18,8)")]
+        public decimal? Latitude { get; set; }
         [MaxLength(1000)]
         public string Desc { get; set; }
         [MaxLength(100)]
