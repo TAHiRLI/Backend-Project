@@ -287,6 +287,11 @@ namespace Quarter.Controllers
             var user = await _userManager.FindByEmailAsync(ForgotVm.Email);
             if (user == null)
                 return NotFound();
+            if(user.PasswordHash == null)
+            {
+                ModelState.AddModelError("Email", "This User Is logged in With Third Party Apps");
+                return View();
+            }
 
             // user can send email every minute
             if (user.LastRequestedEmail.AddMinutes(1) <= DateTime.UtcNow.AddHours(4))
@@ -385,6 +390,7 @@ namespace Quarter.Controllers
             if (user == null)
                 return NotFound();
             ProfileViewModel ProfileVm = new ProfileViewModel();
+            ProfileVm.ProfileEditVm.Email = user.Email;
             ProfileVm.Orders = _context.Orders.Include(x => x.House).Where(x => x.AppUserId == user.Id).OrderByDescending(x=> x.CreatedAt).Take(15).ToList();
             ProfileVm.ProfileEditVm.Fullname = user.Fullname;
             ProfileVm.ProfileEditVm.Email = user.Email;
@@ -412,6 +418,7 @@ namespace Quarter.Controllers
             if (user == null)
                 return NotFound();
             ProfileViewModel ProfileVm = new ProfileViewModel();
+            MemberVm.Email = user.Email;
             ProfileVm.ProfileEditVm = MemberVm;
             ProfileVm.UserBookingMessages = _context.UserBookingMessages
                .OrderByDescending(x => x.CreatedAt)
