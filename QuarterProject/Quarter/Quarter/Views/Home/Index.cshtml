@@ -177,7 +177,7 @@
                     <div class="counter-icon">
                         <i class="flaticon-select"></i>
                     </div>
-                    <h1><span class="counter">@Model.TotalArea</span><span class="counterUp-icon">+</span> </h1>
+                    <h1><span class="counter">@Model.TotalArea.ToString("0.")</span><span class="counterUp-icon">+</span> </h1>
                     <h6>Total Area Sq</h6>
                 </div>
             </div>
@@ -186,7 +186,7 @@
                     <div class="counter-icon">
                         <i class="flaticon-office"></i>
                     </div>
-                    <h1><span class="counter">@Model.TotalOrderCount</span><span class="counterUp-icon">+</span> </h1>
+                    <h1><span class="counter">@Model.TotalHouseCount</span><span class="counterUp-icon">+</span> </h1>
                     <h6>Properties</h6>
                 </div>
             </div>
@@ -205,7 +205,7 @@
                     <div class="counter-icon">
                         <i class="flaticon-armchair"></i>
                     </div>
-                    <h1><span class="counter">@(Model.TotalPrice / 1000)</span><span class="counterUp-letter">K</span><span class="counterUp-icon">+</span> </h1>
+                    <h1><span class="counter">@((Model.TotalPrice / 1000).ToString("0."))</span><span class="counterUp-letter">K</span><span class="counterUp-icon">+</span> </h1>
                     <h6>Total Price</h6>
 
                 </div>
@@ -260,7 +260,7 @@
                             {
                                 <li>
                                     <a href="~/Uploads/Houses/@Image.ImageUrl" data-rel="lightcase:myCollection">
-                                        <img src="~/assets/img/img-slide/11.jpg" alt="Image">
+                                        <img src="~/Uploads/Houses/@Image.ImageUrl" alt="Image">
                                     </a>
                                 </li>
                             }
