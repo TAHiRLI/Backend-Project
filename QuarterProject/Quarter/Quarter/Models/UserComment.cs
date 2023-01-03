@@ -13,5 +13,6 @@ namespace Quarter.Models
         public House? House { get; set; }
         public  AppUser? AppUser { get; set; }
         public bool IsApproved { get; set; }
+        public bool IsFeatured { get; set; } = false;
     }
 }

@@ -390,6 +390,9 @@ namespace Quarter.Controllers
             ProfileVm.ProfileEditVm.Email = user.Email;
             ProfileVm.ProfileEditVm.Username = user.UserName;
             ProfileVm.ProfileEditVm.UserPhoto = user.UserPhoto;
+            if (user.PasswordHash == null)
+                ProfileVm.ProfileEditVm.IsGoogleUser = true;
+
             ProfileVm.UserBookingMessages = _context.UserBookingMessages
                 .OrderByDescending(x => x.CreatedAt)
                 .Include(x => x.BookingRequestReply)
@@ -405,16 +408,23 @@ namespace Quarter.Controllers
         [Authorize(Roles ="Member")]
         public async Task<IActionResult> Profile(ProfileEditViewModel MemberVm)
         {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user == null)
+                return NotFound();
             ProfileViewModel ProfileVm = new ProfileViewModel();
             ProfileVm.ProfileEditVm = MemberVm;
+            ProfileVm.UserBookingMessages = _context.UserBookingMessages
+               .OrderByDescending(x => x.CreatedAt)
+               .Include(x => x.BookingRequestReply)
+               .Include(x => x.House)
+               .Where(x => x.AppUserId == user.Id && x.IsReplied)
+               .Take(10).ToList();
 
             if (!ModelState.IsValid)
                 return View(ProfileVm);
 
 
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (user == null)
-                return NotFound();
+          
 
             if (MemberVm.Email.ToUpper() != user.NormalizedEmail && _context.AppUsers.Any(x => x.NormalizedEmail == MemberVm.Email.ToUpper()))
                 ModelState.AddModelError("Email", "This email allready taken");
@@ -455,7 +465,7 @@ namespace Quarter.Controllers
             user.UserName = MemberVm.Username;
             user.Fullname = MemberVm.Fullname;
 
-            if (MemberVm.Email.ToUpper() != user.NormalizedEmail)
+            if (MemberVm.Email.ToUpper() != user.NormalizedEmail && MemberVm.IsGoogleUser == false)
             {
                 user.Email = MemberVm.Email;
                 user.EmailConfirmed = false;

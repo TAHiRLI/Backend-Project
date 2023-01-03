@@ -59,7 +59,7 @@ namespace Quarter.Areas.Admin.Controllers
         public async Task<IActionResult>  Approve(int id)
         {
             var order = _context.Orders.Include(x=> x.House).Include(x=> x.AppUser).FirstOrDefault(x => x.Id == id);
-            if (order == null || order.House == null)
+            if (order == null || order.House == null || order.House.IsSold == true)
                 return NotFound();
 
             if (order.OrderStatus != null)

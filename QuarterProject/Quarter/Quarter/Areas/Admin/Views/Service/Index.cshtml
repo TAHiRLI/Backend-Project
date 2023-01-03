@@ -13,7 +13,7 @@
 <div class="w-100 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Basic Table</h4>
+            <h4 class="card-title">Services</h4>
             <div class="col-12  text-end"><a class="text-end d-block" asp-action="create" asp-controller="Service">Create</a></div>
             <div class="table-responsive">
                 <table class="table">
@@ -40,7 +40,7 @@
                               
                                 <td>
                                     <a asp-action="edit" asp-controller="Service" asp-route-id="@service.Id"><i style="font-size:26px" class="mdi mdi-lead-pencil"></i></a>
-                                    <a class="delete-btn" asp-controller="delete" asp-action="Service" asp-route-id="@service.Id"><i style="font-size:26px" class="mdi mdi-close-circle text-danger "></i></a>
+                                    <a class="delete-btn" asp-action="delete" asp-controller="Service" asp-route-id="@service.Id"><i style="font-size:26px" class="mdi mdi-close-circle text-danger "></i></a>
                                 </td>
                             </tr>
                         }

@@ -1,7 +1,7 @@
 ﻿@model DashboardScriptViewModel
 
 @{
-    var topCategoryTotal = Model.TopOrderedCategories.Select(x => x.Houses?.Sum(x => x.Order?.HousePrice)).ToList();
+    var topCategoryTotal = Model.TopOrderedCategories.Select(x => x.Houses?.Count()).ToList();
 }
 
 <script>

@@ -2,11 +2,7 @@
 @{
     ViewData["Title"] = "Index";
 
-    //==========================
-    //Top commented house
-    //==========================
-    var topCommentedHouses = Model.Houses.OrderByDescending(x => x.UserComments.Count(x=> x.IsApproved)).Take(4).ToList();
-    var mostCommentedHouse = topCommentedHouses.Take(1).FirstOrDefault();
+    
 
     //==========================
     // earning reports
@@ -68,7 +64,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-wrap justify-content-between mb-4">
-                            <h4 class="card-title mb-3">Orders Per Category</h4>
+                            <h4 class="card-title mb-3">Orders Requests Per Category </h4>
                         </div>
                         <div class="row">
                             <div class="col-12">
@@ -92,14 +88,14 @@
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                      @foreach (var house in topCommentedHouses)
+                                      @foreach (var house in  Model.TopCommentedHouses)
                                         {
                                             <div class="d-flex justify-content-between mt-4">
                                                 <div><a  asp-action="edit" asp-controller="house" asp-route-id="@house.Id">@house.Title</a></div>
                                                 <div class="text-muted">@house.UserComments.Count</div>
                                             </div>
                                             <div class="progress progress-md mt-1">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: @((double)house.UserComments.Count/mostCommentedHouse.UserComments.Count*100)%" aria-valuenow="@house.UserComments.Count" aria-valuemin="0" aria-valuemax="@mostCommentedHouse.UserComments.Count"></div>
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: @((double)house.UserComments.Count/Model.MostCommentedHouse.UserComments.Count*100)%" aria-valuenow="@house.UserComments.Count" aria-valuemin="0" aria-valuemax="@Model.MostCommentedHouse.UserComments.Count"></div>
                                             </div>
                                         }
                                        
@@ -137,10 +133,6 @@
                                                     </div>
                                                 </div>
                                         }
-
-                                    
-
-
                                     </div>
                                 </div>
                             </div>
@@ -181,7 +173,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-wrap justify-content-between">
-                            <h4 class="card-title mb-3">Card Title</h4>
+                            <h4 class="card-title mb-3">Total Earnings</h4>
                         </div>
                         <div class="row">
                             <div class="col-12">

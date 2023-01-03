@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -171,11 +172,23 @@ namespace Quarter.Areas.Admin.Controllers
                 ModelState.AddModelError("OwnerId", "Owner not found");
             if (!ModelState.IsValid)
             {
+                var model = _context.Houses
+                              .Include(x => x.HouseAmenities)
+                              .Include(x => x.City)
+                              .Include(x => x.Category)
+                              .Include(x => x.Owner)
+                .Include(x => x.HouseImages)
+                              .FirstOrDefault(h => h.Id == house.Id);
+                if (model == null)
+                    return NotFound();
+
+
                 ViewBag.Cities = _context.Cities.ToList();
                 ViewBag.Amenities = _context.Amenities.ToList();
                 ViewBag.Owners = _context.Owners.ToList();
                 ViewBag.Categories = _context.Categories.ToList();
-                return View();
+                model.AmenityIds = model.HouseAmenities.Select(x => x.AmenityId).ToList();
+                return View(model);
             }
            
 

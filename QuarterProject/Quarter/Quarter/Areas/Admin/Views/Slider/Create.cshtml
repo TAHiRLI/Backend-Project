@@ -13,14 +13,14 @@
             <form action="create" method="post" class="forms-sample" enctype="multipart/form-data">
                 <div class="form-group">
                     <label asp-for="Title">Title</label>
-                    <input asp-for="Title" id="editor" type="text" class="form-control" placeholder="Name">
+                    <textarea asp-for="Title" id="editor"  class="form-control" placeholder="title"></textarea>
                     <span class="text-danger" asp-validation-for="Title"></span>
                 </div>
             
                 
                 <div class="form-group">
                     <label asp-for="Desc">Description</label>
-                    <textarea asp-for="Desc" class="form-control" placeholder="Desc"><</textarea>
+                    <textarea asp-for="Desc" class="form-control" placeholder="Desc"></textarea>
                     <span class="text-danger" asp-validation-for="Desc"></span>
                 </div>
 

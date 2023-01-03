@@ -15,18 +15,27 @@
                 <input asp-for="Fullname" type="text" >
                 <span class="text-danger" asp-validation-for="Fullname"></span>
             </div>
+          
             <div class="col-md-6">
                 <label asp-for="Username">Username:</label>
-                <input asp-for="Username" type="text" >
+                <input asp-for="Username" type="text">
                 <span class="text-danger" asp-validation-for="Username"></span>
             </div>
-            <div class="col-md-6">
+            @if (Model.IsGoogleUser == false)
+            { 
+                <div class="col-md-6">
                 <label asp-for="Email"> Email:</label>
                 <input asp-for="Email" type="email"  placeholder="example@example.com">
                 <span class="text-danger" asp-validation-for="Email"></span>
             </div>
 
+            }
+           
+
         </div>
+
+        @if(Model.IsGoogleUser == false){
+
         <fieldset>
             <legend>Password change</legend>
             <div class="row">
@@ -46,6 +55,7 @@
                 </div>
             </div>
         </fieldset>
+        }
         <div class="btn-wrapper">
             <div class="text-danger" asp-validation-summary="ModelOnly"></div>
             <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Save Changes</button>

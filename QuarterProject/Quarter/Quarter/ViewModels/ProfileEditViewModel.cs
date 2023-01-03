@@ -30,5 +30,6 @@ namespace Quarter.ViewModels
         [MaxFileSize(2)]
         public IFormFile? File { get; set; }
         public string? UserPhoto { get; set; }
+        public bool? IsGoogleUser = false;
     }
 }

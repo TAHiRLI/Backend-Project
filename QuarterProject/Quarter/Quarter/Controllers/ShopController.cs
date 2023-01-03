@@ -39,9 +39,9 @@ namespace Quarter.Controllers
 
             ShopViewModel ShopVm = new ShopViewModel
             {   
-            Cities = _context.Cities.Include(x=> x.Houses).ToList(),
-            Amenities= _context.Amenities.Include(x=>x.HouseAmenities).ToList(),
-            Categories = _context.Categories.Include(x=> x.Houses).ToList()
+            Cities = _context.Cities.Include(x=> x.Houses).OrderByDescending(x=> x.Houses.Count).ToList(),
+            Amenities= _context.Amenities.Include(x=>x.HouseAmenities).OrderByDescending(x=> x.HouseAmenities.Count).ToList(),
+            Categories = _context.Categories.Include(x=> x.Houses).OrderByDescending(x=> x.Houses.Count).ToList()
 
             };
 

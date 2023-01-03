@@ -93,7 +93,7 @@ namespace Quarter.Areas.Admin.Controllers
 
 
             var counter = slider.Order;
-            foreach (var existSlide in _context.HomeSliders.Where(x => x.Order >= slider.Order).ToList())
+            foreach (var existSlide in _context.HomeSliders.Where(x => x.Order >= slider.Order && x.Order<= existSlider.Order).ToList())
             {
                 counter++;
                 existSlide.Order = counter;

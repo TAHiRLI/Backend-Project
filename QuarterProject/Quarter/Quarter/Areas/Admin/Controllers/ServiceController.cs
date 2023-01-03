@@ -83,10 +83,10 @@ namespace Quarter.Areas.Admin.Controllers
 
         public IActionResult Delete(int id)
         {
-            var serive = _context.Services.FirstOrDefault(x => x.Id == id);
-            if (serive == null)
+            var service = _context.Services.FirstOrDefault(x => x.Id == id);
+            if (service == null)
                 return NotFound();
-            _context.Services.Remove(serive);
+            _context.Services.Remove(service);
             _context.SaveChanges();
             return RedirectToAction("index");
         }

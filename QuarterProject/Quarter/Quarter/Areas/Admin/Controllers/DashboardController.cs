@@ -34,6 +34,14 @@ namespace Quarter.Areas.Admin.Controllers
                 .AsQueryable();
 
             DashboardVm.Admin = admin;
+            DashboardVm.TopCommentedHouses = _context.Houses
+                .Include(x=> x.UserComments)
+                .OrderByDescending(x => x.UserComments.Count(x => x.IsApproved))
+                .Take(4)
+                .ToList();
+
+            DashboardVm.MostCommentedHouse = DashboardVm.TopCommentedHouses.Take(1).FirstOrDefault();
+
             DashboardVm.Categories = _context.Categories.Include(x => x.Houses).ToList();
             DashboardVm.Cities = _context.Cities.Include(x => x.Houses).ToList();
             DashboardVm.CityTotalVms = _context.Cities.Select(x => new CityTotalViewModel
@@ -65,7 +73,7 @@ namespace Quarter.Areas.Admin.Controllers
             // get top ordered category
             DashboardVm.DashboardScriptVm.TopOrderedCategories = _context.Categories
                 .Include(x=> x.Houses)
-                .OrderByDescending(x => x.Houses.Select(x => x.Order.HousePrice).Sum())
+                .OrderByDescending(x => x.Houses.Select(x => x.Order).Count())
                 .Take(4)
                 .ToList();
           

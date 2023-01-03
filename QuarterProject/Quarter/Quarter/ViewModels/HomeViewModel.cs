@@ -13,5 +13,9 @@ namespace Quarter.ViewModels
         public List<Service> Services { get; set; }= new List<Service>();
         public List<City > Cities { get; set; }= new List<City>();
         public List<UserComment> Comments { get; set; }= new List<UserComment>();
+        public decimal TotalArea { get; set; }
+        public decimal TotalPrice { get; set; }
+        public decimal TotalHouseCount { get; set; }
+        public decimal TotalOrderCount { get; set; }
     }
 }

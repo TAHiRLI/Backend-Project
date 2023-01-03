@@ -43,14 +43,17 @@
                                 <td>@comment.CreatedAt.ToString("dd MMMM yyyy")</td>
 
                                 <td>
+                                      <a asp-action="toggleFeatured" asp-controller="comment" asp-route-id="@comment.Id"><i style="font-size:26px; color: red" class="mdi mdi-heart@(comment.IsFeatured? "":"-broken") "></i></a>
                                     <label class="badge text-light badge-@(comment.IsApproved? "success":"warning")">
                                         @(comment.IsApproved==true ? "Approved" :"Pending")
-                                        </label></td>
+                                        </label>
+                                        
+                                    </td>
 
                                     <td>
                                     <a class="text-success @(comment.IsApproved?"d-none":"")" asp-action="approve" asp-controller="Comment" asp-route-id="@comment.Id"><i style="font-size:26px" class="mdi mdi-checkbox-marked-circle"></i></a>
                                     <a class="text-danger " asp-action="deny" asp-controller="Comment" asp-route-id="@comment.Id"><i style="font-size:26px" class="mdi mdi-close-circle "></i></a>
-                                    </td>
+                                </td>
                                 </tr>
                         }
 

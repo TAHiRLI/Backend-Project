@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -63,6 +64,16 @@ namespace Quarter.Areas.Admin.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("index",new { id = comment.HouseId });
+        }
+        public IActionResult ToggleFeatured(int id)
+        {
+            var comment = _context.UserComments.FirstOrDefault(x => x.Id == id);
+            if (comment == null)
+                return NotFound();
+
+            comment.IsFeatured = !comment.IsFeatured;
+            _context.SaveChanges();
+            return RedirectToAction("index", new {id = comment.HouseId});
         }
     }
 }
