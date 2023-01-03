@@ -11,5 +11,12 @@
     <span class="text-danger" asp-validation-for="Message"></span>
 
     <input  type="hidden" asp-for="HouseId" value="@Model.HouseId"/>
-    <button type="submit" class="btn theme-btn-1">Send Messege</button>
+       @if(User.Identity.IsAuthenticated && User.IsInRole("Member")){
+          <button type="submit" class="btn theme-btn-1">Send Messege</button>
+
+       }
+       else{
+        <a asp-action="login" asp-controller="account" class="btn theme-btn-1">Send Messege</a>
+
+       }
 </form>

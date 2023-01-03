@@ -10,7 +10,12 @@
         </div>
         <input  type="hidden" asp-for="HouseId" value="@Model.HouseId"/>
         <div class="btn-wrapper">
+            @if(User.Identity.IsAuthenticated && User.IsInRole("Member")){
             <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Submit</button>
+            }
+            else{
+                <a asp-action="login" asp-controller="account" class="btn theme-btn-1 btn-effect-1 text-uppercase" >Submit</a>
+            }
         </div>
     </form>
 </div>

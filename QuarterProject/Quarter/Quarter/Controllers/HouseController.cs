@@ -22,11 +22,7 @@ namespace Quarter.Controllers
             this._context = context;
             this._userManager = userManager;
         }
-       
-        public IActionResult Index()
-        {
-            return View();
-        }
+     
         public IActionResult Details(int id )
         {
             var house = _context.Houses
