@@ -15,6 +15,7 @@ namespace Quarter.Models
         public string? ConnectionId { get; set; }
         public bool IsAdmin { get; set; } = false;
         public DateTime LastConnectedAt { get; set; }
+        public DateTime LastRequestedEmail { get; set; } = DateTime.UtcNow.AddHours(4);
         public List<WishlistItem>? WishlistItems { get; set; }  = new List<WishlistItem>();
         public List<UserComment>? Comments { get; set; } = new List<UserComment>();
         public List<Order>? Orders { get; set; } = new List<Order>();

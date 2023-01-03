@@ -33,8 +33,8 @@ namespace Quarter.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IWebHostEnvironment _env;
 
-        public string MyEmail = "deangelo81@ethereal.email";
-        public string MyPassword = "HNANVb3Zsh6c5AndXG";
+        public string MyEmail = "reva0@ethereal.email";
+        public string MyPassword = "dGkJkrbMYBYCbT1KSf";
 
         public AccountController(UserManager<AppUser> userManager, QuarterDbContext context, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager, IWebHostEnvironment env)
         {
@@ -71,10 +71,8 @@ namespace Quarter.Controllers
         public async Task<IActionResult> Register(MemmberRegisterViewModel RegisterVm)
         {
 
-
             if (!ModelState.IsValid)
                 return View();
-
 
 
             if (await _userManager.FindByEmailAsync(RegisterVm.Email) != null)
@@ -116,6 +114,8 @@ namespace Quarter.Controllers
                 return View();
             }
 
+
+
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             var url = Url.Action(nameof(ConfirmEmail), "account", new { token = token, email = user.Email }, Request.Scheme); ;
 
@@ -134,7 +134,7 @@ namespace Quarter.Controllers
             smtp.Disconnect(true);
 
 
-            //^ signalr toastr
+           
 
 
 
@@ -206,8 +206,10 @@ namespace Quarter.Controllers
 
             return NotFound();
         }
-        public IActionResult Login()
+        public IActionResult Login(string? ReturnUrl =null)
         {
+            
+            ViewBag.ReturnUrl = ReturnUrl;
             return View();
         }
         [HttpPost]
@@ -232,7 +234,7 @@ namespace Quarter.Controllers
                 return View();
             }
 
-            if (!await _userManager.IsEmailConfirmedAsync(user))
+            if (!await _userManager.IsEmailConfirmedAsync(user) &&  user.LastRequestedEmail.AddMinutes(1) <= DateTime.UtcNow.AddHours(4))
             {
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 var url = Url.Action(nameof(ConfirmEmail), "account", new { token = token, email = user.Email }, Request.Scheme); ;
@@ -251,10 +253,17 @@ namespace Quarter.Controllers
                 smtp.Send(email);
                 smtp.Disconnect(true);
 
+                user.LastRequestedEmail = DateTime.UtcNow.AddHours(4);
+                await _userManager.UpdateAsync(user);
+
+                ModelState.AddModelError("", "Please verify your email, verification request sent");
+                return View();
+            }
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
                 ModelState.AddModelError("", "Please verify your email");
                 return View();
             }
-
             if (!result.Succeeded)
             {
                 ModelState.AddModelError("", "Username of password is incorredt");
@@ -271,7 +280,7 @@ namespace Quarter.Controllers
             return View();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
 
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel ForgotVm)
         {
@@ -279,27 +288,30 @@ namespace Quarter.Controllers
             if (user == null)
                 return NotFound();
 
+            // user can send email every minute
+            if (user.LastRequestedEmail.AddMinutes(1) <= DateTime.UtcNow.AddHours(4))
+            {
+
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-
             var url = Url.Action("VerifyPasswordReset", "account", new { email = user.Email, token = token }, Request.Scheme);
+                // create email message
+                var email = new MimeMessage();
+                email.From.Add(MailboxAddress.Parse(MyEmail));
+                email.To.Add(MailboxAddress.Parse(ForgotVm.Email));
+                email.Subject = "Please, verify your mail address";
+                email.Body = new TextPart(TextFormat.Html) { Text = $"Click <a href=\"{url}\" >here</a> to verify your email" };
 
+                // send email
+                using var smtp = new SmtpClient();
+                smtp.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
+                smtp.Authenticate(MyEmail, MyPassword);
+                smtp.Send(email);
+                smtp.Disconnect(true);
 
-            // create email message
-            var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse(MyEmail));
-            email.To.Add(MailboxAddress.Parse(ForgotVm.Email));
-            email.Subject = "Please, verify your mail address";
-            email.Body = new TextPart(TextFormat.Html) { Text = $"Click <a href=\"{url}\" >here</a> to verify your email" };
+                user.LastRequestedEmail = DateTime.UtcNow.AddHours(4);
+                await _userManager.UpdateAsync(user);
 
-            // send email
-            using var smtp = new SmtpClient();
-            smtp.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate(MyEmail, MyPassword);
-            smtp.Send(email);
-            smtp.Disconnect(true);
-
-
-            //^ signalr toastr
+            }
 
             return View();
         }
@@ -323,7 +335,7 @@ namespace Quarter.Controllers
             return View();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
 
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel ResetVm)
         {
@@ -389,7 +401,7 @@ namespace Quarter.Controllers
             return View(ProfileVm);
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         [Authorize(Roles ="Member")]
         public async Task<IActionResult> Profile(ProfileEditViewModel MemberVm)
         {

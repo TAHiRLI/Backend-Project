@@ -50,6 +50,7 @@
                             <a class="btn btn-info" asp-action="GoogleLogin">Log In With Google</a>
                             <a asp-action="forgotpassword"><small>FORGOTTEN YOUR PASSWORD?</small></a>
                         </div>
+                        <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl"/>
                     </form>
                 </div>
             </div>
