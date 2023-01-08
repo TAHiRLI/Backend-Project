@@ -45,7 +45,7 @@ namespace Quarter.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        //[ValidateAntiForgeryToken]  // results in bad request error
+        [ValidateAntiForgeryToken]  
 
         public IActionResult Create(Owner owner)
         {
@@ -70,7 +70,7 @@ namespace Quarter.Areas.Admin.Controllers
             return View(owner);
         }
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
 
         public IActionResult Edit(Owner owner)
         {

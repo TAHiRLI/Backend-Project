@@ -43,7 +43,7 @@ namespace Quarter.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
 
         public IActionResult Create(HomeSlider slider)
         {
@@ -79,7 +79,7 @@ namespace Quarter.Areas.Admin.Controllers
             return View(slider);
         }
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
 
         public IActionResult Edit(HomeSlider slider)
         {

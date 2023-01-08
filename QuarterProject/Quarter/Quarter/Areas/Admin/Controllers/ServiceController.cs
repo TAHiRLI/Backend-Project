@@ -37,7 +37,7 @@ namespace Quarter.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
 
         public IActionResult Create(Service service)
         {
@@ -60,7 +60,7 @@ namespace Quarter.Areas.Admin.Controllers
             return View(service);
         }
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
 
         public IActionResult Edit(Service service)
         {

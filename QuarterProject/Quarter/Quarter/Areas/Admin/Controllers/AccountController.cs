@@ -59,7 +59,7 @@ namespace Quarter.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
 
         public async Task<IActionResult> Login(AdminLoginViewModel LoginVm)
         {

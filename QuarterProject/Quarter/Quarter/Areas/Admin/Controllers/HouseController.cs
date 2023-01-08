@@ -64,7 +64,7 @@ namespace Quarter.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
 
         public IActionResult Create(House house)
         {
@@ -156,7 +156,7 @@ namespace Quarter.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
 
         public IActionResult Edit(House house)
         {
@@ -351,7 +351,7 @@ namespace Quarter.Areas.Admin.Controllers
         // Export as Excel
         //=================================
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
 
 
         public IActionResult ExportAsExcell()

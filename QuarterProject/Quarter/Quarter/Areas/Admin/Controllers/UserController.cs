@@ -80,7 +80,7 @@ namespace Quarter.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> CreateUser(UserViewModel adminVm)
         {
@@ -165,7 +165,7 @@ namespace Quarter.Areas.Admin.Controllers
             return View(UserVm);
         }
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> EditUser(EditUserViewModel UserVm)
         {
