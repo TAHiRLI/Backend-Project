@@ -249,7 +249,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Amenities");
+                    b.ToTable("Amenities", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.BookingRequestReply", b =>
@@ -276,7 +276,7 @@ namespace Quarter.Migrations
                     b.HasIndex("UserBookingMessageId")
                         .IsUnique();
 
-                    b.ToTable("BookingRequestReplies");
+                    b.ToTable("BookingRequestReplies", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.Category", b =>
@@ -294,7 +294,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.City", b =>
@@ -315,7 +315,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cities");
+                    b.ToTable("Cities", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.HomeSlider", b =>
@@ -365,7 +365,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("HomeSliders");
+                    b.ToTable("HomeSliders", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.House", b =>
@@ -449,7 +449,7 @@ namespace Quarter.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Houses");
+                    b.ToTable("Houses", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.HouseAmenity", b =>
@@ -472,7 +472,7 @@ namespace Quarter.Migrations
 
                     b.HasIndex("HouseId");
 
-                    b.ToTable("HouseAmenities");
+                    b.ToTable("HouseAmenities", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.HouseImage", b =>
@@ -497,7 +497,7 @@ namespace Quarter.Migrations
 
                     b.HasIndex("HouseId");
 
-                    b.ToTable("HousesImages");
+                    b.ToTable("HousesImages", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.Order", b =>
@@ -576,7 +576,7 @@ namespace Quarter.Migrations
                         .IsUnique()
                         .HasFilter("[HouseId] IS NOT NULL");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.Owner", b =>
@@ -606,7 +606,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Owners");
+                    b.ToTable("Owners", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.Service", b =>
@@ -636,7 +636,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services");
+                    b.ToTable("Services", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.Setting", b =>
@@ -657,7 +657,7 @@ namespace Quarter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Settings");
+                    b.ToTable("Settings", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.UserBookingMessage", b =>
@@ -704,7 +704,7 @@ namespace Quarter.Migrations
 
                     b.HasIndex("HouseId");
 
-                    b.ToTable("UserBookingMessages");
+                    b.ToTable("UserBookingMessages", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.UserComment", b =>
@@ -741,7 +741,7 @@ namespace Quarter.Migrations
 
                     b.HasIndex("HouseId");
 
-                    b.ToTable("UserComments");
+                    b.ToTable("UserComments", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.WishlistItem", b =>
@@ -771,7 +771,7 @@ namespace Quarter.Migrations
 
                     b.HasIndex("HouseId");
 
-                    b.ToTable("WishlistItems");
+                    b.ToTable("WishlistItems", (string)null);
                 });
 
             modelBuilder.Entity("Quarter.Models.AppUser", b =>
