@@ -33,8 +33,8 @@ namespace Quarter.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IWebHostEnvironment _env;
 
-        public string MyEmail = "reva0@ethereal.email";
-        public string MyPassword = "dGkJkrbMYBYCbT1KSf";
+        public string MyEmail = "keshawn.waters75@ethereal.email";
+        public string MyPassword = "TnHZwrDrNTs8gV3SaE";
 
         public AccountController(UserManager<AppUser> userManager, QuarterDbContext context, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager, IWebHostEnvironment env)
         {

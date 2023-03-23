@@ -10794,11 +10794,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\Quarter.csproj",
+      "projectUniqueName": "C:\\Users\\Hp\\Desktop\\CodeAcadem\\BackEnd\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\Quarter.csproj",
       "projectName": "Quarter",
-      "projectPath": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\Quarter.csproj",
+      "projectPath": "C:\\Users\\Hp\\Desktop\\CodeAcadem\\BackEnd\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\Quarter.csproj",
       "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Hp\\Desktop\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\obj\\",
+      "outputPath": "C:\\Users\\Hp\\Desktop\\CodeAcadem\\BackEnd\\BackEnd_Project\\Backend-Project\\QuarterProject\\Quarter\\Quarter\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
